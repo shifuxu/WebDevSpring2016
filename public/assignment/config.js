@@ -23,6 +23,9 @@
             .when("/forms", {
                 templateUrl: "views/forms/forms.view.html"
             })
+            .when("/form-fields", {
+                templateUrl: "views/forms/form-fields.view.html"
+            })
             .otherwise("/home")
     }
 })();
