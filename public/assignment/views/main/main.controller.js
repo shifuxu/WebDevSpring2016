@@ -1,3 +1,9 @@
-/**
- * Created by steven on 2/19/16.
- */
+(function(){
+    angular
+        .module("FormBuilderApp")
+        .controller("MainController", mainController);
+
+    function mainController($scope, $location) {
+        $scope.$location = $location;
+    }
+})();
