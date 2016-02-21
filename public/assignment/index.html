@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="FormBuilderApp">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+        <!-- Make it available on mobile screen -->
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Index</title>
+
+        <!-- Bootstrap Import -->
+        <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+
+        <!-- Jquery Import-->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+
+        <!-- Angular Import -->
+        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.9/angular.min.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.9/angular-route.min.js"></script>
+
+        <!-- app.js Import-->
+        <script src="app.js"></script>
+
+        <!-- config.js Import -->
+        <script src="config.js"></script>
+
+        <!-- controller.js Import -->
+        <script src="views/home/home.controller.js"></script>
+        <script src="views/admin/admin.controller.js"></script>
+        <script src="views/forms/form-fields.controller.js"></script>
+        <script src="views/forms/forms.controller.js"></script>
+        <script src="views/header/header.controller.js"></script>
+        <script src="views/main/main.controller.js"></script>
+        <script src="views/siderbar/siderbar.controller.js"></script>
+        <script src="views/users/login.controller.js"></script>
+        <script src="views/users/profile.controller.js"></script>
+        <script src="views/users/register.controller.js"></script>
+
+        <!-- Custom styles for this template -->
+        <link href="css/style.css" rel="stylesheet">
+    </head>
+
+    <body>
+        <div ng-include="views/header/header.view.html"></div>
+        <div class="container-fluid">
+            <div class="row">
+                <div ng-include="views/siderbar/siderbar.view.html"></div>
+                <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+                    <h2>Test</h2>
+                    <div ng-view></div>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>
