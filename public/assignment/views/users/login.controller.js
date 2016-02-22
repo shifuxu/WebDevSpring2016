@@ -5,12 +5,13 @@
 
     function loginController($scope, UserService) {
 
-        $scope.login = function () {
+        $scope.login = function (loginInfo) {
             var data = {
-                username: $scope.username,
-                password: $scope.password
-            }
+                username: loginInfo.username,
+                password: loginInfo.password
+            };
 
+            console.log(data);
 
         }
 
