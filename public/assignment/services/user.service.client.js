@@ -35,7 +35,7 @@
             return users;
         }
 
-        function createUser(use, callback) {
+        function createUser(user, callback) {
 
         }
 
@@ -46,6 +46,5 @@
         function updateUser(userId, user, callback) {
 
         }
-
     }
 })();

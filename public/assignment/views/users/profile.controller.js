@@ -1,3 +1,9 @@
-/**
- * Created by steven on 2/19/16.
- */
+(function(){
+    angular
+        .module("FormBuilderApp")
+        .controller("ProfileController", profileController);
+
+    function profileController() {
+
+    }
+})();
