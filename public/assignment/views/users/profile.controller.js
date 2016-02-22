@@ -3,7 +3,7 @@
         .module("FormBuilderApp")
         .controller("ProfileController", profileController);
 
-    function profileController() {
+    function profileController($scope, UserService) {
 
     }
 })();

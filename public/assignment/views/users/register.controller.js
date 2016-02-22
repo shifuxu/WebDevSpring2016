@@ -3,7 +3,7 @@
         .module("FormBuilderApp")
         .controller("RegisterController", registerController);
 
-    function registerController() {
+    function registerController($scope, UserService) {
 
     }
 })();
