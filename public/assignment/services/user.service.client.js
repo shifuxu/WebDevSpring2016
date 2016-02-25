@@ -6,15 +6,20 @@
     function userService() {
         var users = [
             {	"_id":123, "firstName":"Alice",            "lastName":"Wonderland",
-                "username":"alice",  "password":"alice",   "roles": ["student"]		},
+                "username":"alice",  "password":"alice",   "roles": ["student"],
+                "email": "alice@alice.com"                                              },
             {	"_id":234, "firstName":"Bob",              "lastName":"Hope",
-                "username":"bob",    "password":"bob",     "roles": ["admin"]		},
+                "username":"bob",    "password":"bob",     "roles": ["admin"],
+                "email": "bob@bob.com"                                                  },
             {	"_id":345, "firstName":"Charlie",          "lastName":"Brown",
-                "username":"charlie","password":"charlie", "roles": ["faculty"]		},
+                "username":"charlie","password":"charlie", "roles": ["faculty"],
+                "email": "charlie@charlie.como"                                         },
             {	"_id":456, "firstName":"Dan",              "lastName":"Craig",
-                "username":"dan",    "password":"dan",     "roles": ["faculty", "admin"]},
+                "username":"dan",    "password":"dan",     "roles": ["faculty", "admin"],
+                "email": "dan@dan.com"                                                  },
             {	"_id":567, "firstName":"Edward",           "lastName":"Norton",
-                "username":"ed",     "password":"ed",      "roles": ["student"]		}
+                "username":"ed",     "password":"ed",      "roles": ["student"],
+                "email": "ed@ed.com"                                                    }
         ];
 
         var service = {
@@ -65,11 +70,13 @@
 
         function createUser(user, callback) {
             var newUser = {
+                _id: (new Date).getTime(),
                 username: user.username,
                 password: user.password,
                 firstName: user.firstName,
                 lastName: user.lastName,
-                roles: user.roles
+                roles: user.roles,
+                email: user.email
             };
 
             users.push(newUser);
@@ -79,7 +86,9 @@
         function deleteUserById(userId, callback) {
             var user = findUserById(userId);
             if (user != null) {
-                users.pop(user);
+                users.splice(users.indexOf(user), 1);
+            } else {
+                return null;
             }
         }
 
@@ -91,6 +100,8 @@
                 userTemp.password = user.password;
                 userTemp.username = user.username;
                 userTemp.roles = user.roles;
+                userTemp.email = user.email;
+                return userTemp;
             } else {
                 return null;
             }
