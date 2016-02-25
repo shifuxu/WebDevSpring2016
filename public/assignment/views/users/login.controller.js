@@ -3,17 +3,13 @@
         .module("FormBuilderApp")
         .controller("LoginController", loginController);
 
-    function loginController($scope, UserService) {
-
-        $scope.login = function (loginInfo) {
-            var data = {
-                username: loginInfo.username,
-                password: loginInfo.password
-            };
-
-            console.log(data);
-
+    function loginController($scope, UserService, $rootScope, $location) {
+        $scope.login = function (user) {
+            var userTemp = UserService.findUserByCredentials(user.username, user.password);
+            if (userTemp != null) {
+                $rootScope.currentUser = user;
+                $location.url("/profile");
+            }
         }
-
     }
 })();
