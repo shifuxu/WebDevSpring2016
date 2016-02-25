@@ -1,5 +1,6 @@
 <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main" ng-controller="LoginController">
     <h1 class="page-header">Login</h1>
+    <div ng-show="message" class="alert alert-danger" role="alert">{{message}}</div>
     <form class="form-horizontal col-sm-9">
         <div class="form-group">
             <label for="inputUsername" class="col-sm-2 control-label">Username</label>

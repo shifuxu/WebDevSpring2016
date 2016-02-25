@@ -3,7 +3,7 @@
         .module("FormBuilderApp")
         .controller("SiderbarController", siderbarController);
 
-    function siderbarController() {
+    function siderbarController($rootScope) {
 
     }
 })();
