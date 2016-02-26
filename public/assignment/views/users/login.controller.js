@@ -11,7 +11,7 @@
             var userTemp = UserService.findUserByCredentials(user.username, user.password);
             if (userTemp != null) {
                 $rootScope.currentUser = userTemp;
-                if (userTemp.roles.indexOf("admin") >= 0) {
+                if (userTemp.roles != null && userTemp.roles.indexOf("admin") >= 0) {
                     $location.url("/admin");
                 } else {
                     $location.url("/profile");
