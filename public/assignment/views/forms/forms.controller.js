@@ -14,7 +14,7 @@
         var selectedFormId = null;
 
         function addForm(form) {
-            if (typeof form !== "undefined") {
+            if (typeof form !== "undefined" && form.title != "") {
                 var newForm = FormService.createFormForUser($rootScope.currentUser._id, form);
                 $scope.forms.push(newForm);
             }
