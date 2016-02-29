@@ -38,7 +38,7 @@
             var res = [];
             for (var f in forms) {
                 if (forms[f].userId == userId) {
-                    res.append(forms[f]);
+                    res.push(forms[f]);
                 }
             }
 
