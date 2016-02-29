@@ -14,7 +14,10 @@
         var selectedFormId = null;
 
         function addForm(form) {
-            var newForm = FormService.createFormForUser($rootScope.currentUser._id, form);
+            if (typeof form !== "undefined") {
+                var newForm = FormService.createFormForUser($rootScope.currentUser._id, form);
+                $scope.forms.push(newForm);
+            }
         }
 
         function updateForm(form) {
@@ -24,6 +27,7 @@
         function deleteForm(index) {
             selectedFormId = $scope.forms[index]._id;
             FormService.deleteFormById(selectedFormId);
+            $scope.forms.splice(index, 1);
         }
 
         function selectForm(index) {
