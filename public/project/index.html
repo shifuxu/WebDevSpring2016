@@ -7,11 +7,22 @@
 
         <title>Movie Hub</title>
 
+        <!--Self defined script here-->
+        <script type="application/x-javascript">
+            addEventListener("load", function() {setTimeout(hideURLbar, 0); }, false);
+                function hideURLbar(){ window.scrollTo(0,1); }
+        </script>
+
+        <!--Import fonts-->
+        <link href='http://fonts.googleapis.com/css?family=Roboto+Condensed:100,200,300,400,500,600,700,800,900'
+              rel='stylesheet'
+              type='text/css'>
+
         <!-- Jquery Import-->
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
 
         <!-- Bootstrap Import -->
-        <!--<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">-->
+        <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.5.1/js/bootstrap-datepicker.js">
         </script>
@@ -41,23 +52,33 @@
         <script src="views/users/profile.controller.js"></script>
         <script src="views/users/register.controller.js"></script>
         <script src="views/footer/footer.controller.js"></script>
+
         <!-- service.js Import -->
         <script src="services/user.service.client.js"></script>
 
         <!--Import self defined js-->
-
-
-        <!-- Loading third party fonts -->
-        <link href="http://fonts.googleapis.com/css?family=Roboto:300,400,700|" rel="stylesheet" type="text/css">
-        <link href="fonts/font-awesome.min.css" rel="stylesheet" type="text/css">
-
+        <script src="js/jquery.flexisel.js"></script>
+        <script src="js/responsiveslides.min.js"></script>
+        <script>
+            $(function () {
+                $("#slider").responsiveSlides({
+                    auto: true,
+                    nav: true,
+                    speed: 500,
+                    namespace: "callbacks",
+                    pager: true
+                });
+            });
+        </script>
     </head>
 
     <body ng-controller="MainController">
-        <div id="site-content">
-            <div ng-include="'views/header/header.view.html'"></div>
-            <div ng-view></div>
-            <div ng-include="'views/footer/footer.view.html'"></div>
+        <div class="container">
+            <div class="container_wrap">
+                <div ng-include="'views/header/header.view.html'"></div>
+                <div ng-view></div>
+            </div>
         </div>
+        <div ng-include="'views/footer/footer.view.html'"></div>
     </body>
 </html>

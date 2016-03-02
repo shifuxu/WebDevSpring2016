@@ -1,28 +1,22 @@
-<header class="site-header" ng-controller="HeaderController">
-    <div class="container">
-        <a href="#/home" id="branding">
-            <img src="images/logo.png" class="logo">
-            <div class="logo-copy">
-                <h1 class="site-title">Movie Hub</h1>
-                <small class="site-description">Enjoy and have fun!</small>
-            </div>
-        </a>
-
-        <div class="main-navigation">
-            <button type="button" class="menu-toggle"><i class="fa fa-bars"></i></button>
-            <ul class="menu">
-                <li class="menu-item current-menu-item"><a href="index.html">Home</a></li>
-                <li class="menu-item"><a href="about.html">About</a></li>
-                <li class="menu-item"><a href="review.html">Movie reviews</a></li>
-                <li class="menu-item"><a href="joinus.html">Join us</a></li>
-                <li class="menu-item"><a href="contact.html">Contact</a></li>
-            </ul>
-
-            <form action="#" class="search-form">
-                <input type="text" placeholder="Search...">
-                <button><i class="fa fa-search"></i></button>
-            </form>
-        </div>
-        <div class="mobile-navigation"></div>
+<div class="header_top" ng-controller="HeaderController">
+    <div class="col-sm-3 logo"><a href="#/home"><img src="images/logo.png" alt=""/></a></div>
+    <div class="col-sm-6 nav">
+        <ul>
+            <li> <span class="simptip-position-bottom simptip-movable" data-tooltip="comic"><a href="movie.html"> </a></span></li>
+            <li><span class="simptip-position-bottom simptip-movable" data-tooltip="movie"><a href="movie.html"> </a> </span></li>
+            <li><span class="simptip-position-bottom simptip-movable" data-tooltip="video"><a href="movie.html"> </a></span></li>
+            <li><span class="simptip-position-bottom simptip-movable" data-tooltip="game"><a href="movie.html"> </a></span></li>
+            <li><span class="simptip-position-bottom simptip-movable" data-tooltip="tv"><a href="movie.html"> </a></span></li>
+            <li><span class="simptip-position-bottom simptip-movable" data-tooltip="more"><a href="movie.html"> </a></span></li>
+        </ul>
     </div>
-</header>
+    <div class="col-sm-3 header_right">
+        <ul class="header_right_box">
+            <li><img src="images/p1.png" alt=""/></li>
+            <li><p><a href="login.html">Carol Varois</a></p></li>
+            <li class="last"><i class="edit"> </i></li>
+            <div class="clearfix"> </div>
+        </ul>
+    </div>
+    <div class="clearfix"> </div>
+</div>
