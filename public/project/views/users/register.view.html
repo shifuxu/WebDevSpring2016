@@ -1,41 +1,47 @@
 <div class="content" ng-controller="RegisterController">
     <div class="register">
         <form>
+            <div ng-show="message" class="alert alert-danger" role="alert">{{message}}</div>
             <div class="register-top-grid">
                 <h3>Personal Information</h3>
                 <div>
                     <span>First Name<label>*</label></span>
-                    <input type="text">
+                    <input ng-model="user.firstname" class="form-control" placeholder="First Name">
                 </div>
                 <div>
                     <span>Last Name<label>*</label></span>
-                    <input type="text">
+                    <input ng-model="user.lastname" class="form-control" placeholder="Last Name">
                 </div>
                 <div>
                     <span>Email Address<label>*</label></span>
-                    <input type="text">
+                    <input ng-model="user.email"
+                           type="email"
+                           class="form-control"
+                           placeholder="Email (@gmail, @yahoo, @hotmail...)">
                 </div>
                 <a class="divider"></a>
             </div>
             <div class="register-bottom-grid">
                 <h3>Login Information</h3>
                 <div>
+                    <span>Username<label>*</label></span>
+                    <input ng-model="user.username" class="form-control" placeholder="Username">
+                </div>
+                <div>
                     <span>Password<label>*</label></span>
-                    <input type="text">
+                    <input ng-model="user.password" type="password" class="form-control" placeholder="Password">
                 </div>
                 <div>
                     <span>Confirm Password<label>*</label></span>
-                    <input type="text">
+                    <input ng-model="user.verify" type="password" class="form-control" placeholder="Confirm Password">
                 </div>
                 <div class="clearfix"> </div>
             </div>
         </form>
         <div class="clearfix"> </div>
-        <div class="register-but">
-            <form>
-                <input type="submit" value="submit">
-                <div class="clearfix"> </div>
-            </form>
+        <div>
+            <button type="submit" ng-click="register(user)" class="register-btn">Register</button>
+            <div class="clearfix"> </div>
         </div>
     </div>
 </div>

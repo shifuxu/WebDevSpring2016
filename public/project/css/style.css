@@ -1172,19 +1172,19 @@ outline: none;
 	margin: 0 0 1.5em 0;
 	line-height: 1.5em;
 }
-.acount-btn {
+.account-btn {
 	background: #d8232a;
-color: #FFF;
-font-size: 1em;
-padding: 7px 10px;
-transition: 0.5s all;
--webkit-transition: 0.5s all;
--moz-transition: 0.5s all;
--o-transition: 0.5s all;
-display: inline-block;
-text-transform: uppercase;
+	color: #FFF;
+	font-size: 1em;
+	padding: 7px 10px;
+	transition: 0.5s all;
+	-webkit-transition: 0.5s all;
+	-moz-transition: 0.5s all;
+	-o-transition: 0.5s all;
+	display: inline-block;
+	text-transform: uppercase;
 }
-.acount-btn:hover, .login-right input[type="submit"]:hover{
+.account-btn:hover, .login-right input[type="submit"]:hover{
 	background:#3f444e;
 	text-decoration:none;
 	color:#fff;
@@ -1254,7 +1254,7 @@ p.cart {
 .register-top-grid div, .register-bottom-grid div {
 	width: 48%;
 	float: left;
-	margin: 10px 0;
+	margin: 10px 10px;
 }
 .register-top-grid span, .register-bottom-grid span {
 	color:#999;
@@ -1335,25 +1335,22 @@ p.cart {
 .checkbox input:checked + i:after {
 	opacity: 1;
 }
-.register-but{
-	
+.register-btn {
+	background: #d8232a;
+	color: #FFF;
+	font-size: 1em;
+	padding: 7px 10px;
+	transition: 0.5s all;
+	-webkit-transition: 0.5s all;
+	-moz-transition: 0.5s all;
+	-o-transition: 0.5s all;
+	display: inline-block;
+	text-transform: uppercase;
 }
-.register-but form input[type="submit"] {
-	background: #df1f26;
-color: #FFF;
-font-size: 1em;
-padding: 7px 20px;
-transition: 0.5s all;
--webkit-transition: 0.5s all;
--moz-transition: 0.5s all;
--o-transition: 0.5s all;
-display: inline-block;
-text-transform: uppercase;
-border: none;
-outline: none;
-}
-.register-but input[type="submit"]:hover {
+.register-btn:hover {
 	background:#3f444e;
+	text-decoration:none;
+	color:#fff;
 }
 div.register-bottom-grid {
 	margin-top:3em;
