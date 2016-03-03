@@ -1,24 +1,3 @@
-<div class="slider" ng-controller="HomeController">
-    <div class="callbacks_container">
-        <ul class="rslides" id="slider">
-            <li><img src="images/banner.jpg" class="img-responsive" alt=""/>
-            </li>
-            <li><img src="images/banner1.jpg" class="img-responsive" alt=""/>
-            </li>
-            <li><img src="images/banner2.jpg" class="img-responsive" alt=""/>
-            </li>
-        </ul>
-    </div>
+<div class="slider rslides" ng-controller="HomeController">
+    <img src="images/banner1.jpg" class="img-responsive" alt=""/>
 </div>
-
-<script>
-    $(function () {
-        $("#slider").responsiveSlides({
-            auto: true,
-            nav: true,
-            speed: 500,
-            namespace: "callbacks",
-            pager: true
-        });
-    });
-</script>
