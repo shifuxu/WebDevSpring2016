@@ -21,7 +21,7 @@
                 $scope.message = "User update successfully";
                 $rootScope.currentUser = $scope.currentUser;
             } else {
-                $scope.message = "Unable to update the user";
+                $scope.error = "Unable to update the user";
             }
         }
     }

@@ -32,59 +32,40 @@ border-top-right-radius: 3px;
 	margin-top: 4px;
 }
 /*---social-icons-----*/
-.nav {
-	text-align:center;
-	
-}
-.nav ul{
-	padding:0;
-	margin:0;
-	list-style:none;
-}
-.nav li{
-	
-	margin: 0px 4% 0px 0;
-	display:inline-block;
-}
-.nav li a {
-	height:30px;
-	width:30px;
-	display: block;
-}
-.nav li a:hover {
-	zoom: 1;
-	filter: alpha(opacity=50);
-	opacity: 0.8;
-	-webkit-transition: opacity .15s ease-in-out;
-	-moz-transition: opacity .15s ease-in-out;
-	-ms-transition: opacity .15s ease-in-out;
-	-o-transition: opacity .15s ease-in-out;
-	transition: opacity .15s ease-in-out;
-}
-
-.nav li:nth-child(1) a{
-	background: url(../images/img_sprite.png) -7px -9px;
-}
-.nav li:nth-child(2) a{
-	background: url(../images/img_sprite.png) -49px -8px;
-}
-.nav li:nth-child(3) a{
-	background: url(../images/img_sprite.png) -90px -9px;
-}
-.nav li:nth-child(4) a{
-	background: url(../images/img_sprite.png) -130px -8px;
-}
-.nav li:nth-child(5) a{
-	background: url(../images/img_sprite.png) -175px -9px;
-}
-.nav li:nth-child(6) a{
-	background: url(../images/img_sprite.png) -216px -9px;
-}
+/*.nav {*/
+	/*text-align:center;*/
+	/**/
+/*}*/
+/*.nav ul{*/
+	/*padding:0;*/
+	/*margin:0;*/
+	/*list-style:none;*/
+/*}*/
+/*.nav li{*/
+	/**/
+	/*margin: 0px 4% 0px 0;*/
+	/*display:inline-block;*/
+/*}*/
+/*.nav li a {*/
+	/*height:30px;*/
+	/*width:30px;*/
+	/*display: block;*/
+/*}*/
+/*.nav li a:hover {*/
+	/*zoom: 1;*/
+	/*filter: alpha(opacity=50);*/
+	/*opacity: 0.8;*/
+	/*-webkit-transition: opacity .15s ease-in-out;*/
+	/*-moz-transition: opacity .15s ease-in-out;*/
+	/*-ms-transition: opacity .15s ease-in-out;*/
+	/*-o-transition: opacity .15s ease-in-out;*/
+	/*transition: opacity .15s ease-in-out;*/
+/*}*/
 ul.header_right_box{
 	padding:0;
 	margin: 0 0 0 33%;
 	list-style:none;
-	
+
 }
 ul.header_right_box li{
 	float: left;
@@ -1243,6 +1224,28 @@ p.cart {
 	color: #999;
 	line-height: 1.8em;
 }
+
+/*--profile--*/
+.update-btn {
+	background: #d8232a;
+	color: #FFF;
+	font-size: 1em;
+	padding: 7px 10px;
+	transition: 0.5s all;
+	-webkit-transition: 0.5s all;
+	-moz-transition: 0.5s all;
+	-o-transition: 0.5s all;
+	display: inline-block;
+	text-transform: uppercase;
+}
+.update-btn:hover {
+	background:#3f444e;
+	text-decoration:none;
+	color:#fff;
+}
+
+
+
 /*--register--*/
 .register-top-grid h3, .register-bottom-grid h3 {
 	color:#000;

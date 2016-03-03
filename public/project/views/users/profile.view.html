@@ -1,0 +1,54 @@
+<div class="content" ng-controller="ProfileController">
+    <form>
+        <div ng-show="message" class="alert alert-success" role="alert">{{message}}</div>
+        <div ng-show="error" class="alert alert-danger" role="alert">{{error}}</div>
+        <div class="register-top-grid">
+            <h3>Personal Information</h3>
+            <div>
+                <span>First Name<label>*</label></span>
+                <input ng-model="currentUser.firstname" class="form-control" placeholder="{{currentUser.firstName}}">
+            </div>
+            <div>
+                <span>Last Name<label>*</label></span>
+                <input ng-model="currentUser.lastname" class="form-control" placeholder="{{currentUser.lastName}}">
+            </div>
+            <div>
+                <span>Username<label>*</label></span>
+                <input ng-model="currentUser.username" class="form-control" placeholder="{{currentUser.username}}">
+            </div>
+            <div>
+                <span>Password<label>*</label></span>
+                <input ng-model="currentUser.password"
+                       class="form-control"
+                       placeholder="{{currentUser.password}}">
+            </div>
+            <div>
+                <span>Email Address<label>*</label></span>
+                <input ng-model="currentUser.email"
+                       type="email"
+                       class="form-control"
+                       placeholder="{{currentUser.email}}">
+            </div>
+            <a class="divider"></a>
+        </div>
+        <div class="register-bottom-grid">
+            <h3>Movie Likes</h3>
+            <a class="divider"></a>
+            <div class="clearfix"> </div>
+        </div>
+        <div class="register-bottom-grid">
+            <h3>Movie Comments</h3>
+            <a class="divider"></a>
+            <div class="clearfix"> </div>
+        </div>
+        <div class="register-bottom-grid">
+            <h3>Followed Friends</h3>
+            <div class="clearfix"> </div>
+        </div>
+    </form>
+    <div class="clearfix"> </div>
+    <div>
+        <button type="submit" ng-click="update(currentUser)" class="update-btn">Update</button>
+        <div class="clearfix"> </div>
+    </div>
+</div>
