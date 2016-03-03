@@ -7,12 +7,24 @@
     <div class="col-sm-6 header_right">
         <ul class="header_right_box">
             <li><a href="#/home" ng-class="{'active': $location.url() == '/home'}">Home</a></li>
-            <li ng-hide="currentUser"><a href="#/register" ng-class="{'active': $location.url() == '/register'}">Register</a></li>
-            <li><a href="#/login" ng-class="{'active': $location.url() == '/login'}">Login</a></li>
-            <li><a>Logout</a></li>
-            <li><a href="#/profile" ng-class="{'active': $location.url() == '/profile'}">Profile</a></li>
+            <li ng-hide="currentUser">
+                <a href="#/login" ng-class="{'active': $location.url() == '/login'}">
+                    Login
+                </a>
+            </li>
+            <li ng-hide="currentUser">
+                <a href="#/register" ng-class="{'active': $location.url() == '/register'}">
+                    Register
+                </a>
+            </li>
+            <li ng-show="currentUser"><a ng-click="logout()">Logout</a></li>
+            <li ng-show="currentUser"><a href="#/profile" ng-class="{'active': $location.url() == '/profile'}">Profile</a></li>
             <li><a href="#/search" ng-class="{'active': $location.url() == '/search'}">Search</a></li>
-            <li><a>Details</a></li>
+            <li ng-show="$location.url().indexOf('/details')>=0">
+                <a ng-class="{'active': $location.url().indexOf('/details')>=0}">
+                    Details
+                </a>
+            </li>
             <div class="clearfix"></div>
         </ul>
     </div>
