@@ -17,8 +17,8 @@
                     Register
                 </a>
             </li>
-            <li ng-show="currentUser"><a ng-click="logout()">Logout</a></li>
             <li ng-show="currentUser"><a href="#/profile" ng-class="{'active': $location.url() == '/profile'}">Profile</a></li>
+            <li ng-show="currentUser"><a ng-click="logout()">Logout</a></li>
             <li><a href="#/search" ng-class="{'active': $location.url() == '/search'}">Search</a></li>
             <li ng-show="$location.url().indexOf('/details')>=0">
                 <a ng-class="{'active': $location.url().indexOf('/details')>=0}">
