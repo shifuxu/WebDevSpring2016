@@ -7,12 +7,6 @@
 
         <title>Movie Hub</title>
 
-        <!--Self defined script here-->
-        <script type="application/x-javascript">
-            addEventListener("load", function() {setTimeout(hideURLbar, 0); }, false);
-                function hideURLbar(){ window.scrollTo(0,1); }
-        </script>
-
         <!--Import fonts-->
         <link href='http://fonts.googleapis.com/css?family=Roboto+Condensed:100,200,300,400,500,600,700,800,900'
               rel='stylesheet'
@@ -56,20 +50,6 @@
         <!-- service.js Import -->
         <script src="services/user.service.client.js"></script>
 
-        <!--Import self defined js-->
-        <script src="js/jquery.flexisel.js"></script>
-        <script src="js/responsiveslides.min.js"></script>
-        <script>
-            $(function () {
-                $("#slider").responsiveSlides({
-                    auto: true,
-                    nav: true,
-                    speed: 500,
-                    namespace: "callbacks",
-                    pager: true
-                });
-            });
-        </script>
     </head>
 
     <body ng-controller="MainController">

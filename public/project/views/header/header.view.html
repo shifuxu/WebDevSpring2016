@@ -3,10 +3,16 @@
         <a href="#/home"><img style="float: left;" src="images/logo1.png"/></a>
         <h2 style="float: left; margin-left: 10px;">Movie Hub</h2>
     </div>
-    <div class="col-sm-6"></div>
-    <div class="col-sm-3 header_right">
+    <div class="col-sm-3"></div>
+    <div class="col-sm-6 header_right">
         <ul class="header_right_box">
-            <li><p><a href="login.html">Search</a></p></li>
+            <li><a href="#/home" ng-class="{'active': $location.url() == '/home'}">Home</a></li>
+            <li ng-hide="currentUser"><a href="#/register" ng-class="{'active': $location.url() == '/register'}">Register</a></li>
+            <li><a href="#/login" ng-class="{'active': $location.url() == '/login'}">Login</a></li>
+            <li><a>Logout</a></li>
+            <li><a href="#/profile" ng-class="{'active': $location.url() == '/profile'}">Profile</a></li>
+            <li><a href="#/search" ng-class="{'active': $location.url() == '/search'}">Search</a></li>
+            <li><a>Details</a></li>
             <div class="clearfix"></div>
         </ul>
     </div>
