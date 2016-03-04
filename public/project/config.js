@@ -29,7 +29,7 @@
                 templateUrl: "views/search/search.view.html",
                 controller: "SearchController"
             })
-            .when("/details", {
+            .when("/details/:imdbID", {
                 templateUrl: "views/details/details.view.html",
                 controller: "DetailsController"
             })

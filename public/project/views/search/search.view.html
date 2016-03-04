@@ -1,0 +1,40 @@
+<div class="content" ng-controller="SearchController">
+    <div class="row">
+        <div class="col-md-2"></div>
+        <div class="col-md-8">
+            <form>
+                <h3>Please search what you like!</h3>
+                <input ng-model="movie.title" class="form-control" placeholder="Batman"/>
+                <button ng-click="search(movie)" class="btn btn-danger btn-block">Search</button>
+            </form>
+        </div>
+        <div class="col-md-2"></div>
+    </div>
+    <div ng-if="data">
+        <h3>Search Results</h3>
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <th>Poster</th>
+                    <th>Title</th>
+                    <th>Year</th>
+                    <th>IMDB</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="movie in data.Search">
+                    <td>
+                        <img ng-src="{{movie.Poster}}" height="100px" width="70px"/>
+                    </td>
+                    <td>
+                        <a href="#/details/{{movie.imdbID}}">
+                            {{movie.Title}}
+                        </a>
+                    </td>
+                    <td>{{movie.Year}}</td>
+                    <td>{{movie.imdbID}}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
