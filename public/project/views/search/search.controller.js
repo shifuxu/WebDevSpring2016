@@ -3,11 +3,16 @@
         .module("MovieHubApp")
         .controller("SearchController", searchController);
 
-    function searchController($scope, OmdbService) {
+    function searchController($scope, $routeParams, $location, OmdbService) {
+        $scope.title = $routeParams.title;
         $scope.search = search;
+        $scope.message = null;
 
-        function search(movie) {
+        if ($scope.title) {
 
+        }
+
+        function search(moive) {
             OmdbService.searchMovieByTitle(
                 movie.title,
                 function(response) {

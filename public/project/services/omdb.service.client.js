@@ -11,7 +11,7 @@
         return api;
 
         function findMovieByImdbID(imdbID, callback) {
-            return $http.get("http://www.omdbapi.com/?i="+imdbID)
+            return $http.get("http://www.omdbapi.com/?i="+imdbID+"&plot=full")
                 .success(callback);
         }
 

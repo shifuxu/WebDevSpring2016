@@ -8,6 +8,6 @@
 
         OmdbService.findMovieByImdbID($scope.imdbID, function(response) {
             $scope.movie = response;
-        })
+        });
     }
 })();
