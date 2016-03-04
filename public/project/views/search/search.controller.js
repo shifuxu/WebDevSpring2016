@@ -9,15 +9,19 @@
         $scope.message = null;
 
         if ($scope.title) {
-
-        }
-
-        function search(moive) {
             OmdbService.searchMovieByTitle(
-                movie.title,
+                $scope.title,
                 function(response) {
                     $scope.data = response;
                 });
+        }
+
+        function search(title) {
+            if (title != "") {
+                $location.url("/search/" + title);
+            } else {
+                $scope.message = "Please enter the correct title for searching!";
+            }
         }
     }
 })();
