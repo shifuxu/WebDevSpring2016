@@ -7,7 +7,10 @@ function rootRequest (req, res) {
     res.send('hello world')
 }
 
-app.use(express.static(__dirname + '/public'))
+app.use(express.static(__dirname + '/public'));
 
 app.get('/hello', rootRequest);
+
+require("./public/assignment/server/app.js")(app);
+
 app.listen(port, ipaddress);

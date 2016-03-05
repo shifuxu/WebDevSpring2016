@@ -69,6 +69,7 @@ module.exports = function () {
         var user = findUserById(userId);
         if (user != null) {
             users.splice(users.indexOf(user), 1);
+            return null;
         } else {
             return null;
         }
