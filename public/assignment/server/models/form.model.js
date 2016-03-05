@@ -54,9 +54,8 @@ module.exports = function() {
         var form = findFormById(formId);
         if (form != null) {
             forms.splice(forms.indexOf(form), 1);
-        } else {
-            return null;
         }
+        return null;
     }
 
     function updateFormById(formId, newForm) {
