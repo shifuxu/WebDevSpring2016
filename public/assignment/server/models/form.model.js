@@ -8,7 +8,12 @@ module.exports = function() {
         findAllForms: findAllForms,
         deleteFormById: deleteFormById,
         updateFormById: updateFormById,
-        findFormByTitle: findFormByTitle
+        findFormByTitle: findFormByTitle,
+        findAllFieldsById: findAllFieldsById,
+        findFieldByFieldIdAndFormId: findFieldByFieldIdAndFormId,
+        deleteFieldByFieldIdAndFormId: deleteFieldByFieldIdAndFormId,
+        createFieldForForm: createFieldForForm,
+        updateFieldForForm: updateFieldForForm
     };
 
     return api;
@@ -79,4 +84,76 @@ module.exports = function() {
 
         return null;
     }
+
+    function findAllFieldsById(formId) {
+        var form = findFormById(formId);
+        if (!form) {
+            return form.fields;
+        }
+
+        return [];
+    }
+
+    function findFieldByFieldIdAndFormId(formId, fieldId) {
+        var fields = findAllFieldsById(formId);
+        if (!fields) {
+            for (var f in fields) {
+                if (fields[f] == fieldId) {
+                    return fields[f];
+                }
+            }
+        }
+
+        return null;
+    }
+
+    function deleteFieldByFieldIdAndFormId(formId, fieldId) {
+        var field = findFieldByFieldIdAndFormId(formId, fieldId);
+        var fields = findAllFieldsById(formId);
+        if (!field) {
+            fields.splice(fields.indexOf(filed), 1);
+        }
+        return null;
+    }
+
+    function createFieldForForm(formId, field) {
+        var newField = {
+            _id: (new Date).getTime(),
+            label: field.label,
+            type: field.type,
+            placeholder: field.placeholder,
+            options: field.options
+        };
+
+        var fields = findAllFieldsById(formId);
+        fields.push(newField);
+
+        // can we remove here?
+        var form = findFormById(formId);
+        var newForm = {
+            _id: form._id,
+            title: form.title,
+            userId: form.userId,
+            fields: fields
+        };
+
+        updateFormById(formId, newForm);
+
+        return newField;
+    }
+
+    function updateFieldForForm(formId, fieldId, field) {
+        var fieldTemp = findFieldByFieldIdAndFormId(formId, fieldId);
+        if (!fieldTemp) {
+            fieldTemp._id = field._id;
+            fieldTemp.label = field.label;
+            fieldTemp.type = field.type;
+            fieldTemp.placeholder = field.placeholder;
+            fieldTemp.options = field.options;
+            return fieldTemp;
+        } else {
+            return null;
+        }
+    }
+
 };
