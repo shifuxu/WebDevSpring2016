@@ -17,7 +17,8 @@ module.exports = function() {
         var newForm = {
             _id: (new Date).getTime(),
             title: form.title,
-            userId: userId
+            userId: userId,
+            fields: form.fields
         };
 
         forms.push(newForm);
@@ -63,6 +64,7 @@ module.exports = function() {
         if (formTemp != null) {
             formTemp.title = newForm.title;
             formTemp.userId = newForm.userId;
+            formTemp.fields = newForm.fields;
             return formTemp;
         } else {
             return null;
