@@ -16,9 +16,9 @@
                 });
         }
 
-        function search(title) {
-            if (title != "") {
-                $location.url("/search/" + title);
+        function search(movie) {
+            if (typeof movie !== "undefined" && movie.title != "") {
+                $location.url("/search/" + movie.title);
             } else {
                 $scope.message = "Please enter the correct title for searching!";
             }
