@@ -18,7 +18,7 @@
             .when("/profile", {
                 templateUrl: "views/users/profile.view.html",
                 controller: "ProfileController",
-                controolerAs: "model"
+                controllerAs: "model"
             })
             .when("/admin", {
                 templateUrl: "views/admin/admin.view.html"
