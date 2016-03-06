@@ -3,20 +3,25 @@
         .module("FormBuilderApp")
         .controller("FormController", formController);
 
-    function formController($scope, FormService, $rootScope) {
-        $scope.forms = FormService.findAllFormsForUser($rootScope.currentUser._id);
+    function formController(FormService, $rootScope) {
+        var vm = this;
 
-        $scope.addForm = addForm;
-        $scope.updateForm = updateForm;
-        $scope.deleteForm = deleteForm;
-        $scope.selectForm = selectForm;
+        vm.addForm = addForm;
+        vm.updateForm = updateForm;
+        vm.deleteForm = deleteForm;
+        vm.selectForm = selectForm;
+
+        function init() {
+            vm.forms = FormService.findAllFormsForUser($rootScope.currentUser._id);
+        }
+        init();
 
         var selectedFormId = null;
 
         function addForm(form) {
             if (typeof form !== "undefined" && form.title != "") {
                 var newForm = FormService.createFormForUser($rootScope.currentUser._id, form);
-                $scope.forms.push(newForm);
+                vm.forms.push(newForm);
             }
         }
 
@@ -25,15 +30,15 @@
         }
 
         function deleteForm(index) {
-            selectedFormId = $scope.forms[index]._id;
+            selectedFormId = vm.forms[index]._id;
             FormService.deleteFormById(selectedFormId);
-            $scope.forms.splice(index, 1);
+            vm.forms.splice(index, 1);
         }
 
         function selectForm(index) {
-            selectedFormId = $scope.forms[index]._id;
+            selectedFormId = vm.forms[index]._id;
             var form = FormService.findFormById(selectedFormId);
-            $scope.form = {
+            vm.form = {
                 _id: form._id,
                 title: form.title,
                 userId: form.userId

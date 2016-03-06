@@ -3,9 +3,16 @@
         .module("FormBuilderApp")
         .controller("LoginController", loginController);
 
-    function loginController($scope, UserService, $rootScope, $location) {
-        $scope.message = null;
-        $scope.login = login;
+    function loginController(UserService, $rootScope, $location) {
+        var vm = this;
+
+        vm.login = login;
+        vm.message = null;
+
+        function init() {
+
+        }
+        init();
 
         function login(user) {
             var userTemp = UserService.findUserByCredentials(user.username, user.password);
@@ -17,7 +24,7 @@
                     $location.url("/profile");
                 }
             } else {
-                $scope.message = "Can not find such user, please enter again!";
+                vm.message = "Can not find such user, please enter again!";
                 return ;
             }
         }
