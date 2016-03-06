@@ -23,7 +23,7 @@
 
         return service;
 
-        function createFormForUser(userId, form, callback) {
+        function createFormForUser(userId, form) {
             var newForm = {
                 _id: (new Date).getTime(),
                 title: form.title,
@@ -34,7 +34,7 @@
             return newForm;
         }
 
-        function findAllFormsForUser(userId, callback) {
+        function findAllFormsForUser(userId) {
             var res = [];
             for (var f in forms) {
                 if (forms[f].userId == userId) {
@@ -45,7 +45,7 @@
             return res;
         }
 
-        function findFormById(formId, callback) {
+        function findFormById(formId) {
             for (var f in forms) {
                 if (forms[f]._id == formId) {
                     return forms[f];
@@ -55,11 +55,11 @@
             return null;
         }
 
-        function findAllForms(callback) {
+        function findAllForms() {
             return forms;
         }
 
-        function deleteFormById(formId, callback) {
+        function deleteFormById(formId) {
             var form = findFormById(formId);
             if (form != null) {
                 forms.splice(forms.indexOf(form), 1);
@@ -68,7 +68,7 @@
             }
         }
 
-        function updateFormById(formId, newForm, callback) {
+        function updateFormById(formId, newForm) {
             var formTemp = findFormById(formId);
             if (formTemp != null) {
                 formTemp.title = newForm.title;
