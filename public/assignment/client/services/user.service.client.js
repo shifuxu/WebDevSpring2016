@@ -3,24 +3,7 @@
         .module("FormBuilderApp")
         .factory("UserService", userService);
 
-    function userService() {
-        var users = [
-            {	"_id":123, "firstName":"Alice",            "lastName":"Wonderland",
-                "username":"alice",  "password":"alice",   "roles": ["student"],
-                "email": "alice@alice.com"                                              },
-            {	"_id":234, "firstName":"Bob",              "lastName":"Hope",
-                "username":"bob",    "password":"bob",     "roles": ["admin"],
-                "email": "bob@bob.com"                                                  },
-            {	"_id":345, "firstName":"Charlie",          "lastName":"Brown",
-                "username":"charlie","password":"charlie", "roles": ["faculty"],
-                "email": "charlie@charlie.como"                                         },
-            {	"_id":456, "firstName":"Dan",              "lastName":"Craig",
-                "username":"dan",    "password":"dan",     "roles": ["faculty", "admin"],
-                "email": "dan@dan.com"                                                  },
-            {	"_id":567, "firstName":"Edward",           "lastName":"Norton",
-                "username":"ed",     "password":"ed",      "roles": ["student"],
-                "email": "ed@ed.com"                                                    }
-        ];
+    function userService($http, $rootScope) {
 
         var service = {
             findUserByCredentials: findUserByCredentials,
@@ -29,19 +12,18 @@
             findAllUsers: findAllUsers,
             createUser: createUser,
             deleteUserById: deleteUserById,
-            updateUser: updateUser
+            updateUser: updateUser,
+            setCurrentUser: setCurrentUser
         };
 
         return service;
 
         function findUserByCredentials(username, password) {
-            for (var u in users) {
-                if (users[u].username == username && users[u].password == password) {
-                    return users[u];
-                }
-            }
-
-            return null;
+            var credentials = {
+                username: username,
+                password: password
+            };
+            return $http.post("/api/assignment/login", credentials);
         }
 
         function findUserById(userId) {
@@ -105,6 +87,10 @@
             } else {
                 return null;
             }
+        }
+
+        function setCurrentUser(user) {
+            $rootScope.currentUser = user;
         }
     }
 })();
