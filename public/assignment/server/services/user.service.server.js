@@ -56,7 +56,7 @@ module.exports = function(app, userModel) {
 
     function login(req, res) {
         var credentials = req.body;
-        var user = userModel.findUserByCredential(credentials);
+        var user = userModel.findUserByCredentials(credentials);
         res.json(user);
     }
 

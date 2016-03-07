@@ -15,18 +15,22 @@
         init();
 
         function login(user) {
-            var userTemp = UserService.findUserByCredentials(user.username, user.password);
-            if (userTemp != null) {
-                $rootScope.currentUser = userTemp;
-                if (userTemp.roles != null && userTemp.roles.indexOf("admin") >= 0) {
-                    $location.url("/admin");
-                } else {
-                    $location.url("/profile");
-                }
-            } else {
-                vm.message = "Can not find such user, please enter again!";
-                return ;
-            }
+            var userTemp = UserService
+                            .findUserByCredentials(user.username, user.password)
+                            .then(function(response) {
+                                var userTemp = response.data;
+                                if (userTemp) {
+                                    UserService.setCurrentUser(userTemp);
+                                    if (userTemp.roles != null && userTemp.roles.indexOf("admin") >= 0) {
+                                        $location.url("/admin");
+                                    } else {
+                                        $location.url("/profile");
+                                    }
+                                } else {
+                                    vm.message = "Can not find such user, please enter again!";
+                                }
+                            });
+            console.log(userTemp);
         }
     }
 })();
