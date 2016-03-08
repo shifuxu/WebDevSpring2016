@@ -39,13 +39,7 @@
         }
 
         function findUserByUsername(username) {
-            for (var u in users){
-                if (users[u].username == username) {
-                    return users[u];
-                }
-            }
-
-            return null;
+            return $http.get("/api/assignment/user/" + username);
         }
 
         function findAllUsers() {
@@ -53,18 +47,7 @@
         }
 
         function createUser(user) {
-            var newUser = {
-                _id: (new Date).getTime(),
-                username: user.username,
-                password: user.password,
-                firstName: user.firstName,
-                lastName: user.lastName,
-                roles: user.roles,
-                email: user.email
-            };
-
-            users.push(newUser);
-            return newUser;
+            return $http.post("/api/assignment/user", user);
         }
 
         function deleteUserById(userId) {
@@ -77,18 +60,7 @@
         }
 
         function updateUser(userId, user) {
-            var userTemp = findUserById(userId);
-            if (userTemp != null) {
-                userTemp.firstName = user.firstName;
-                userTemp.lastName = user.lastName;
-                userTemp.password = user.password;
-                userTemp.username = user.username;
-                userTemp.roles = user.roles;
-                userTemp.email = user.email;
-                return userTemp;
-            } else {
-                return null;
-            }
+            return $http.put("/api/assignment/user/" + userId, user);
         }
 
         function setCurrentUser(user) {

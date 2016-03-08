@@ -3,7 +3,7 @@
         .module("FormBuilderApp")
         .controller("RegisterController", registerController);
 
-    function registerController($scope, UserService, $location, $rootScope) {
+    function registerController(UserService, $location) {
         var vm = this;
 
         vm.message = null;
@@ -35,15 +35,29 @@
                 vm.message = "Please provide a email address";
                 return ;
             }
-            var userTemp = UserService.findUserByUsername(user.username);
-            if (userTemp != null) {
-                vm.message = "User already exists";
-                return ;
-            }
 
-            var newUser = UserService.createUser(user);
-            $rootScope.currentUser = newUser;
-            $location.url("/profile");
+            UserService
+                .findUserByUsername(user.username)
+                .then(function(response) {
+                    var userTemp = response.data;
+                    console.log(userTemp);
+                    if (userTemp) {
+                        console.log("test test");
+                        vm.message = "User already exists";
+                    }
+                });
+
+            if (vm.message != null) {
+                UserService
+                    .createUser(user)
+                    .then(function(response) {
+                        var newUser = response.data;
+                        if (newUser) {
+                            UserService.setCurrentUser(newUser);
+                            $location.url("/profile");
+                        }
+                    });
+            }
         }
     }
 })();

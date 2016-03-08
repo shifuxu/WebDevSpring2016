@@ -2,8 +2,8 @@ module.exports = function(app, userModel) {
     app.post("/api/assignment/user", createUser);
     app.get("/api/assignment/user", findAllUsers);
     app.get("/api/assignment/user/:id", findUserById);
-    app.get("/api/assignment/user?username=username", findUserByUsername);
-    app.get("/api/assignment/user?username=alice&password=alice", findUserByCredential);
+    app.get("/api/assignment/user/:username", findUserByUsername);
+    app.get("/api/assignment/user?username=:username&password=:password", findUserByCredential);
     app.put("/api/assignment/user/:id", updateUserById);
     app.delete("/api/assignment/user/:id", deleteUserById);
     app.post("/api/assignment/login", login);
@@ -12,8 +12,9 @@ module.exports = function(app, userModel) {
 
     function createUser(req, res) {
         var user = req.body;
-        user = userModel.createUser(user);
-        res.json(userModel.findAllUsers());
+        var newUser = userModel.createUser(user);
+        req.session.currentUser = newUser;
+        res.json(newUser);
     }
 
     function findAllUsers(req, res) {
@@ -44,10 +45,10 @@ module.exports = function(app, userModel) {
     }
 
     function updateUserById(req, res) {
-        var id = req.params.id;
+        var id = Number(req.params.id);
         var user = req.body;
-        var userTemp = userModel.updateUserById(id, user);
-        res.json(userModel.findAllUsers());
+        var userTemp = userModel.updateUser(id, user);
+        res.json(userTemp);
     }
 
     function deleteUserById(req, res) {

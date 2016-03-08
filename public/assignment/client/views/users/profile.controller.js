@@ -3,32 +3,37 @@
         .module("FormBuilderApp")
         .controller("ProfileController", profileController);
 
-    function profileController($rootScope, UserService, $location) {
+    function profileController(UserService) {
         var vm = this;
 
         vm.message = null;
         vm.error = null;
         vm.update = update;
-        vm.currentUser = $rootScope.currentUser;
 
         function init() {
-
+            UserService
+                .getCurrentUser()
+                .then(function(response) {
+                    var currentUser = response.data;
+                    if (currentUser) {
+                        vm.currentUser = currentUser;
+                    }
+                });
         }
         init();
 
-        if (!vm.currentUser) {
-            $location.url("/home");
-        }
-
         function update(user) {
-            vm.currentUser = UserService.updateUser(vm.currentUser._id, user);
-
-            if (user) {
-                vm.message = "User update successfully";
-                $rootScope.currentUser = vm.currentUser;
-            } else {
-                vm.error = "Unable to update the user";
-            }
+            UserService
+                .updateUser(vm.currentUser._id, user)
+                .then(function(response) {
+                    var userTemp = response.data;
+                    if (userTemp) {
+                        vm.message = "User update successfully";
+                        UserService.setCurrentUser(userTemp);
+                    } else {
+                        vm.error = "Unable to update the user";
+                    }
+                });
         }
     }
 })();
