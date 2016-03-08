@@ -3,16 +3,33 @@
         .module("FormBuilderApp")
         .controller("FormController", formController);
 
-    function formController(FormService, $rootScope) {
+    function formController(UserService, FormService) {
         var vm = this;
 
         vm.addForm = addForm;
         vm.updateForm = updateForm;
         vm.deleteForm = deleteForm;
         vm.selectForm = selectForm;
+        vm.currentUser = null;
+        vm.forms = [];
 
         function init() {
-            vm.forms = FormService.findAllFormsForUser($rootScope.currentUser._id);
+            UserService
+                .getCurrentUser()
+                .then(function(response) {
+                    var userTemp = response.data;
+                    if (userTemp) {
+                        vm.currentUser = userTemp;
+                        FormService
+                            .findAllFormsForUser(vm.currentUser._id)
+                            .then(function(response) {
+                                var forms = response.data;
+                                if (forms) {
+                                    vm.forms = forms;
+                                }
+                            });
+                    }
+                });
         }
         init();
 
@@ -20,7 +37,7 @@
 
         function addForm(form) {
             if (typeof form !== "undefined" && form.title != "") {
-                var newForm = FormService.createFormForUser($rootScope.currentUser._id, form);
+                var newForm = FormService.createFormForUser(vm.currentUser._id, form);
                 vm.forms.push(newForm);
             }
         }

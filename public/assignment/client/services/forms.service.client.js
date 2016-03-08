@@ -3,14 +3,7 @@
         .module("FormBuilderApp")
         .factory("FormService", formService);
 
-    function formService() {
-
-        var forms = [
-            {"_id": "000", "title": "Contacts", "userId": 123},
-            {"_id": "010", "title": "ToDo",     "userId": 123},
-            {"_id": "020", "title": "CDs",      "userId": 234}
-        ];
-
+    function formService($http) {
 
         var service = {
             createFormForUser: createFormForUser,
@@ -35,14 +28,7 @@
         }
 
         function findAllFormsForUser(userId) {
-            var res = [];
-            for (var f in forms) {
-                if (forms[f].userId == userId) {
-                    res.push(forms[f]);
-                }
-            }
-
-            return res;
+            return $http.get("/api/assignment/user/" + userId + "/form");
         }
 
         function findFormById(formId) {
