@@ -36,25 +36,23 @@
                 return ;
             }
 
-            UserService
-                .findUserByUsername(user.username)
-                .then(function(response) {
-                    var userTemp = response.data;
-                    console.log(userTemp);
-                    if (userTemp) {
-                        console.log("test test");
-                        vm.message = "User already exists";
-                    }
-                });
-
-            if (vm.message != null) {
+            if (vm.message == null) {
                 UserService
-                    .createUser(user)
-                    .then(function(response) {
-                        var newUser = response.data;
-                        if (newUser) {
-                            UserService.setCurrentUser(newUser);
-                            $location.url("/profile");
+                    .findUserByUsername(user.username)
+                    .then(function (response) {
+                        var userTemp = response.data;
+                        if (userTemp != null) {
+                            vm.message = "User already exists";
+                        } else {
+                            UserService
+                                .createUser(user)
+                                .then(function(response) {
+                                    var newUser = response.data;
+                                    if (newUser) {
+                                        UserService.setCurrentUser(newUser);
+                                        $location.url("/profile");
+                                    }
+                                });
                         }
                     });
             }

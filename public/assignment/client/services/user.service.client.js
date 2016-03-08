@@ -29,13 +29,7 @@
         }
 
         function findUserById(userId) {
-            for (var u in users){
-                if (users[u]._id == userId) {
-                    return users[u];
-                }
-            }
-
-            return null;
+            return $http.get("/api/assignment/user/" + userId);
         }
 
         function findUserByUsername(username) {
