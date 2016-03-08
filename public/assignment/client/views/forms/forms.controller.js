@@ -37,29 +37,68 @@
 
         function addForm(form) {
             if (typeof form !== "undefined" && form.title != "") {
-                var newForm = FormService.createFormForUser(vm.currentUser._id, form);
-                vm.forms.push(newForm);
+                FormService
+                    .createFormForUser(vm.currentUser._id, form)
+                    .then(function(response) {
+                        var forms = response.data;
+                        if (forms) {
+                            vm.forms = forms;
+                        }
+                    });
             }
         }
 
         function updateForm(form) {
-            var newForm = FormService.updateFormById(selectedFormId, form);
+            FormService
+                .updateFormById(selectedFormId, form)
+                .then(function(response) {
+                    var forms = response.data;
+                    if (forms) {
+                        FormService
+                            .findAllFormsForUser(vm.currentUser._id)
+                            .then(function(response) {
+                                var forms = response.data;
+                                if (forms) {
+                                    vm.forms = forms;
+                                }
+                            });
+                    }
+                });
         }
 
         function deleteForm(index) {
             selectedFormId = vm.forms[index]._id;
-            FormService.deleteFormById(selectedFormId);
-            vm.forms.splice(index, 1);
+            FormService
+                .deleteFormById(selectedFormId)
+                .then(function(response) {
+                    var forms = response.data;
+                    if (forms) {
+                        FormService
+                            .findAllFormsForUser(vm.currentUser._id)
+                            .then(function(response) {
+                                var forms = response.data;
+                                if (forms) {
+                                    vm.forms = forms;
+                                }
+                            });
+                    }
+                });
         }
 
         function selectForm(index) {
             selectedFormId = vm.forms[index]._id;
-            var form = FormService.findFormById(selectedFormId);
-            vm.form = {
-                _id: form._id,
-                title: form.title,
-                userId: form.userId
-            };
+            FormService
+                .findFormById(selectedFormId)
+                .then(function(response) {
+                    var formTemp = response.data;
+                    if (formTemp) {
+                        vm.form = {
+                            _id: formTemp._id,
+                            title: formTemp.title,
+                            userId: formTemp.userId
+                        };
+                    }
+                });
         }
     }
 })();

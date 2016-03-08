@@ -20,7 +20,7 @@ module.exports = function() {
 
     function createFormForUser(userId, form) {
         var newForm = {
-            _id: (new Date).getTime(),
+            _id: (new Date).getTime().toString(),
             title: form.title,
             userId: userId,
             fields: form.fields
