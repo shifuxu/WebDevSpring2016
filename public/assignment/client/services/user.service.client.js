@@ -37,7 +37,7 @@
         }
 
         function findAllUsers() {
-            return users;
+            return $http.get("/api/assignment/user");
         }
 
         function createUser(user) {
@@ -45,12 +45,7 @@
         }
 
         function deleteUserById(userId) {
-            var user = findUserById(userId);
-            if (user != null) {
-                users.splice(users.indexOf(user), 1);
-            } else {
-                return null;
-            }
+            return $http.delete("/api/assignment/user/" + userId);
         }
 
         function updateUser(userId, user) {
