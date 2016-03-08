@@ -15,6 +15,10 @@
         init();
 
         function login(user) {
+            if(!user) {
+                vm.message = "Can not find such user, please enter again!";
+                return;
+            }
             UserService
                 .findUserByCredentials(user.username, user.password)
                 .then(function(response) {
