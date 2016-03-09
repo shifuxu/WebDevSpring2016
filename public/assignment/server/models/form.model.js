@@ -96,9 +96,9 @@ module.exports = function() {
 
     function findFieldByFieldIdAndFormId(formId, fieldId) {
         var fields = findAllFieldsById(formId);
-        if (!fields) {
+        if (fields) {
             for (var f in fields) {
-                if (fields[f] == fieldId) {
+                if (fields[f]._id == fieldId) {
                     return fields[f];
                 }
             }
@@ -110,15 +110,15 @@ module.exports = function() {
     function deleteFieldByFieldIdAndFormId(formId, fieldId) {
         var field = findFieldByFieldIdAndFormId(formId, fieldId);
         var fields = findAllFieldsById(formId);
-        if (!field) {
-            fields.splice(fields.indexOf(filed), 1);
+        if (field) {
+            fields.splice(fields.indexOf(field), 1);
         }
         return null;
     }
 
     function createFieldForForm(formId, field) {
         var newField = {
-            _id: (new Date).getTime(),
+            _id: (new Date).getTime().toString(),
             label: field.label,
             type: field.type,
             placeholder: field.placeholder,
@@ -128,7 +128,6 @@ module.exports = function() {
         var fields = findAllFieldsById(formId);
         fields.push(newField);
 
-        // can we remove here?
         var form = findFormById(formId);
         var newForm = {
             _id: form._id,
@@ -144,7 +143,7 @@ module.exports = function() {
 
     function updateFieldForForm(formId, fieldId, field) {
         var fieldTemp = findFieldByFieldIdAndFormId(formId, fieldId);
-        if (!fieldTemp) {
+        if (fieldTemp) {
             fieldTemp._id = field._id;
             fieldTemp.label = field.label;
             fieldTemp.type = field.type;
