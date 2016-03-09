@@ -1,3 +1,13 @@
+<script>
+    $(init);
+
+    function init()
+    {
+        $("#sortDiv").sortable(
+                {axis: "y"}
+        );
+    }
+</script>
 <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
     <h1 class="page-header">Forms</h1>
     <ul class="nav nav-tabs">
@@ -5,15 +15,14 @@
         <li role="presentation" class="active"><a href="#">Fileds</a></li>
     </ul>
     <br/>
-    <div ng-controller="FieldsController as model">
+    <div id="sortDiv" ng-controller="FieldsController as model">
         <div class="row" ng-repeat="field in model.fields">
             <div ng-switch="field.type" class="col-sm-4">
                 <div ng-switch-when="TEXT" class="form-group">
-                    <label for="input-{{field._id}}">{{field.label}}</label>
+                    <label>{{field.label}}</label>
                     <input class="form-control"
                            type="text"
-                           placeholder="{{field.placeholder}}"
-                           id="input-{{field._id}}"/>
+                           placeholder="{{field.placeholder}}"/>
                 </div>
                 <div ng-switch-when="TEXTAREA" class="form-group">
                     <label for="input-{{field._id}}">{{field.label}}</label>
