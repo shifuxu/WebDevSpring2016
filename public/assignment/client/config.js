@@ -38,7 +38,9 @@
                 controllerAs: "model"
             })
             .when("/form-fields", {
-                templateUrl: "views/forms/form-fields.view.html"
+                templateUrl: "views/forms/form-fields.view.html",
+                controller: "FieldsController",
+                controllerAs: "model"
             })
             .otherwise("/home")
     }

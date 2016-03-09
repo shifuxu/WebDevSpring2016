@@ -1,9 +1,9 @@
 module.exports = function (app, userModel, formModel) {
     app.get("/api/assignment/form/:formId/field", findAllFieldsById);
-    app.get("/api/assignment/form/::formId/field/:fieldId", findFieldByFieldIdAndFormId);
+    app.get("/api/assignment/form/:formId/field/:fieldId", findFieldByFieldIdAndFormId);
     app.delete("/api/assignment/form/:formId/field/:fieldId", deleteFieldByFieldIdAndFormId);
     app.post("/api/assignment/form/:formId/field", createFieldForForm);
-    app.put("/api/assignment/form/:formId/field/:fieldId");
+    app.put("/api/assignment/form/:formId/field/:fieldId", updateFieldForForm);
 
     function findAllFieldsById(req, res) {
         var formId = req.params.formId;
