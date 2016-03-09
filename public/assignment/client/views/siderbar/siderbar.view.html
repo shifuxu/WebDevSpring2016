@@ -7,7 +7,7 @@
         <li ng-show="currentUser.roles.indexOf('admin') >= 0" ng-class="{'active': model.$location.url() == '/admin'}">
             <a href="#/admin">Admin</a></li>
         <li ng-show="currentUser"
-            ng-class="{'active': model.$location.url() == '/forms' || model.$location.url() == '/form-fields'}">
+            ng-class="{'active': model.$location.url() == '/forms' || model.$location.url().indexOf('/form') >= 0}">
             <a href="#/forms">
                 Forms
             </a>

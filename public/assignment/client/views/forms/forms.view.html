@@ -1,10 +1,10 @@
-<div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main" ng-controller="FormController as model">
+<div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
     <h1 class="page-header">Forms</h1>
     <ul class="nav nav-tabs">
         <li role="presentation" class="active"><a href="#/forms">Forms</a></li>
-        <li role="presentation"><a href="#/form-fields">Fileds</a></li>
+        <li role="presentation"><a href="#">Fileds</a></li>
     </ul>
-    <div class="table-responsive">
+    <div class="table-responsive" ng-controller="FormController as model">
         <table class="table table-striped">
             <thead>
                 <tr>
@@ -35,7 +35,7 @@
             </thead>
             <tbody>
                 <tr ng-repeat="form in model.forms">
-                    <td><a href="#/form-fields">{{form.title}}</a></td>
+                    <td><a href="#/form/{{form._id}}/fields">{{form.title}}</a></td>
                     <td>
                         <div>
                             <button ng-click="model.deleteForm($index)" class="btn btn-danger pull-middle">

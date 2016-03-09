@@ -2,238 +2,112 @@
     <h1 class="page-header">Forms</h1>
     <ul class="nav nav-tabs">
         <li role="presentation"><a href="#/forms">Forms</a></li>
-        <li role="presentation" class="active"><a href="#/form-fields">Fileds</a></li>
+        <li role="presentation" class="active"><a href="#">Fileds</a></li>
     </ul>
-    <div class="table-responsive">
-        <table class="table table-borderless">
-            <thead>
-                <tr>
-                    <th class="col-sm-6"></th>
-                    <th class="col-sm-6"></th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td>
-                        <div class="form-group">
-                            <label>First Name:</label>
-                            <input class="form-control ng-pristine ng-valid ng-touched" placeholder="First Name">
+    <br/>
+    <div ng-controller="FieldsController as model">
+        <div class="row" ng-repeat="field in model.fields">
+            <div ng-switch="field.type" class="col-sm-4">
+                <div ng-switch-when="TEXT" class="form-group">
+                    <label for="input-{{field._id}}">{{field.label}}</label>
+                    <input class="form-control"
+                           type="text"
+                           placeholder="{{field.placeholder}}"
+                           id="input-{{field._id}}"/>
+                </div>
+                <div ng-switch-when="TEXTAREA" class="form-group">
+                    <label for="input-{{field._id}}">{{field.label}}</label>
+                    <textarea class="form-control"
+                              placeholder="{{field.placeholder}}"
+                              id="input-{{field._id}}"></textarea>
+                </div>
+                <div ng-switch-when="EMAIL" class="form-group">
+                    <label for="input-{{field._id}}">{{field.label}}</label>
+                    <input class="form-control"
+                           type="email"
+                           placeholder="{{field.placeholder}}"
+                           id="input-{{field._id}}"/>
+                </div>
+                <div ng-switch-when="OPTIONS" class="form-group">
+                    <label for="input-{{field._id}}">{{field.label}}</label>
+                    <select class="form-control" id="input-{{field._id}}">
+                        <option ng-repeat="item in field.options" value="{{item.value}}">
+                            {{item.label}}
+                        </option>
+                    </select>
+                </div>
+                <div ng-switch-when="CHECKBOXES" class="form-group">
+                    <label for="input-{{field._id}}">{{field.label}}</label>
+                    <div id="input-{{field._id}}">
+                        <div class="checkbox" ng-repeat="item in field.options">
+                            <label>
+                                <input type="checkbox" value="{{item.value}}"/>{{item.label}}
+                            </label>
                         </div>
-                    </td>
-                    <td>
-                        &nbsp
-                        <div>
-                            <button class="btn btn-warning pull-middle">
-                                <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
-                            </button>
-                            <button class="btn btn-primary pull-middle">
-                                <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
-                            </button>
-                            <button class="btn btn-danger pull-middle">
-                                <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
-                            </button>
-                            <button class="btn btn-info pull-middle">
-                                <span class="glyphicon glyphicon-align-justify" aria-hidden="true"></span>
-                            </button>
+                    </div>
+                </div>
+                <div ng-switch-when="RADIOS" class="form-group">
+                    <label for="input-{{field._id}}">{{field.label}}</label>
+                    <div id="input-{{field._id}}">
+                        <div class="radio" ng-repeat="item in field.options">
+                            <label>
+                                <input type="radio"
+                                       name="input-{{field._id}}-radios"
+                                       value="{{item.value}}"/>
+                                {{item.label}}
+                            </label>
                         </div>
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <div class="form-group">
-                            <label>Last Name:</label>
-                            <input class="form-control ng-pristine ng-valid ng-touched" placeholder="Last Name">
-                        </div>
-                    </td>
-                    <td>
-                        &nbsp
-                        <div>
-                            <button class="btn btn-warning pull-middle">
-                                <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
-                            </button>
-                            <button class="btn btn-primary pull-middle">
-                                <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
-                            </button>
-                            <button class="btn btn-danger pull-middle">
-                                <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
-                            </button>
-                            <button class="btn btn-info pull-middle">
-                                <span class="glyphicon glyphicon-align-justify" aria-hidden="true"></span>
-                            </button>
-                        </div>
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <div>
-                            <label>Date of Birth:</label>
-                        </div>
-                        <div class="input-group date" data-provide="datepicker">
-                            <input type="text" class="form-control" placeholder="Select Date">
-                            <div class="input-group-addon">
-                                <span class="glyphicon glyphicon-calendar"></span>
-                            </div>
-                        </div>
-                    </td>
-                    <td>
-                        &nbsp
-                        <div>
-                            <button class="btn btn-warning pull-middle">
-                                <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
-                            </button>
-                            <button class="btn btn-primary pull-middle">
-                                <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
-                            </button>
-                            <button class="btn btn-danger pull-middle">
-                                <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
-                            </button>
-                            <button class="btn btn-info pull-middle">
-                                <span class="glyphicon glyphicon-align-justify" aria-hidden="true"></span>
-                            </button>
-                        </div>
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <div>
-                            <label>Gender:</label>
-                        </div>
-                        <div class="btn-group">
-                            <button type="button" class="btn btn-default">Male</button>
-                            <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <span class="caret"></span>
-                                <span class="sr-only">Toggle Dropdown</span>
-                            </button>
-                            <ul class="dropdown-menu">
-                                <li><a href="#">Female</a></li>
-                            </ul>
-                        </div>
-                    </td>
-                    <td>
-                        &nbsp
-                        <div>
-                            <button class="btn btn-warning pull-middle">
-                                <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
-                            </button>
-                            <button class="btn btn-primary pull-middle">
-                                <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
-                            </button>
-                            <button class="btn btn-danger pull-middle">
-                                <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
-                            </button>
-                            <button class="btn btn-info pull-middle">
-                                <span class="glyphicon glyphicon-align-justify" aria-hidden="true"></span>
-                            </button>
-                        </div>
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <div>
-                            <label>Roles:</label>
-                        </div>
-                        <div class="input-group">
-                            <div class="checkbox">
-                                <label>
-                                    <input type="checkbox" checked> Admin
-                                </label>
-                            </div>
-                            <div class="checkbox">
-                                <label>
-                                    <input type="checkbox"> Student
-                                </label>
-                            </div>
-                            <div class="checkbox">
-                                <label>
-                                    <input type="checkbox" checked> User
-                                </label>
-                            </div>
-                        </div>
-                    </td>
-                    <td>
-                        &nbsp
-                        <div>
-                            <button class="btn btn-warning pull-middle">
-                                <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
-                            </button>
-                            <button class="btn btn-primary pull-middle">
-                                <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
-                            </button>
-                            <button class="btn btn-danger pull-middle">
-                                <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
-                            </button>
-                            <button class="btn btn-info pull-middle">
-                                <span class="glyphicon glyphicon-align-justify" aria-hidden="true"></span>
-                            </button>
-                        </div>
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <div>
-                            <label>License Agreement:</label>
-                        </div>
-                        <div class="input-group">
-                            <div class="radio">
-                                <label>
-                                    <input type="radio" checked> Yes
-                                </label>
-                            </div>
-                            <div class="radio">
-                                <label>
-                                    <input type="radio"> No
-                                </label>
-                            </div>
-                        </div>
-                    </td>
-                    <td>
-                        &nbsp
-                        <div>
-                            <button class="btn btn-warning pull-middle">
-                                <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
-                            </button>
-                            <button class="btn btn-primary pull-middle">
-                                <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
-                            </button>
-                            <button class="btn btn-danger pull-middle">
-                                <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
-                            </button>
-                            <button class="btn btn-info pull-middle">
-                                <span class="glyphicon glyphicon-align-justify" aria-hidden="true"></span>
-                            </button>
-                        </div>
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <div>
-                            <label>Add New Field:</label>
-                        </div>
-                        <div class="btn-group dropup">
-                            <button type="button" class="btn btn-default">Single Line Text</button>
-                            <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <span class="caret"></span>
-                                <span class="sr-only">Toggle Dropdown</span>
-                            </button>
-                            <ul class="dropdown-menu">
-                                <li><a href="#">Date</a></li>
-                                <li><a href="#">Dropdown</a></li>
-                                <li><a href="#">Checkboxes</a></li>
-                                <li><a href="#">Radiobuttons</a></li>
-                            </ul>
-                        </div>
-                    </td>
-                    <td>
-                        &nbsp
-                        <div>
-                            &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
-                            <button class="btn btn-primary pull-middle">
-                                <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
-                            </button>
-                        </div>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
+                    </div>
+                </div>
+                <div ng-switch-when="DATE" class="form-group">
+                    <label for="input-{{field._id}}">{{field.label}}</label>
+                    <div class="input-group date" id="input-{{field._id}}" data-provide="datepicker">
+                        <input type="text" class="form-control" placeholder="Select Date"/>
+                    <span class="input-group-addon">
+                        <span class="glyphicon glyphicon-calendar"></span>
+                    </span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-sm-4 col-sm-offset-3 bottom-align">
+                <button class="btn btn-warning pull-middle" ng-click="">
+                    <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
+                </button>
+                <button class="btn btn-primary pull-middle" ng-click="">
+                    <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+                </button>
+                <button class="btn btn-danger pull-middle" ng-click="model.removeField(field)">
+                    <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+                </button>
+                <button class="btn btn-info pull-middle" ng-click="">
+                    <span class="glyphicon glyphicon-menu-hamburger" aria-hidden="true"></span>
+                </button>
+            </div>
+        </div>
+
+        <hr/>
+
+        <div class="row">
+            <p class="col-sm-4">Add New Field:</p>
+        </div>
+
+        <div class="row">
+            <div class="col-sm-4">
+                <select class="form-control" ng-model="model.fieldType">
+                    <option value="slt">Single Line Text Field</option>
+                    <option value="mlt">Multi Line Text Field</option>
+                    <option value="date">Date Field</option>
+                    <option value="dropdown">Dropdown Field</option>
+                    <option value="checkbox">Checkboxes Field</option>
+                    <option value="radiobutton">Radio Buttons Field</option>
+                </select>
+            </div>
+            <div class="col-sm-4 col-sm-offset-4">
+                <button class="btn btn-primary pull-middle" ng-click="model.addField(model.fieldType)">
+                    <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+                </button>
+            </div>
+        </div>
     </div>
 </div>

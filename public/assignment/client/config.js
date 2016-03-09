@@ -35,12 +35,18 @@
             .when("/forms", {
                 templateUrl: "views/forms/forms.view.html",
                 controller: "FormController",
-                controllerAs: "model"
+                controllerAs: "model",
+                resolve: {
+                    checkLoggedIn: checkLoggedIn
+                }
             })
-            .when("/form-fields", {
+            .when("/form/:formId/fields", {
                 templateUrl: "views/forms/form-fields.view.html",
                 controller: "FieldsController",
-                controllerAs: "model"
+                controllerAs: "model",
+                resolve: {
+                    checkLoggedIn: checkLoggedIn
+                }
             })
             .otherwise("/home")
     }

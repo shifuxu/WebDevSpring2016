@@ -87,7 +87,7 @@ module.exports = function() {
 
     function findAllFieldsById(formId) {
         var form = findFormById(formId);
-        if (!form) {
+        if (form) {
             return form.fields;
         }
 
