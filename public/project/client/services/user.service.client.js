@@ -24,6 +24,7 @@
         var service = {
             findUserByCredentials: findUserByCredentials,
             findUserById: findUserById,
+            findUsersByIds: findUsersByIds,
             findUserByUsername: findUserByUsername,
             findAllUsers: findAllUsers,
             createUser: createUser,
@@ -51,6 +52,24 @@
             }
 
             return null;
+        }
+
+        function findUsersByIds(userIds) {
+            var usersTemp = [];
+            for (var u in userIds) {
+                var user = findUserById (userIds[u]);
+                if (user) {
+                    usersTemp.push ({
+                        _id: user._id,
+                        username: user.username,
+                        password: user.password,
+                        firstName: user.firstName,
+                        lastName: user.lastName,
+                        email: user.email
+                    });
+                }
+            }
+            return usersTemp;
         }
 
         function findUserByUsername(username) {
