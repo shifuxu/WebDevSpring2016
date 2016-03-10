@@ -4,7 +4,6 @@ module.exports = function(app, movieModel, userModel) {
 
     function findUserLikes (req, res) {
         var imdbID = req.params.imdbID;
-        console.log(imdbID);
         var movie = movieModel.findMovieByImdbID(imdbID);
         if(movie) {
             var userLikes = movie.likes;
@@ -33,8 +32,6 @@ module.exports = function(app, movieModel, userModel) {
             user.likes = [];
         }
         user.likes.push(imdbID);
-        console.log(user);
-        console.log(movie);
         res.send(200);
     }
 };

@@ -37,6 +37,10 @@
             </div>
             <a class="divider"></a>
         </div>
+        <div>
+            <button type="submit" ng-click="model.update(model.currentUser)" class="update-btn">Update</button>
+            <div class="clearfix"> </div>
+        </div>
         <div ng-if="model.profile.likesMovies.length" class="register-bottom-grid">
             <h3>Movie Likes</h3>
             <div class="panel panel-default"
@@ -66,8 +70,4 @@
         </div>
     </form>
     <div class="clearfix"> </div>
-    <div>
-        <button type="submit" ng-click="model.update(model.currentUser)" class="update-btn">Update</button>
-        <div class="clearfix"> </div>
-    </div>
 </div>

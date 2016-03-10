@@ -11,7 +11,7 @@
             <div ng-show="model.message" class="alert alert-danger" role="alert">{{model.message}}</div>
             <form>
                 <div>
-                    <span>Email Address<label>*</label></span>
+                    <span>Username<label>*</label></span>
                     <input ng-model="model.user.username" class="form-control" placeholder="username">
                 </div>
                 <div>
@@ -21,6 +21,6 @@
                 <button type="submit" ng-click="model.login(model.user)" class="account-btn">Login</button>
             </form>
         </div>
-        <div class="clearfix"> </div>
+        <div class="clearfix"></div>
     </div>
 </div>
