@@ -9,6 +9,7 @@
         vm.message = null;
         vm.error = null;
         vm.currentUser = null;
+        vm.profile = null;
         vm.update = update;
 
         function init() {
@@ -19,6 +20,11 @@
                     if (currentUser) {
                         vm.currentUser = currentUser;
                     }
+                    UserService
+                        .getProfile()
+                        .then(function(response) {
+                            vm.profile = response.data;
+                        });
                 });
         }
         init();

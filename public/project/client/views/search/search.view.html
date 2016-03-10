@@ -25,7 +25,9 @@
             <tbody>
                 <tr ng-repeat="movie in model.data.Search">
                     <td>
-                        <img ng-src="{{movie.Poster}}" height="100px" width="70px"/>
+                        <a href="#/details/{{movie.imdbID}}">
+                            <img ng-src="{{movie.Poster}}" height="100px" width="70px"/>
+                        </a>
                     </td>
                     <td>
                         <a href="#/details/{{movie.imdbID}}">

@@ -14,7 +14,8 @@
             updateUser: updateUser,
             setCurrentUser: setCurrentUser,
             getCurrentUser: getCurrentUser,
-            logout: logout
+            logout: logout,
+            getProfile: getProfile
         };
 
         return service;
@@ -53,6 +54,10 @@
 
         function logout() {
             return $http.post("/api/project/omdb/logout");
+        }
+
+        function getProfile() {
+            return $http.get("/api/project/omdb/profile/" + $rootScope.currentUser._id);
         }
     }
 })();
