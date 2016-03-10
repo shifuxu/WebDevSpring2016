@@ -3,11 +3,20 @@
         .module("MovieHubApp")
         .controller("DetailsController", detailsController);
 
-    function detailsController($scope, $routeParams, OmdbService) {
-        $scope.imdbID = $routeParams.imdbID;
+    function detailsController($routeParams, OmdbService) {
+        var vm = this;
 
-        OmdbService.findMovieByImdbID($scope.imdbID, function(response) {
-            $scope.movie = response;
-        });
+        vm.imdbID = null;
+
+        function init() {
+            vm.imdbID = $routeParams.imdbID;
+        }
+        init();
+
+        OmdbService
+            .findMovieByImdbID(vm.imdbID)
+            .then(function(response) {
+                vm.movie = response.data;
+            });
     }
 })();

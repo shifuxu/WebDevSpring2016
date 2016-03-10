@@ -1,10 +1,10 @@
-<div class="content" ng-controller="DetailsController">
+<div class="content" ng-controller="DetailsController as model">
     <div class="movie_top">
         <div class="col-md-9 movie_box">
             <div class="grid images_3_of_2">
                 <div class="movie_image">
-                    <span class="movie_rating">{{movie.imdbRating}}</span>
-                    <img src="{{movie.Poster}}" class="img-responsive" alt=""/>
+                    <span class="movie_rating">{{model.movie.imdbRating}}</span>
+                    <img src="{{model.movie.Poster}}" class="img-responsive" alt=""/>
                 </div>
                 <div ng-if="currentUser" class="movie_rate">
                     <div class="rating_desc"><p>Your Vote :</p></div>
@@ -30,16 +30,16 @@
                 </div>
             </div>
             <div class="desc1 span_3_of_2">
-                <p class="movie_option"><strong>Country: </strong>{{movie.Country}}</p>
-                <p class="movie_option"><strong>Year: </strong>{{movie.Year}}</p>
-                <p class="movie_option"><strong>Category: </strong>{{movie.Genre}}</p>
-                <p class="movie_option"><strong>Release date: </strong>{{movie.Released}}</p>
-                <p class="movie_option"><strong>Director: </strong>{{movie.Director}}</p>
-                <p class="movie_option"><strong>Actors: </strong>{{movie.Actors}}</p>
-                <p class="movie_option"><strong>Runtime: </strong>{{movie.Runtime}}</p>
+                <p class="movie_option"><strong>Country: </strong>{{model.movie.Country}}</p>
+                <p class="movie_option"><strong>Year: </strong>{{model.movie.Year}}</p>
+                <p class="movie_option"><strong>Category: </strong>{{model.movie.Genre}}</p>
+                <p class="movie_option"><strong>Release date: </strong>{{model.movie.Released}}</p>
+                <p class="movie_option"><strong>Director: </strong>{{model.movie.Director}}</p>
+                <p class="movie_option"><strong>Actors: </strong>{{model.movie.Actors}}</p>
+                <p class="movie_option"><strong>Runtime: </strong>{{model.movie.Runtime}}</p>
             </div>
             <div class="clearfix"> </div>
-            <p class="m_4">{{movie.Plot}}</p>
+            <p class="m_4">{{model.movie.Plot}}</p>
             <form ng-if="currentUser" method="post">
                 <div class="to">
                     <input type="text" class="text" value="Name" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Name';}">
