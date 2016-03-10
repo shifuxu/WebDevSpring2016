@@ -3,26 +3,38 @@
         .module("MovieHubApp")
         .controller("ProfileController", profileController);
 
-    function profileController($scope, $rootScope, UserService, $location) {
-        $scope.message = null;
-        $scope.error = null;
+    function profileController(UserService) {
+        var vm = this;
 
-        $scope.update = update;
-        $scope.currentUser = $rootScope.currentUser;
+        vm.message = null;
+        vm.error = null;
+        vm.currentUser = null;
+        vm.update = update;
 
-        if (!$scope.currentUser) {
-            $location.url("/home");
+        function init() {
+            UserService
+                .getCurrentUser()
+                .then(function(response) {
+                    var currentUser = response.data;
+                    if (currentUser) {
+                        vm.currentUser = currentUser;
+                    }
+                });
         }
+        init();
 
         function update(user) {
-            $scope.currentUser = UserService.updateUser($scope.currentUser._id, user);
-
-            if (user) {
-                $scope.message = "User update successfully";
-                $rootScope.currentUser = $scope.currentUser;
-            } else {
-                $scope.message = "Unable to update the user";
-            }
+            UserService
+                .updateUser(vm.currentUser._id, user)
+                .then(function(response) {
+                    var userTemp = response.data;
+                    if (userTemp) {
+                        vm.message = "User update successfully";
+                        UserService.setCurrentUser(userTemp);
+                    } else {
+                        vm.error = "Unable to update the user";
+                    }
+                });
         }
     }
 })();

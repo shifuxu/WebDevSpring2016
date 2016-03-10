@@ -90,17 +90,7 @@
         }
 
         function updateUser(userId, user) {
-            var userTemp = findUserById(userId);
-            if (userTemp != null) {
-                userTemp.firstName = user.firstName;
-                userTemp.lastName = user.lastName;
-                userTemp.password = user.password;
-                userTemp.username = user.username;
-                userTemp.email = user.email;
-                return userTemp;
-            } else {
-                return null;
-            }
+            return $http.put("/api/project/omdb/user/" + userId, user);
         }
 
         function getCurrentUser() {

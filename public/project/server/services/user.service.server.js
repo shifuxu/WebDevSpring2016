@@ -4,6 +4,7 @@ module.exports = function(app, movieModel, userModel) {
     app.post("/api/project/omdb/logout", logout);
     app.post("/api/project/omdb/register", register);
     app.get("/api/project/omdb/profile/:userId", profile);
+    app.put("/api/project/omdb/user/:userId", updateUser);
 
     function profile(req, res) {
         var userId = req.params.userId;
@@ -36,4 +37,11 @@ module.exports = function(app, movieModel, userModel) {
         req.session.destroy();
         res.send(200);
     }
-}
+
+    function updateUser(req, res) {
+        var userId = Number(req.params.userId);
+        var user = req.body;
+        var userTemp = userModel.updateUser(userId, user);
+        res.json(userTemp);
+    }
+};

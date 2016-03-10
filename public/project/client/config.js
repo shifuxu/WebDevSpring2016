@@ -35,9 +35,6 @@
                 templateUrl: "views/home/home.view.html",
                 controller: "HomeController",
                 controllerAs: "model",
-                resolve: {
-                    getLoggedIn: getLoggedIn
-                }
             })
             .when("/search", {
                 templateUrl: "views/search/search.view.html",

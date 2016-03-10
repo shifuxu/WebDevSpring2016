@@ -1,33 +1,39 @@
-<div class="content" ng-controller="ProfileController">
+<div class="content" ng-controller="ProfileController as model">
     <form>
-        <div ng-show="message" class="alert alert-success" role="alert">{{message}}</div>
-        <div ng-show="error" class="alert alert-danger" role="alert">{{error}}</div>
+        <div ng-show="model.message" class="alert alert-success" role="alert">{{model.message}}</div>
+        <div ng-show="model.error" class="alert alert-danger" role="alert">{{model.error}}</div>
         <div class="register-top-grid">
             <h3>Personal Information</h3>
             <div>
                 <span>First Name<label>*</label></span>
-                <input ng-model="currentUser.firstName" class="form-control" placeholder="{{currentUser.firstName}}">
+                <input ng-model="model.currentUser.firstName"
+                       class="form-control"
+                       placeholder="{{model.currentUser.firstName}}">
             </div>
             <div>
                 <span>Last Name<label>*</label></span>
-                <input ng-model="currentUser.lastName" class="form-control" placeholder="{{currentUser.lastName}}">
+                <input ng-model="model.currentUser.lastName"
+                       class="form-control"
+                       placeholder="{{model.currentUser.lastName}}">
             </div>
             <div>
                 <span>Username<label>*</label></span>
-                <input ng-model="currentUser.username" class="form-control" placeholder="{{currentUser.username}}">
+                <input ng-model="model.currentUser.username"
+                       class="form-control"
+                       placeholder="{{model.currentUser.username}}">
             </div>
             <div>
                 <span>Password<label>*</label></span>
-                <input ng-model="currentUser.password"
+                <input ng-model="model.currentUser.password"
                        class="form-control"
-                       placeholder="{{currentUser.password}}">
+                       placeholder="{{model.currentUser.password}}">
             </div>
             <div>
                 <span>Email Address<label>*</label></span>
-                <input ng-model="currentUser.email"
+                <input ng-model="model.currentUser.email"
                        type="email"
                        class="form-control"
-                       placeholder="{{currentUser.email}}">
+                       placeholder="{{model.currentUser.email}}">
             </div>
             <a class="divider"></a>
         </div>
@@ -48,7 +54,7 @@
     </form>
     <div class="clearfix"> </div>
     <div>
-        <button type="submit" ng-click="update(currentUser)" class="update-btn">Update</button>
+        <button type="submit" ng-click="model.update(model.currentUser)" class="update-btn">Update</button>
         <div class="clearfix"> </div>
     </div>
 </div>

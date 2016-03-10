@@ -9,6 +9,11 @@
         vm.message = null;
         vm.login = login;
 
+        function init() {
+
+        }
+        init();
+
         function login(user) {
             var credentials = {
                 username: user.username,
