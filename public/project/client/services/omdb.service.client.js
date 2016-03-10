@@ -4,20 +4,18 @@
         .factory("OmdbService", omdbService);
 
     function omdbService($http) {
-        var api = {
+        var service = {
             searchMovieByTitle: searchMovieByTitle,
             findMovieByImdbID: findMovieByImdbID
         };
-        return api;
+        return service;
 
-        function findMovieByImdbID(imdbID, callback) {
-            return $http.get("http://www.omdbapi.com/?i="+imdbID+"&plot=full")
-                .success(callback);
+        function findMovieByImdbID(imdbID) {
+            return $http.get("http://www.omdbapi.com/?i=" + imdbID + "&plot=full");
         }
 
-        function searchMovieByTitle(title, callback) {
-            return $http.get("http://www.omdbapi.com/?s="+title)
-                .success(callback);
+        function searchMovieByTitle(title) {
+            return $http.get("http://www.omdbapi.com/?s=" + title);
         }
     }
 })();

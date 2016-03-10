@@ -3,16 +3,23 @@
         .module("MovieHubApp")
         .controller("SearchController", searchController);
 
-    function searchController($scope, $routeParams, $location, OmdbService) {
-        $scope.title = $routeParams.title;
-        $scope.search = search;
-        $scope.message = null;
+    function searchController($routeParams, OmdbService, $location) {
+        var vm = this;
 
-        if ($scope.title) {
-            OmdbService.searchMovieByTitle(
-                $scope.title,
-                function(response) {
-                    $scope.data = response;
+        vm.title = null;
+        vm.search = search;
+        vm.message = null;
+
+        function init() {
+            vm.title = $routeParams.title;
+        }
+        init();
+
+        if (vm.title) {
+            OmdbService
+                .searchMovieByTitle(vm.title)
+                .then(function(response) {
+                    vm.data = response.data;
                 });
         }
 
@@ -20,7 +27,7 @@
             if (typeof movie !== "undefined" && movie.title != "") {
                 $location.url("/search/" + movie.title);
             } else {
-                $scope.message = "Please enter the correct title for searching!";
+                vm.message = "Please enter the correct title for searching!";
             }
         }
     }
