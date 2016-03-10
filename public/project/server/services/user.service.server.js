@@ -5,6 +5,7 @@ module.exports = function(app, movieModel, userModel) {
     app.post("/api/project/omdb/register", register);
     app.get("/api/project/omdb/profile/:userId", profile);
     app.put("/api/project/omdb/user/:userId", updateUser);
+    app.get("/api/project/omdb/user/:username", findUserByUsername)
 
     function profile(req, res) {
         var userId = req.params.userId;
@@ -43,5 +44,11 @@ module.exports = function(app, movieModel, userModel) {
         var user = req.body;
         var userTemp = userModel.updateUser(userId, user);
         res.json(userTemp);
+    }
+
+    function findUserByUsername(req, res) {
+        var username = req.params.username;
+        var user = userModel.findUserByUsername(username);
+        res.json(user);
     }
 };

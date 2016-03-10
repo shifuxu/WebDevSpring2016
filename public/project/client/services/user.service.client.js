@@ -53,13 +53,7 @@
         }
 
         function findUserByUsername(username) {
-            for (var u in users){
-                if (users[u].username == username) {
-                    return users[u];
-                }
-            }
-
-            return null;
+            return $http.get("/api/project/omdb/user/"+ username);
         }
 
         function findAllUsers() {
@@ -67,17 +61,7 @@
         }
 
         function createUser(user) {
-            var newUser = {
-                _id: (new Date).getTime(),
-                username: user.username,
-                password: user.password,
-                firstName: user.firstName,
-                lastName: user.lastName,
-                email: user.email
-            };
-
-            users.push(newUser);
-            return newUser;
+            return $http.post("/api/project/omdb/register", user);
         }
 
         function deleteUserById(userId) {
