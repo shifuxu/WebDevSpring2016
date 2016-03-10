@@ -3,13 +3,23 @@
         .module("MovieHubApp")
         .controller("HeaderController", headerController);
 
-    function headerController($location, $scope, $rootScope) {
-        $scope.$location = $location;
-        $scope.logout = logout;
+    function headerController($location, UserService) {
+        var vm = this;
+
+        vm.logout = logout;
+
+        function init() {
+            vm.$location = $location;
+        }
+        init();
 
         function logout() {
-            $rootScope.currentUser = null;
-            $location.url("/home");
+            UserService
+                .logout()
+                .then(function() {
+                    UserService.setCurrentUser(null);
+                    $location.url("/home");
+                });
         }
     }
 })();

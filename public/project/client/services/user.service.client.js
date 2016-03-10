@@ -15,7 +15,8 @@
             deleteUserById: deleteUserById,
             updateUser: updateUser,
             setCurrentUser: setCurrentUser,
-            getCurrentUser: getCurrentUser
+            getCurrentUser: getCurrentUser,
+            logout: logout
         };
 
         return service;
@@ -83,6 +84,10 @@
 
         function setCurrentUser(user) {
             $rootScope.currentUser = user;
+        }
+
+        function logout() {
+            return $http.post("/api/project/omdb/logout");
         }
     }
 })();

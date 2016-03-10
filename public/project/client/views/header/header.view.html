@@ -1,4 +1,4 @@
-<div class="header_top" ng-controller="HeaderController">
+<div class="header_top" ng-controller="HeaderController as model">
     <div class="col-sm-3">
         <a href="#/home"><img style="float: left;" src="images/logo1.png"/></a>
         <h2 style="float: left; margin-left: 10px;">Movie Hub</h2>
@@ -6,22 +6,29 @@
     <div class="col-sm-3"></div>
     <div class="col-sm-6 header_right">
         <ul class="header_right_box">
-            <li><a href="#/home" ng-class="{'active': $location.url() == '/home'}">Home</a></li>
+            <li><a href="#/home" ng-class="{'active': model.$location.url() == '/home'}">Home</a></li>
             <li ng-hide="currentUser">
-                <a href="#/login" ng-class="{'active': $location.url() == '/login'}">
+                <a href="#/login" ng-class="{'active': model.$location.url() == '/login'}">
                     Login
                 </a>
             </li>
             <li ng-hide="currentUser">
-                <a href="#/register" ng-class="{'active': $location.url() == '/register'}">
+                <a href="#/register" ng-class="{'active': model.$location.url() == '/register'}">
                     Register
                 </a>
             </li>
-            <li ng-show="currentUser"><a href="#/profile" ng-class="{'active': $location.url() == '/profile'}">Profile</a></li>
-            <li ng-show="currentUser"><a ng-click="logout()">Logout</a></li>
-            <li><a href="#/search" ng-class="{'active': $location.url() == '/search'}">Search</a></li>
-            <li ng-show="$location.url().indexOf('/details')>=0">
-                <a ng-class="{'active': $location.url().indexOf('/details')>=0}">
+            <li ng-show="currentUser">
+                <a href="#/profile" ng-class="{'active': model.$location.url() == '/profile'}">
+                    Profile
+                </a>
+            </li>
+            <li ng-show="currentUser"><a ng-click="model.logout()">Logout</a></li>
+            <li><a href="#/search" ng-class="{'active': model.$location.url().indexOf('/search') >= 0}">
+                    Search
+                </a>
+            </li>
+            <li ng-show="model.$location.url().indexOf('/details')>=0">
+                <a ng-class="{'active': model.$location.url().indexOf('/details')>=0}">
                     Details
                 </a>
             </li>
