@@ -8,7 +8,9 @@ module.exports = function() {
         createUser: createUser,
         findUserById: findUserById,
         findUsersByIds: findUsersByIds,
-        updateUser: updateUser
+        updateUser: updateUser,
+        deleteUserById: deleteUserById,
+        findAllUsers: findAllUsers
     };
     return api;
 
@@ -79,5 +81,18 @@ module.exports = function() {
         }
 
         return null;
+    }
+
+    function deleteUserById(userId) {
+        var user = findUserById(userId);
+        if (user != null) {
+            users.splice(users.indexOf(user), 1);
+        }
+
+        return null;
+    }
+
+    function findAllUsers() {
+        return users;
     }
 };

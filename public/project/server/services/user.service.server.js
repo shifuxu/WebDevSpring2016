@@ -1,11 +1,13 @@
 module.exports = function(app, movieModel, userModel) {
-    app.post("/api/project/omdb/login", login);
     app.get("/api/project/omdb/loggedin", loggedin);
+    app.get("/api/project/omdb/user/:username", findUserByUsername);
+    app.get("/api/project/omdb/profile/:userId", profile);
+    app.get("/api/project/omdb/user", findAllUsers);
+    app.post("/api/project/omdb/login", login);
     app.post("/api/project/omdb/logout", logout);
     app.post("/api/project/omdb/register", register);
-    app.get("/api/project/omdb/profile/:userId", profile);
     app.put("/api/project/omdb/user/:userId", updateUser);
-    app.get("/api/project/omdb/user/:username", findUserByUsername);
+    app.delete("/api/project/omdb/:userId", deleteUserById);
 
     function profile(req, res) {
         var userId = req.params.userId;
@@ -50,5 +52,15 @@ module.exports = function(app, movieModel, userModel) {
         var username = req.params.username;
         var user = userModel.findUserByUsername(username);
         res.json(user);
+    }
+
+    function deleteUserById(req, res) {
+        var userId= req.params.userId;
+        var user = userModel.deleteUserById(userId);
+        res.json(user);
+    }
+
+    function findAllUsers(req, res) {
+        res.json(userModel.findAllUsers())
     }
 };
