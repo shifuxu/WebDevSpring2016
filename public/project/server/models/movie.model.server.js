@@ -26,7 +26,7 @@ module.exports = function() {
 
     function createMovie(movie) {
         movie = {
-            _id: "ID_" + (new Date()).getTime(),
+            _id: (new Date).getTime(),
             imdbID: movie.imdbID,
             poster: movie.Poster,
             title: movie.Title
@@ -37,7 +37,7 @@ module.exports = function() {
 
     function findMovieByImdbID(imdbID) {
         for(var m in movies) {
-            if(movies[m].imdbID === imdbID) {
+            if(movies[m].imdbID == imdbID) {
                 return movies[m];
             }
         }

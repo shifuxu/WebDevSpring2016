@@ -37,4 +37,4 @@ module.exports = function(app, movieModel, userModel) {
         console.log(movie);
         res.send(200);
     }
-}
+};
