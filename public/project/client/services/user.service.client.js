@@ -3,23 +3,7 @@
         .module("MovieHubApp")
         .factory("UserService", userService);
 
-    function userService() {
-        var users = [
-            {   "_id":123,
-                "firstName":"Alice",
-                "lastName":"Wonderland",
-                "username":"alice",
-                "password":"alice",
-                "email": "alice@alice.com"
-            },
-            {	"_id":234,
-                "firstName":"Bob",
-                "lastName":"Hope",
-                "username":"bob",
-                "password":"bob",
-                "email": "bob@bob.com"
-            }
-        ];
+    function userService($http, $rootScope) {
 
         var service = {
             findUserByCredentials: findUserByCredentials,
@@ -29,19 +13,15 @@
             findAllUsers: findAllUsers,
             createUser: createUser,
             deleteUserById: deleteUserById,
-            updateUser: updateUser
+            updateUser: updateUser,
+            setCurrentUser: setCurrentUser,
+            getCurrentUser: getCurrentUser
         };
 
         return service;
 
-        function findUserByCredentials(username, password) {
-            for (var u in users) {
-                if (users[u].username == username && users[u].password == password) {
-                    return users[u];
-                }
-            }
-
-            return null;
+        function findUserByCredentials(credentials) {
+            return $http.post("/api/project/omdb/login", credentials);
         }
 
         function findUserById(userId, callback) {
@@ -121,6 +101,14 @@
             } else {
                 return null;
             }
+        }
+
+        function getCurrentUser() {
+            return $http.get("/api/project/omdb/loggedin");
+        }
+
+        function setCurrentUser(user) {
+            $rootScope.currentUser = user;
         }
     }
 })();

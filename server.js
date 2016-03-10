@@ -25,5 +25,6 @@ app.use(session({
 app.get('/hello', rootRequest);
 
 require("./public/assignment/server/app.js")(app);
+require("./public/project/server/app.js")(app);
 
 app.listen(port, ipaddress);

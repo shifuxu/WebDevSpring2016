@@ -1,4 +1,4 @@
-<div class="content" ng-controller="LoginController">
+<div class="content" ng-controller="LoginController as model">
     <div class="register">
         <div class="col-md-6 login-left">
             <h3>New Customers</h3>
@@ -8,17 +8,17 @@
         <div class="col-md-6 login-right">
             <h3>Registered Customers</h3>
             <p>If you have an account, please log in.</p>
-            <div ng-show="message" class="alert alert-danger" role="alert">{{message}}</div>
+            <div ng-show="model.message" class="alert alert-danger" role="alert">{{model.message}}</div>
             <form>
                 <div>
                     <span>Email Address<label>*</label></span>
-                    <input ng-model="user.username" class="form-control" placeholder="username">
+                    <input ng-model="model.user.username" class="form-control" placeholder="username">
                 </div>
                 <div>
                     <span>Password<label>*</label></span>
-                    <input ng-model="user.password" type="password" class="form-control" placeholder="password">
+                    <input ng-model="model.user.password" type="password" class="form-control" placeholder="password">
                 </div>
-                <button type="submit" ng-click="login(user)" class="account-btn">Login</button>
+                <button type="submit" ng-click="model.login(model.user)" class="account-btn">Login</button>
             </form>
         </div>
         <div class="clearfix"> </div>

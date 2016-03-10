@@ -1,4 +1,4 @@
-var mock = require("./user.mock.json");
+var users = require("./user.mock.json");
 
 module.exports = function() {
 
@@ -25,9 +25,9 @@ module.exports = function() {
     }
 
     function findUserById(userId) {
-        for(var u in mock) {
-            if( mock[u]._id === userId ) {
-                return mock[u];
+        for(var u in users) {
+            if( users[u]._id === userId ) {
+                return users[u];
             }
         }
         return null;
@@ -35,15 +35,14 @@ module.exports = function() {
 
     function createUser(user) {
         user._id = "ID_" + (new Date()).getTime();
-        mock.push(user);
+        users.push(user);
         return user;
     }
 
     function findUserByCredentials(credentials) {
-        for(var u in mock) {
-            if( mock[u].username === credentials.username &&
-                mock[u].password === credentials.password) {
-                return mock[u];
+        for(var u in users) {
+            if( users[u].username === credentials.username && users[u].password === credentials.password) {
+                return users[u];
             }
         }
         return null;

@@ -3,19 +3,28 @@
         .module("MovieHubApp")
         .controller("LoginController", loginController);
 
-    function loginController($scope, UserService, $rootScope, $location) {
-        $scope.message = null;
-        $scope.login = login;
+    function loginController(UserService, $location) {
+        var vm = this;
+
+        vm.message = null;
+        vm.login = login;
 
         function login(user) {
-            var userTemp = UserService.findUserByCredentials(user.username, user.password);
-            if (userTemp != null) {
-                $rootScope.currentUser = userTemp;
-                $location.url("/profile");
-            } else {
-                $scope.message = "Can not find such user, please enter again!";
-                return ;
-            }
+            var credentials = {
+                username: user.username,
+                password: user.password
+            };
+            UserService
+                .findUserByCredentials(credentials)
+                .then(function(response) {
+                    var userTemp = response.data;
+                    if (userTemp) {
+                        UserService.setCurrentUser(userTemp);
+                        $location.url("/profile");
+                    } else {
+                        vm.message = "Can not find such user, please enter again!";
+                    }
+                });
         }
     }
 })();
