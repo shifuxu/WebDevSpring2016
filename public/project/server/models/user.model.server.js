@@ -36,9 +36,16 @@ module.exports = function() {
     }
 
     function createUser(user) {
-        user._id = "ID_" + (new Date()).getTime();
-        users.push(user);
-        return user;
+        var newUser = {
+            _id: (new Date()).getTime(),
+            username: user.username,
+            password: user.password,
+            firstName: user.firstName,
+            lastName: user.lastName,
+            email: user.email
+        };
+        users.push(newUser);
+        return newUser;
     }
 
     function findUserByCredentials(credentials) {

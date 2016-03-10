@@ -3,7 +3,7 @@
         .module("MovieHubApp")
         .controller("RegisterController", registerController);
 
-    function registerController($scope, UserService, $rootScope, $location) {
+    function registerController(UserService, $location) {
         var vm = this;
 
         vm.message = null;

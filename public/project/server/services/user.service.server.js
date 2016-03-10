@@ -5,7 +5,7 @@ module.exports = function(app, movieModel, userModel) {
     app.post("/api/project/omdb/register", register);
     app.get("/api/project/omdb/profile/:userId", profile);
     app.put("/api/project/omdb/user/:userId", updateUser);
-    app.get("/api/project/omdb/user/:username", findUserByUsername)
+    app.get("/api/project/omdb/user/:username", findUserByUsername);
 
     function profile(req, res) {
         var userId = req.params.userId;
