@@ -48,7 +48,7 @@
                  ng-repeat="movie in model.profile.likesMovies">
                 <div class="panel-body">
                     <a href="#/details/{{movie.imdbID}}">
-                        <img ng-src="{{movie.poster}}" width="100px"/>
+                        <img ng-src="http://img.omdbapi.com/?i={{movie.imdbID}}&apikey=2bf5ee9" width="100px"/>
                     </a>
                 </div>
             </div>

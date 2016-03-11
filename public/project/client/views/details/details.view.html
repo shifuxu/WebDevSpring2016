@@ -4,7 +4,8 @@
             <div class="grid images_3_of_2">
                 <div class="movie_image">
                     <span class="movie_rating">{{model.movie.imdbRating}}</span>
-                    <img src="{{model.movie.Poster}}" class="img-responsive" alt=""/>
+                    <img ng-src="http://img.omdbapi.com/?i={{movie.imdbID}}&apikey=2bf5ee9"
+                         class="img-responsive" alt=""/>
                 </div>
             </div>
             <div class="desc1 span_3_of_2">
