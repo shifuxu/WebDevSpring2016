@@ -26,7 +26,8 @@
                 <tr ng-repeat="movie in model.data.Search">
                     <td>
                         <a href="#/details/{{movie.imdbID}}">
-                            <img ng-src="{{movie.Poster}}" height="100px" width="70px"/>
+                            <img ng-src="http://img.omdbapi.com/?i={{movie.imdbID}}&apikey=2bf5ee9"
+                                 height="100px" width="70px"/>
                         </a>
                     </td>
                     <td>
