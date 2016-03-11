@@ -38,6 +38,20 @@
                 </div>
                 <div class="clearfix"></div>
             </form>
+            <div class="clearfix"></div>
+            <br/>
+            <div ng-if="model.data.userLikes">
+                <h3>Other Users that Like This Movie</h3>
+                <ul>
+                    <li ng-repeat="user in model.data.userLikes"
+                        style="font-size: 25px;">
+                        <a href="#/profile/{{user.username}}">
+                            {{user.username}}
+                        </a>
+                    </li>
+                </ul>
+            </div>
+            <div class="clearfix"></div>
             <div ng-if="currentUser" class="single">
                 <h1>10 Comments</h1>
                 <ul class="single_list">
