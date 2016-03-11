@@ -38,13 +38,21 @@ module.exports = function() {
     }
 
     function createUser(user) {
+        var roleVal = null;
+        if (typeof user.role == 'undefined') {
+            roleVal = "user";
+        } else {
+            roleVal = user.role;
+        }
+
         var newUser = {
             _id: (new Date()).getTime(),
             username: user.username,
             password: user.password,
             firstName: user.firstName,
             lastName: user.lastName,
-            email: user.email
+            email: user.email,
+            role: roleVal
         };
         users.push(newUser);
         return newUser;
@@ -67,6 +75,7 @@ module.exports = function() {
             userTemp.password = user.password;
             userTemp.username = user.username;
             userTemp.email = user.email;
+            userTemp.role = user.role;
             return userTemp;
         } else {
             return null;
