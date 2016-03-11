@@ -3,8 +3,8 @@
         <a href="#/home"><img style="float: left;" src="images/logo1.png"/></a>
         <h2 style="float: left; margin-left: 10px;">Movie Hub</h2>
     </div>
-    <div class="col-sm-3"></div>
-    <div class="col-sm-6 header_right">
+    <!--<div class="col-sm-1"></div>-->
+    <div class="col-sm-9 header_right">
         <ul class="header_right_box">
             <li><a href="#/home" ng-class="{'active': model.$location.url() == '/home'}">Home</a></li>
             <li ng-hide="currentUser">
@@ -15,6 +15,11 @@
             <li ng-hide="currentUser">
                 <a href="#/register" ng-class="{'active': model.$location.url() == '/register'}">
                     Register
+                </a>
+            </li>
+            <li ng-show="currentUser.role == 'admin'">
+                <a href="#/admin" ng-class="{'active': model.$location.url() == '/admin'}">
+                    Admin
                 </a>
             </li>
             <li ng-show="currentUser">

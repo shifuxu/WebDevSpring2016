@@ -4,13 +4,24 @@
     "lastName":"Wonderland",
     "username":"alice",
     "password":"alice",
-    "email": "alice@alice.com"
+    "email": "alice@alice.com",
+    "role": "user"
   },
   {	"_id":234,
     "firstName":"Bob",
     "lastName":"Hope",
     "username":"bob",
     "password":"bob",
-    "email": "bob@bob.com"
+    "email": "bob@bob.com",
+    "role": "user"
+  },
+  {
+    "_id":345,
+    "firstName":"Admin",
+    "lastName":"Admin",
+    "username":"admin",
+    "password":"admin",
+    "email": "admin@admin.com",
+    "role": "admin"
   }
 ]

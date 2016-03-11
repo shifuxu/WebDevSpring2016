@@ -25,7 +25,12 @@
                     var userTemp = response.data;
                     if (userTemp) {
                         UserService.setCurrentUser(userTemp);
-                        $location.url("/profile");
+                        console.log(userTemp.role);
+                        if (userTemp.role == "admin") {
+                            $location.url("/admin");
+                        } else {
+                            $location.url("/profile");
+                        }
                     } else {
                         vm.message = "Can not find such user, please enter again!";
                     }
