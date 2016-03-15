@@ -23,7 +23,7 @@ module.exports = function() {
             _id: (new Date).getTime().toString(),
             title: form.title,
             userId: userId,
-            fields: form.fields
+            fields: []
         };
 
         forms.push(newForm);
