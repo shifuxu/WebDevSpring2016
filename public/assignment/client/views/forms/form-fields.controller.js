@@ -1,15 +1,17 @@
 (function() {
     angular
         .module("FormBuilderApp")
-        .controller("FieldsController", fieldsController);
+        .controller("FieldsController", fieldsController)
+        .controller("DialogController", dialogController);
 
-    function fieldsController($routeParams, FieldsService) {
+    function fieldsController($routeParams, $uibModal, FieldsService) {
         var vm = this;
 
         var formId = null;
 
         vm.addField = addField;
         vm.removeField = removeField;
+        vm.editField = editField;
         vm.fields = null;
 
         function init() {
@@ -113,6 +115,35 @@
                         vm.fields = fields;
                     }
                 });
+        }
+
+        function editField(field) {
+            console.log(field.type);
+            $uibModal.open({
+                templateUrl: "views/forms/dialog.view.html",
+                controller: "DialogController",
+                controllerAs: "model"
+            });
+        }
+    }
+
+    function dialogController($uibModalInstance) {
+        var vm = this;
+
+        vm.ok = ok;
+        vm.cancel = cancel;
+
+        function init() {
+
+        }
+        init();
+
+        function ok() {
+            console.log("ok");
+        }
+
+        function cancel() {
+            $uibModalInstance.dismiss("cancel");
         }
     }
 

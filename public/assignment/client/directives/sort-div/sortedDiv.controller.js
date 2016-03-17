@@ -28,10 +28,11 @@
             restrict: 'E',
             scope: {
                 data: '=',  // data binds to fields array
-                remove: '&' // function binds to directive
+                remove: '&', // function binds to directive
+                edit: '&' // function binds to directive
             },
             replace: true,
-            templateUrl: "directives/sortedDiv.html",
+            templateUrl: "directives/sort-div/sortedDiv.view.html",
             controllerAs: 'model',
             link: link
         };
