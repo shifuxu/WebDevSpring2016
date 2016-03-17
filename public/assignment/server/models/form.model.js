@@ -68,7 +68,9 @@ module.exports = function() {
         if (formTemp != null) {
             formTemp.title = newForm.title;
             formTemp.userId = newForm.userId;
-            formTemp.fields = newForm.fields;
+            if (newForm.fields) {
+                formTemp.fields = newForm.fields;
+            }
             return formTemp;
         } else {
             return null;
