@@ -21,12 +21,6 @@
                 //    scope.data[start] = scope.data[end];
                 //    scope.data[end] = temp;
                 //    scope.$apply();
-                //
-                //    //var arr = [];
-                //    //for (var d in scope.data) {
-                //    //    arr.push(scope.data[d].type);
-                //    //}
-                //    //console.log(arr);
                 //}
             });
         }
@@ -38,6 +32,7 @@
             },
             replace: true,
             templateUrl: "directives/sortedDiv.html",
+            controllerAs: 'model',
             link: link
         };
     }

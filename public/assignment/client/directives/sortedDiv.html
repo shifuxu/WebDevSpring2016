@@ -1,6 +1,5 @@
 <div>
     <div class="row" ng-repeat="field in data">
-        {{field}}
         <div ng-switch="field.type" class="col-sm-4">
             <div ng-switch-when="TEXT" class="form-group">
                 <label>{{field.label}}</label>
@@ -57,11 +56,10 @@
                 </div>
             </div>
         </div>
-
         <div class="col-sm-4 col-sm-offset-3 bottom-align">
             <a ng-click="" class="glyphicon glyphicon-pencil"></a>
             <a ng-click="" class="glyphicon glyphicon-plus"></a>
-            <a ng-click="remove(field)" class="glyphicon glyphicon-remove"></a>
+            <a ng-click="remove({field: field})" class="glyphicon glyphicon-remove"></a>
             <a ng-click="" class="glyphicon glyphicon-menu-hamburger"></a>
         </div>
     </div>
