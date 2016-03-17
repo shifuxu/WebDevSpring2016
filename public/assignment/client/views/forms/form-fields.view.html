@@ -1,13 +1,3 @@
-<script>
-    $(init);
-
-    function init()
-    {
-        $("#sortDiv").sortable(
-                {axis: "y"}
-        );
-    }
-</script>
 <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
     <h1 class="page-header">Forms</h1>
     <ul class="nav nav-tabs">
@@ -15,74 +5,10 @@
         <li role="presentation" class="active"><a href="#">Fileds</a></li>
     </ul>
     <br/>
-    <div ng-controller="FieldsController as model">
-        <div id="sortDiv">
-            <div class="row" ng-repeat="field in model.fields">
-                <div ng-switch="field.type" class="col-sm-4">
-                    <div ng-switch-when="TEXT" class="form-group">
-                        <label>{{field.label}}</label>
-                        <input class="form-control"
-                               type="text"
-                               placeholder="{{field.placeholder}}"/>
-                    </div>
-                    <div ng-switch-when="TEXTAREA" class="form-group">
-                        <label>{{field.label}}</label>
-                        <textarea class="form-control"
-                                  placeholder="{{field.placeholder}}">
-                        </textarea>
-                    </div>
-                    <div ng-switch-when="EMAIL" class="form-group">
-                        <label>{{field.label}}</label>
-                        <input class="form-control"
-                               type="email"
-                               placeholder="{{field.placeholder}}"/>
-                    </div>
-                    <div ng-switch-when="OPTIONS" class="form-group">
-                        <label>{{field.label}}</label>
-                        <select class="form-control">
-                            <option ng-repeat="item in field.options" value="{{item.value}}">
-                                {{item.label}}
-                            </option>
-                        </select>
-                    </div>
-                    <div ng-switch-when="CHECKBOXES" class="form-group">
-                        <label>{{field.label}}</label>
-                        <div class="checkbox" ng-repeat="item in field.options">
-                            <label>
-                                <input type="checkbox" value="{{item.value}}"/>{{item.label}}
-                            </label>
-                        </div>
-                    </div>
-                    <div ng-switch-when="RADIOS" class="form-group">
-                        <label>{{field.label}}</label>
-                        <div class="radio" ng-repeat="item in field.options">
-                            <label>
-                                <input type="radio"
-                                       name="input-{{field._id}}-radios"
-                                       value="{{item.value}}"/>
-                                {{item.label}}
-                            </label>
-                        </div>
-                    </div>
-                    <div ng-switch-when="DATE" class="form-group">
-                        <label>{{field.label}}</label>
-                        <div class="input-group date" data-provide="datepicker">
-                            <input type="text" class="form-control" placeholder="Select Date"/>
-                            <span class="input-group-addon">
-                                <span class="glyphicon glyphicon-calendar"></span>
-                            </span>
-                        </div>
-                    </div>
-                </div>
+    <div>
+        <sorted-div data="model.fields" remove="model.removeField(field)">
 
-                <div class="col-sm-4 col-sm-offset-3 bottom-align">
-                    <a ng-click="" class="glyphicon glyphicon-pencil"></a>
-                    <a ng-click="" class="glyphicon glyphicon-plus"></a>
-                    <a ng-click="model.removeField(field)" class="glyphicon glyphicon-remove"></a>
-                    <a ng-click="" class="glyphicon glyphicon-menu-hamburger"></a>
-                </div>
-            </div>
-        </div>
+        </sorted-div>
 
         <hr/>
 
@@ -93,6 +19,7 @@
         <div class="row">
             <div class="col-sm-4">
                 <select class="form-control" ng-model="model.fieldType">
+                    <option disabled selected value> -- Select an option -- </option>
                     <option value="slt">Single Line Text Field</option>
                     <option value="mlt">Multi Line Text Field</option>
                     <option value="date">Date Field</option>

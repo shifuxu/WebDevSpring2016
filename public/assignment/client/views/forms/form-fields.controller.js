@@ -26,6 +26,9 @@
         init();
 
         function addField(fieldType) {
+            if (typeof fieldType == "undefined") {
+                return ;
+            }
             var fieldTemplates = {
                 "slt": {
                     "id": null,

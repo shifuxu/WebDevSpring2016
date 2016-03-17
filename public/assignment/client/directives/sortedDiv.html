@@ -1,10 +1,68 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+<div>
+    <div class="row" ng-repeat="field in data">
+        {{field}}
+        <div ng-switch="field.type" class="col-sm-4">
+            <div ng-switch-when="TEXT" class="form-group">
+                <label>{{field.label}}</label>
+                <input class="form-control"
+                       type="text"
+                       placeholder="{{field.placeholder}}"/>
+            </div>
+            <div ng-switch-when="TEXTAREA" class="form-group">
+                <label>{{field.label}}</label>
+                        <textarea class="form-control"
+                                  placeholder="{{field.placeholder}}">
+                        </textarea>
+            </div>
+            <div ng-switch-when="EMAIL" class="form-group">
+                <label>{{field.label}}</label>
+                <input class="form-control"
+                       type="email"
+                       placeholder="{{field.placeholder}}"/>
+            </div>
+            <div ng-switch-when="OPTIONS" class="form-group">
+                <label>{{field.label}}</label>
+                <select class="form-control">
+                    <option ng-repeat="item in field.options" value="{{item.value}}">
+                        {{item.label}}
+                    </option>
+                </select>
+            </div>
+            <div ng-switch-when="CHECKBOXES" class="form-group">
+                <label>{{field.label}}</label>
+                <div class="checkbox" ng-repeat="item in field.options">
+                    <label>
+                        <input type="checkbox" value="{{item.value}}"/>{{item.label}}
+                    </label>
+                </div>
+            </div>
+            <div ng-switch-when="RADIOS" class="form-group">
+                <label>{{field.label}}</label>
+                <div class="radio" ng-repeat="item in field.options">
+                    <label>
+                        <input type="radio"
+                               name="input-{{field._id}}-radios"
+                               value="{{item.value}}"/>
+                        {{item.label}}
+                    </label>
+                </div>
+            </div>
+            <div ng-switch-when="DATE" class="form-group">
+                <label>{{field.label}}</label>
+                <div class="input-group date" data-provide="datepicker">
+                    <input type="text" class="form-control" placeholder="Select Date"/>
+                            <span class="input-group-addon">
+                                <span class="glyphicon glyphicon-calendar"></span>
+                            </span>
+                </div>
+            </div>
+        </div>
 
-</body>
-</html>
+        <div class="col-sm-4 col-sm-offset-3 bottom-align">
+            <a ng-click="" class="glyphicon glyphicon-pencil"></a>
+            <a ng-click="" class="glyphicon glyphicon-plus"></a>
+            <a ng-click="remove(field)" class="glyphicon glyphicon-remove"></a>
+            <a ng-click="" class="glyphicon glyphicon-menu-hamburger"></a>
+        </div>
+    </div>
+</div>
