@@ -27,7 +27,8 @@
     "cookie-parser": "^1.4.1",
     "express": "~3.4.4",
     "express-session": "^1.13.0",
-    "mongoose": "^4.4.7"
+    "mongoose": "^4.4.7",
+    "q": "^1.4.1"
   },
   "devDependencies": {},
   "bundleDependencies": [],
