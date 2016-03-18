@@ -118,53 +118,100 @@
         }
 
         function editField(field) {
-            if (field.type == "TEXT") {
-                var modalInstance = $uibModal.open({
-                    templateUrl: "views/forms/text.dialog.view.html",
-                    controller: "DialogController",
-                    controllerAs: "model",
-                    resolve: {
-                        field: function () {
-                            return field;
-                        }
+            var modalInstance = $uibModal.open({
+                templateUrl: "views/forms/dialog.view.html",
+                controller: "DialogController",
+                controllerAs: "model",
+                resolve: {
+                    type: function () {
+                        return field.type;
                     }
-                });
+                }
+            });
 
-                modalInstance.result.then(function (newField) {
-                    FieldsService
-                        .updateField(formId, field._id, newField)
-                        .then(function (response) {
-                            var fields = response.data;
-                            if (response.data) {
-                                vm.fields = fields;
-                            }
-                        });
-                });
-            }
+            modalInstance.result.then(function (newField) {
+                FieldsService
+                    .updateField(formId, field._id, newField)
+                    .then(function (response) {
+                        var fields = response.data;
+                        if (response.data) {
+                            vm.fields = fields;
+                        }
+                    });
+            });
         }
     }
 
-    function dialogController($uibModalInstance, field) {
+    function dialogController($uibModalInstance, type) {
         var vm = this;
 
         vm.ok = ok;
         vm.cancel = cancel;
+        vm.message = null;
 
         function init() {
-            var fieldTemp = {
-                _id: field._id,
-                label: field.label,
-                type: field.type,
-                placeholder: field.placeholder,
-                options: field.options
-            };
-            vm.field = fieldTemp;
+            vm.type = type;
         }
         init();
 
-        function ok() {
-            console.log(vm.field);
-            $uibModalInstance.close(vm.field);
+        function ok(field) {
+            if (typeof field == "undefined") {
+                vm.message = "Please enter something!";
+                return ;
+            }
+            if (!field.label) {
+                vm.message = "The label can not be empty!";
+                return ;
+            }
+
+            if ((type == "TEXT" || type == "TEXTAREA") && !field.placeholder) {
+                vm.message = "The placeholder can not be empty";
+                return ;
+            }
+
+            if ((type == "OPTIONS" || type == "CHECKBOXES" || type == "RADIOS") && !field.options) {
+                vm.message = "The options can not be empty";
+                return ;
+            }
+
+            var newField = {
+                "label" : field.label
+            };
+
+            if (field.placeholder) {
+                newField = {
+                    "label" : field.label,
+                    "placeholder": field.placeholder
+                };
+            }
+
+            if (field.options) {
+                var optionsTemp = [];
+                var info = field.options;
+                var optionArr = info.split("\n");
+                for (var o in optionArr) {
+                    var pair = optionArr[o].split(":");
+                    if (pair.length == 2) {
+                        var option = {
+                            "label": pair[0],
+                            "value": pair[1]
+                        };
+                        optionsTemp.push(option);
+                    } else {
+                        vm.message = "Please follow input format as label:value!";
+                        return ;
+                    }
+                }
+
+                newField = {
+                    "label" : field.label,
+                    "options": optionsTemp
+                };
+
+                console.log(newField);
+            }
+
+            $uibModalInstance.close(newField);
         }
 
         function cancel() {

@@ -146,11 +146,13 @@ module.exports = function() {
     function updateFieldForForm(formId, fieldId, field) {
         var fieldTemp = findFieldByFieldIdAndFormId(formId, fieldId);
         if (fieldTemp) {
-            fieldTemp._id = field._id;
             fieldTemp.label = field.label;
-            fieldTemp.type = field.type;
-            fieldTemp.placeholder = field.placeholder;
-            fieldTemp.options = field.options;
+            if (field.placeholder) {
+                fieldTemp.placeholder = field.placeholder;
+            }
+            if (field.options) {
+                fieldTemp.options = field.options;
+            }
             return fieldTemp;
         } else {
             return null;
