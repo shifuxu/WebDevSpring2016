@@ -118,28 +118,53 @@
         }
 
         function editField(field) {
-            console.log(field.type);
-            $uibModal.open({
-                templateUrl: "views/forms/dialog.view.html",
-                controller: "DialogController",
-                controllerAs: "model"
-            });
+            if (field.type == "TEXT") {
+                var modalInstance = $uibModal.open({
+                    templateUrl: "views/forms/text.dialog.view.html",
+                    controller: "DialogController",
+                    controllerAs: "model",
+                    resolve: {
+                        field: function () {
+                            return field;
+                        }
+                    }
+                });
+
+                modalInstance.result.then(function (newField) {
+                    FieldsService
+                        .updateField(formId, field._id, newField)
+                        .then(function (response) {
+                            var fields = response.data;
+                            if (response.data) {
+                                vm.fields = fields;
+                            }
+                        });
+                });
+            }
         }
     }
 
-    function dialogController($uibModalInstance) {
+    function dialogController($uibModalInstance, field) {
         var vm = this;
 
         vm.ok = ok;
         vm.cancel = cancel;
 
         function init() {
-
+            var fieldTemp = {
+                _id: field._id,
+                label: field.label,
+                type: field.type,
+                placeholder: field.placeholder,
+                options: field.options
+            };
+            vm.field = fieldTemp;
         }
         init();
 
         function ok() {
-            console.log("ok");
+            console.log(vm.field);
+            $uibModalInstance.close(vm.field);
         }
 
         function cancel() {
