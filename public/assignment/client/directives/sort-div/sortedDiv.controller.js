@@ -24,6 +24,7 @@
                         .updateFields(formId, scope.data)
                         .then(function(response) {
                             var fields = response.data;
+                            console.log(fields);
                         });
                 }
             });
