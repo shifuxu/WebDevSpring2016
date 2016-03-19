@@ -3,33 +3,37 @@
         .module("FormBuilderApp")
         .directive("sortedDiv", sortedDiv);
 
-    function sortedDiv() {
+    function sortedDiv(FieldsService, $routeParams) {
         var start = null;
         var end = null;
+        var formId = $routeParams.formId;
         function link (scope, element, attrs) {
             element = $(element);
             element.sortable({
-                axis: "y"
-                //start: function(event, ui) {
-                //    start = ui.item.index();
-                //    console.log("start: " + start);
-                //},
-                //stop: function(event, ui) {
-                //    end = ui.item.index();
-                //    console.log("end: " + end);
-                //    var temp = scope.data[start];
-                //    scope.data[start] = scope.data[end];
-                //    scope.data[end] = temp;
-                //    scope.$apply();
-                //}
+                axis: "y",
+                start: function(event, ui) {
+                    start = ui.item.index();
+                },
+                stop: function(event, ui) {
+                    end = ui.item.index();
+                    var temp = scope.data[start];
+                    scope.data[start] = scope.data[end];
+                    scope.data[end] = temp;
+                    scope.$apply();
+                    FieldsService
+                        .updateFields(formId, scope.data)
+                        .then(function(response) {
+                            var fields = response.data;
+                        });
+                }
             });
         }
         return {
             restrict: 'E',
             scope: {
-                data: '=',  // data binds to fields array
-                remove: '&', // function binds to directive
-                edit: '&' // function binds to directive
+                data: '=',
+                remove: '&',
+                edit: '&'
             },
             replace: true,
             templateUrl: "directives/sort-div/sortedDiv.view.html",
