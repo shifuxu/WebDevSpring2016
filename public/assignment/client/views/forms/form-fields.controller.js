@@ -207,8 +207,6 @@
                     "label" : field.label,
                     "options": optionsTemp
                 };
-
-                console.log(newField);
             }
 
             $uibModalInstance.close(newField);
