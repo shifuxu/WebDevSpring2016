@@ -15,6 +15,7 @@
                 },
                 stop: function(event, ui) {
                     end = ui.item.index();
+                    scope.data.splice(end, 0, scope.data.splice(start, 1)[0]);
                     scope.$apply();
                 }
             });
