@@ -26,6 +26,7 @@ if (process.env.OPENSHIFT_MONGODB_DB_PASSWORD) {
         process.env.OPENSHIFT_APP_NAME;
 }
 
+
 var db = mongoose.connect(connectionString);
 
 app.use(express.static(__dirname + '/public'));
