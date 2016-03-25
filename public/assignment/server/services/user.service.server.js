@@ -9,6 +9,7 @@ module.exports = function(app, userModel) {
     app.post("/api/assignment/login", login);
     app.post("/api/assignment/logout", logout);
     app.get("/api/assignment/loggedin", loggedin);
+    app.get("/api/assignment/loggedin/:id", getUpdatedCurrentUser);
 
     function createUser(req, res) {
         var user = req.body;
@@ -139,4 +140,18 @@ module.exports = function(app, userModel) {
         res.json(req.session.currentUser);
     }
 
+    function getUpdatedCurrentUser(req, res) {
+        var id = req.params.id;
+        userModel
+            .findUserById(id)
+            .then(
+                function (doc) {
+                    req.session.currentUser = doc;
+                    res.json(doc);
+                },
+                function (err) {
+                    res.status(400).send(err);
+                }
+            );
+    }
 };

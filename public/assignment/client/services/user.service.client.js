@@ -15,7 +15,8 @@
             updateUser: updateUser,
             setCurrentUser: setCurrentUser,
             logout: logout,
-            getCurrentUser: getCurrentUser
+            getCurrentUser: getCurrentUser,
+            getUpdatedCurrentUser: getUpdatedCurrentUser
         };
 
         return service;
@@ -64,5 +65,8 @@
             return $http.post("/api/assignment/logout");
         }
 
+        function getUpdatedCurrentUser(userId) {
+            return $http.get("/api/assignment/loggedin/" + userId);
+        }
     }
 })();
