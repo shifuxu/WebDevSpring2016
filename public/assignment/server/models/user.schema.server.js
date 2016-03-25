@@ -1,6 +1,6 @@
 module.exports = function(mongoose) {
 
-    var userSchema = mongoose.schema(
+    var userSchema = mongoose.Schema(
         {
             username: String,
             password: String,

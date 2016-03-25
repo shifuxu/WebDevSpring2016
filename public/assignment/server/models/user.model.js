@@ -1,68 +1,100 @@
-var users = require("./user.mock.json");
+// var users = require("./user.mock.json");
+
+var q = require("q");
 
 module.exports = function (db, mongoose) {
+
+    var UserSchema = require("./user.schema.server.js")(mongoose);
+
+    var UserModel = mongoose.model('User', UserSchema);
+
     var api = {
         findUserByCredentials: findUserByCredentials,
         findUserById: findUserById,
         findAllUsers: findAllUsers,
         createUser: createUser,
         deleteUserById: deleteUserById,
-        updateUser: updateUser,
+        updateUserById: updateUserById,
         findUserByUsername: findUserByUsername
     };
 
     return api;
 
     function findUserByCredentials(credentials) {
+        var deferred = q.defer();
+
         var username = credentials.username;
         var password = credentials.password;
 
-        for (var u in users) {
-            if (users[u].username == username && users[u].password == password) {
-                return users[u];
+        UserModel.findOne(
+            {username: username, password: password}, function(err, doc) {
+                if (err) {
+                    deferred.reject(err);
+                } else {
+                    deferred.resolve(doc);
+                }
             }
-        }
+        );
 
-        return null;
+        return deferred.promise();
     }
 
     function findUserById(userId) {
-        for (var u in users){
-            if (users[u]._id == userId) {
-                return users[u];
-            }
-        }
+        var deferred = q.defer();
 
-        return null;
+        UserModel.findById(userId, function (err, doc) {
+            if (err) {
+                deferred.reject(err);
+            } else {
+                deferred.resolve(doc);
+            }
+        });
+
+        return deferred.promise();
     }
 
     function findUserByUsername(username) {
-        for (var u in users){
-            if (users[u].username == username) {
-                return users[u];
-            }
-        }
+        var deferred = q.defer();
 
-        return null;
+        UserModel.findOne(
+            {username: username}, function(err, doc) {
+                if (err) {
+                    deferred.reject(err);
+                } else {
+                    deferred.resolve(doc);
+                }
+            }
+        );
+
+        return deferred.promise();
     }
 
     function findAllUsers() {
-        return users;
+        var deferred = q.defer();
+
+        UserModel.find({}, function(err, doc) {
+            if (err) {
+                deferred.reject(err);
+            } else {
+                deferred.resolve(doc);
+            }
+        });
+
+        return deferred.promise();
     }
 
     function createUser(user) {
-        var newUser = {
-            _id: (new Date).getTime(),
-            username: user.username,
-            password: user.password,
-            firstName: user.firstName,
-            lastName: user.lastName,
-            roles: user.roles,
-            email: user.email
-        };
+        var deferred = q.defer();
 
-        users.push(newUser);
-        return newUser;
+        UserModel.create(user, function (err, doc) {
+            if (err) {
+                deferred.reject(err);
+            } else {
+                deferred.resolve(doc);
+            }
+        });
+
+        return deferred.promise;
     }
 
     function deleteUserById(userId) {
@@ -73,7 +105,7 @@ module.exports = function (db, mongoose) {
         return null;
     }
 
-    function updateUser(userId, user) {
+    function updateUserById(userId, user) {
         var userTemp = findUserById(userId);
         if (userTemp != null) {
             userTemp.firstName = user.firstName;

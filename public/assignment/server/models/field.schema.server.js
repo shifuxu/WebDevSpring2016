@@ -1,10 +1,10 @@
 module.exports = function(mongoose) {
 
-    var fieldSchema = mongoose.schema(
+    var fieldSchema = mongoose.Schema(
         {
             label: String,
             type: String,
-            placehoder: String,
+            placeholder: String,
             options: [{"label": String, "value": String}]
         }, {collection: 'assignment.formbuilder.field'});
 

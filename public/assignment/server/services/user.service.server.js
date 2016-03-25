@@ -12,25 +12,54 @@ module.exports = function(app, userModel) {
 
     function createUser(req, res) {
         var user = req.body;
-        var newUser = userModel.createUser(user);
-        req.session.currentUser = newUser;
-        res.json(newUser);
+        user = userModel.createUser(user)
+            .then(
+                function (doc) {
+                    req.session.currentUser = doc;
+                    res.json(user);
+                },
+                function (err) {
+                    res.status(400).send(err);
+                }
+            );
     }
 
     function findAllUsers(req, res) {
-        res.json(userModel.findAllUsers());
+        var users = userModel.findAllUsers()
+                .then(
+                    function (doc) {
+                        res.json(doc);
+                    },
+                    function (err) {
+                        res.status(400).send(err);
+                    }
+                );
     }
 
     function findUserById(req, res) {
         var id = req.params.id;
-        var user = userModel.findUserById(id);
-        res.json(user);
+        var user = userModel.findUserById(id)
+                .then(
+                    function (doc) {
+                        res.json(doc);
+                    },
+                    function (err) {
+                        res.status(400).send(err);
+                    }
+                );
     }
 
     function findUserByUsername(req, res) {
         var username = req.params.username;
-        var user = userModel.findUserByUsername(username);
-        res.json(user);
+        var user = userModel.findUserByUsername(username)
+                .then(
+                    function (doc) {
+                        res.json(doc);
+                    },
+                    function (err) {
+                        res.status(400).send(err);
+                    }
+                );
     }
 
     function findUserByCredential(req, res) {
@@ -40,14 +69,22 @@ module.exports = function(app, userModel) {
             username: username,
             password: password
         };
-        var user = userModel.findUserByCredentials(credentital);
-        res.json(user);
+        var user = userModel.findUserByCredentials(credentital)
+                .then(
+                    function (doc) {
+                        req.session.currentUser = doc;
+                        res.json(doc);
+                    },
+                    function (err) {
+                        res.status(400).send(err);
+                    }
+                );
     }
 
     function updateUserById(req, res) {
         var id = Number(req.params.id);
         var user = req.body;
-        var userTemp = userModel.updateUser(id, user);
+        var userTemp = userModel.updateUserById(id, user);
         res.json(userTemp);
     }
 
@@ -59,9 +96,16 @@ module.exports = function(app, userModel) {
 
     function login(req, res) {
         var credentials = req.body;
-        var user = userModel.findUserByCredentials(credentials);
-        req.session.currentUser = user;
-        res.json(user);
+        var user = userModel.findUserByCredentials(credentital)
+            .then(
+                function (doc) {
+                    req.session.currentUser = doc;
+                    res.json(doc);
+                },
+                function (err) {
+                    res.status(400).send(err);
+                }
+            );
     }
 
     function logout(req, res) {

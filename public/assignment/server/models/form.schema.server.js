@@ -2,7 +2,7 @@ module.exports = function(mongoose) {
 
     var fieldSchema = require("./field.schema.server.js")(mongoose);
 
-    var formSchema = mongoose.schema(
+    var formSchema = mongoose.Schema(
         {
             userId: String,
             title: String,
