@@ -26,15 +26,17 @@ module.exports = function (db, mongoose) {
         var username = credentials.username;
         var password = credentials.password;
 
-        UserModel.findOne(
-            {username: username, password: password}, function(err, doc) {
-                if (err) {
-                    deferred.reject(err);
-                } else {
-                    deferred.resolve(doc);
+        UserModel
+            .findOne(
+                {username: username, password: password},
+                function(err, doc) {
+                    if (err) {
+                        deferred.reject(err);
+                    } else {
+                        deferred.resolve(doc);
+                    }
                 }
-            }
-        );
+            );
 
         return deferred.promise;
     }
@@ -42,13 +44,17 @@ module.exports = function (db, mongoose) {
     function findUserById(userId) {
         var deferred = q.defer();
 
-        UserModel.findById(userId, function (err, doc) {
-            if (err) {
-                deferred.reject(err);
-            } else {
-                deferred.resolve(doc);
-            }
-        });
+        UserModel
+            .findById(
+                userId,
+                function (err, doc) {
+                    if (err) {
+                        deferred.reject(err);
+                    } else {
+                        deferred.resolve(doc);
+                    }
+                }
+            );
 
         return deferred.promise;
     }
@@ -56,15 +62,17 @@ module.exports = function (db, mongoose) {
     function findUserByUsername(username) {
         var deferred = q.defer();
 
-        UserModel.findOne(
-            {username: username}, function(err, doc) {
-                if (err) {
-                    deferred.reject(err);
-                } else {
-                    deferred.resolve(doc);
+        UserModel
+            .findOne(
+                {username: username},
+                function(err, doc) {
+                    if (err) {
+                        deferred.reject(err);
+                    } else {
+                        deferred.resolve(doc);
+                    }
                 }
-            }
-        );
+            );
 
         return deferred.promise;
     }
@@ -72,13 +80,17 @@ module.exports = function (db, mongoose) {
     function findAllUsers() {
         var deferred = q.defer();
 
-        UserModel.find({}, function(err, doc) {
-            if (err) {
-                deferred.reject(err);
-            } else {
-                deferred.resolve(doc);
-            }
-        });
+        UserModel
+            .find(
+                {},
+                function(err, doc) {
+                    if (err) {
+                        deferred.reject(err);
+                    } else {
+                        deferred.resolve(doc);
+                    }
+                }
+            );
 
         return deferred.promise;
     }
@@ -86,23 +98,36 @@ module.exports = function (db, mongoose) {
     function createUser(user) {
         var deferred = q.defer();
 
-        UserModel.create(user, function (err, doc) {
-            if (err) {
-                deferred.reject(err);
-            } else {
-                deferred.resolve(doc);
-            }
-        });
+        UserModel
+            .create(
+                user,
+                function (err, doc) {
+                    if (err) {
+                        deferred.reject(err);
+                    } else {
+                        deferred.resolve(doc);
+                    }
+                }
+            );
 
         return deferred.promise;
     }
 
     function deleteUserById(userId) {
-        var user = findUserById(userId);
-        if (user != null) {
-            users.splice(users.indexOf(user), 1);
-        }
-        return null;
+        var deferred = q.defer();
+
+        UserModel
+            .remove(
+                {_id: userId},
+                function(err, doc) {
+                    if (err) {
+                        deferred.reject(err);
+                    } else {
+                        deferred.resolve(doc);
+                    }
+                });
+
+        return deferred.promise;
     }
 
     function updateUserById(userId, user) {
@@ -129,18 +154,5 @@ module.exports = function (db, mongoose) {
         );
 
         return deferred.promise;
-
-        //var userTemp = findUserById(userId);
-        //if (userTemp != null) {
-        //    userTemp.firstName = user.firstName;
-        //    userTemp.lastName = user.lastName;
-        //    userTemp.password = user.password;
-        //    userTemp.username = user.username;
-        //    userTemp.roles = user.roles;
-        //    userTemp.email = user.email;
-        //    return userTemp;
-        //} else {
-        //    return null;
-        //}
     }
 };
