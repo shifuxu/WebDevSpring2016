@@ -36,7 +36,7 @@ module.exports = function (db, mongoose) {
             }
         );
 
-        return deferred.promise();
+        return deferred.promise;
     }
 
     function findUserById(userId) {
@@ -50,7 +50,7 @@ module.exports = function (db, mongoose) {
             }
         });
 
-        return deferred.promise();
+        return deferred.promise;
     }
 
     function findUserByUsername(username) {
@@ -66,7 +66,7 @@ module.exports = function (db, mongoose) {
             }
         );
 
-        return deferred.promise();
+        return deferred.promise;
     }
 
     function findAllUsers() {
@@ -80,7 +80,7 @@ module.exports = function (db, mongoose) {
             }
         });
 
-        return deferred.promise();
+        return deferred.promise;
     }
 
     function createUser(user) {
@@ -106,17 +106,41 @@ module.exports = function (db, mongoose) {
     }
 
     function updateUserById(userId, user) {
-        var userTemp = findUserById(userId);
-        if (userTemp != null) {
-            userTemp.firstName = user.firstName;
-            userTemp.lastName = user.lastName;
-            userTemp.password = user.password;
-            userTemp.username = user.username;
-            userTemp.roles = user.roles;
-            userTemp.email = user.email;
-            return userTemp;
-        } else {
-            return null;
-        }
+        var deferred = q.defer();
+
+        UserModel.update(
+            {_id: userId},
+            {
+                $set: {
+                    username: user.username,
+                    password: user.password,
+                    firstName: user.firstName,
+                    lastName: user.lastName,
+                    email: user.email
+                }
+            },
+            function(err, doc) {
+                if (err) {
+                    deferred.reject(err);
+                } else {
+                    deferred.resolve(doc);
+                }
+            }
+        );
+
+        return deferred.promise;
+
+        //var userTemp = findUserById(userId);
+        //if (userTemp != null) {
+        //    userTemp.firstName = user.firstName;
+        //    userTemp.lastName = user.lastName;
+        //    userTemp.password = user.password;
+        //    userTemp.username = user.username;
+        //    userTemp.roles = user.roles;
+        //    userTemp.email = user.email;
+        //    return userTemp;
+        //} else {
+        //    return null;
+        //}
     }
 };

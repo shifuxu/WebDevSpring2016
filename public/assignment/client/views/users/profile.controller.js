@@ -23,6 +23,7 @@
         init();
 
         function update(user) {
+            console.log(vm.currentUser._id);
             UserService
                 .updateUser(vm.currentUser._id, user)
                 .then(function(response) {

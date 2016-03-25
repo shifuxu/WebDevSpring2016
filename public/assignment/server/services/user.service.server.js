@@ -82,10 +82,17 @@ module.exports = function(app, userModel) {
     }
 
     function updateUserById(req, res) {
-        var id = Number(req.params.id);
+        var id = req.params.id;
         var user = req.body;
-        var userTemp = userModel.updateUserById(id, user);
-        res.json(userTemp);
+        var userTemp = userModel.updateUserById(id, user)
+                    .then(
+                        function(doc) {
+                            res.json(doc);
+                        },
+                        function(err) {
+                            res.status(400).send(err);
+                        }
+                    );
     }
 
     function deleteUserById(req, res) {
@@ -96,7 +103,7 @@ module.exports = function(app, userModel) {
 
     function login(req, res) {
         var credentials = req.body;
-        var user = userModel.findUserByCredentials(credentital)
+        var user = userModel.findUserByCredentials(credentials)
             .then(
                 function (doc) {
                     req.session.currentUser = doc;
