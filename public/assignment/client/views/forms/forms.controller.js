@@ -20,14 +20,13 @@
                     var userTemp = response.data;
                     if (userTemp) {
                         vm.currentUser = userTemp;
-                        FormService
-                            .findAllFormsForUser(vm.currentUser._id)
-                            .then(function(response) {
-                                var forms = response.data;
-                                if (forms) {
-                                    vm.forms = forms;
-                                }
-                            });
+                        return FormService.findAllFormsForUser(vm.currentUser._id);
+                    }
+                })
+                .then(function(response) {
+                    var forms = response.data;
+                    if (forms) {
+                        vm.forms = forms;
                     }
                 });
         }
@@ -54,14 +53,13 @@
                 .then(function(response) {
                     var forms = response.data;
                     if (forms) {
-                        FormService
-                            .findAllFormsForUser(vm.currentUser._id)
-                            .then(function(response) {
-                                var forms = response.data;
-                                if (forms) {
-                                    vm.forms = forms;
-                                }
-                            });
+                        return FormService.findAllFormsForUser(vm.currentUser._id);
+                    }
+                })
+                .then(function(response) {
+                    var forms = response.data;
+                    if (forms) {
+                        vm.forms = forms;
                     }
                 });
         }
@@ -73,14 +71,13 @@
                 .then(function(response) {
                     var forms = response.data;
                     if (forms) {
-                        FormService
-                            .findAllFormsForUser(vm.currentUser._id)
-                            .then(function(response) {
-                                var forms = response.data;
-                                if (forms) {
-                                    vm.forms = forms;
-                                }
-                            });
+                        return FormService.findAllFormsForUser(vm.currentUser._id);
+                    }
+                })
+                .then(function(response) {
+                    var forms = response.data;
+                    if (forms) {
+                        vm.forms = forms;
                     }
                 });
         }

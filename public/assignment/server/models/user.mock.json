@@ -7,7 +7,7 @@
         "email": "bob@bob.com"                                                  },
     {	"_id":345, "firstName":"Charlie",          "lastName":"Brown",
         "username":"charlie","password":"charlie", "roles": ["faculty"],
-        "email": "charlie@charlie.como"                                         },
+        "email": "charlie@charlie.com"                                         },
     {	"_id":456, "firstName":"Dan",              "lastName":"Craig",
         "username":"dan",    "password":"dan",     "roles": ["faculty", "admin"],
         "email": "dan@dan.com"                                                  },
