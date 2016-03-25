@@ -4,6 +4,7 @@ var bodyParser = require('body-parser');
 var session = require('express-session');
 var cookieParser = require('cookie-parser');
 var mongoose = require('mongoose');
+var multer = require('multer');
 
 var ipaddress = process.env.OPENSHIFT_NODEJS_IP || '127.0.0.1';
 var port = process.env.OPENSHIFT_NODEJS_PORT || 3020;
@@ -30,6 +31,7 @@ if (process.env.OPENSHIFT_MONGODB_DB_PASSWORD) {
 var db = mongoose.connect(connectionString);
 
 app.use(express.static(__dirname + '/public'));
+app.use(multer());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cookieParser());
