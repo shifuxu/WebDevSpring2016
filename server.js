@@ -27,7 +27,7 @@ if (process.env.OPENSHIFT_MONGODB_DB_PASSWORD) {
 }
 
 
-// var db = mongoose.connect(connectionString);
+var db = mongoose.connect(connectionString);
 
 app.use(express.static(__dirname + '/public'));
 app.use(bodyParser.json());
@@ -41,7 +41,7 @@ app.use(session({
 
 app.get('/hello', rootRequest);
 
-require("./public/assignment/server/app.js")(app);
+require("./public/assignment/server/app.js")(app, db, mongoose);
 require("./public/project/server/app.js")(app);
 
 app.listen(port, ipaddress);
