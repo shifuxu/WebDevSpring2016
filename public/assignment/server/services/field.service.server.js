@@ -8,8 +8,16 @@ module.exports = function (app, userModel, formModel) {
 
     function findAllFieldsById(req, res) {
         var formId = req.params.formId;
-        var fields = formModel.findAllFieldsById(formId);
-        res.json(fields);
+        formModel
+            .findAllFieldsById(formId)
+            .then(
+                function(fields) {
+                    res.json(fields);
+                },
+                function(err) {
+                    res.status(400).send(err);
+                }
+            );
     }
 
     function findFieldByFieldIdAndFormId(req, res) {

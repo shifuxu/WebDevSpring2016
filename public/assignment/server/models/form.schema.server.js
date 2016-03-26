@@ -1,16 +1,16 @@
 module.exports = function(mongoose) {
 
-    var fieldSchema = require("./field.schema.server.js")(mongoose);
+    var FieldSchema = require("./field.schema.server.js")(mongoose);
 
-    var formSchema = mongoose.Schema(
+    var FormSchema = mongoose.Schema(
         {
             userId: String,
             title: String,
-            fields: [fieldSchema],
+            fields: [FieldSchema],
             created: Date,
             updated: Date
         }, {collection: 'assignment.formbuilder.form'});
 
-    return formSchema;
+    return FormSchema;
 
 };

@@ -1,13 +1,14 @@
-// var users = require("./user.mock.json");
-
+// import q library
 var q = require("q");
 
 module.exports = function (db, mongoose) {
-
+    // define schema
     var UserSchema = require("./user.schema.server.js")(mongoose);
 
+    // define model
     var UserModel = mongoose.model('User', UserSchema);
 
+    // define api
     var api = {
         findUserByCredentials: findUserByCredentials,
         findUserById: findUserById,

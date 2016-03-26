@@ -51,8 +51,8 @@
             FormService
                 .updateFormById(selectedFormId, form)
                 .then(function(response) {
-                    var forms = response.data;
-                    if (forms) {
+                    var formTemp = response.data;
+                    if (formTemp) {
                         return FormService.findAllFormsForUser(vm.currentUser._id);
                     }
                 })
@@ -69,10 +69,7 @@
             FormService
                 .deleteFormById(selectedFormId)
                 .then(function(response) {
-                    var forms = response.data;
-                    if (forms) {
-                        return FormService.findAllFormsForUser(vm.currentUser._id);
-                    }
+                    return FormService.findAllFormsForUser(vm.currentUser._id);
                 })
                 .then(function(response) {
                     var forms = response.data;
@@ -92,7 +89,8 @@
                         vm.form = {
                             _id: formTemp._id,
                             title: formTemp.title,
-                            userId: formTemp.userId
+                            userId: formTemp.userId,
+                            fields: formTemp.fields
                         };
                     }
                 });

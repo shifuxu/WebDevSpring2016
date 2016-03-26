@@ -1,6 +1,6 @@
 module.exports = function(mongoose) {
 
-    var fieldSchema = mongoose.Schema(
+    var FieldSchema = mongoose.Schema(
         {
             label: String,
             type: String,
@@ -8,6 +8,6 @@ module.exports = function(mongoose) {
             options: [{"label": String, "value": String}]
         }, {collection: 'assignment.formbuilder.field'});
 
-    return fieldSchema;
+    return FieldSchema;
 
 };

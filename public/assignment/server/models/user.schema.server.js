@@ -1,6 +1,6 @@
 module.exports = function(mongoose) {
 
-    var userSchema = mongoose.Schema(
+    var UserSchema = mongoose.Schema(
         {
             username: String,
             password: String,
@@ -10,6 +10,6 @@ module.exports = function(mongoose) {
             roles: [String]
         }, {collection: 'assignment.formbuilder.user'});
 
-    return userSchema;
+    return UserSchema;
 
 };
