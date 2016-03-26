@@ -189,28 +189,6 @@ module.exports = function(db, mongoose) {
         return deferred.promise;
     }
 
-    // ? not sure it is okay
-    function findFieldByFieldIdAndFormId(formId, fieldId) {
-        var deferred = q.defer();
-
-        FormModel
-            .find(
-                {
-                    _id: formId,
-                    'fields._id': fieldId
-                },
-                function(err, doc) {
-                    if (err) {
-                        deferred.reject(err);
-                    } else {
-                        deferred.resolve(doc.fields[0]);
-                    }
-                }
-            );
-
-        return deferred.promise;
-    }
-
     function deleteFieldByFieldIdAndFormId(formId, fieldId) {
         var deferred = q.defer();
 
