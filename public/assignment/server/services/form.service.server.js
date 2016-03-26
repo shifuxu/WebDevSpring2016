@@ -89,7 +89,16 @@ module.exports = function(app, userModel, formModel) {
     }
 
     function findAllForms(req, res) {
-        res.json(formModel.findAllForms());
+        formModel
+            .findAllForms()
+            .then(
+                function(forms) {
+                    res.json(forms);
+                },
+                function(err) {
+                    res.status(400).send(err);
+                }
+            );
     }
 
 };
