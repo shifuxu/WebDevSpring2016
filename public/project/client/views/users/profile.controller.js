@@ -20,11 +20,10 @@
                     if (currentUser) {
                         vm.currentUser = currentUser;
                     }
-                    UserService
-                        .getProfile()
-                        .then(function(response) {
-                            vm.profile = response.data;
-                        });
+                    return UserService.getProfile();
+                })
+                .then(function(response) {
+                    vm.profile = response.data;
                 });
         }
         init();

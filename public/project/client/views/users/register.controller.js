@@ -43,15 +43,14 @@
                     if (userTemp != null) {
                         vm.message = "User already exists";
                     } else {
-                        UserService
-                            .createUser(user)
-                            .then(function(response) {
-                                var newUser = response.data;
-                                if (newUser) {
-                                    UserService.setCurrentUser(newUser);
-                                    $location.url("/profile");
-                                }
-                            });
+                        return UserService.createUser(user);
+                    }
+                })
+                .then(function(response) {
+                    var newUser = response.data;
+                    if (newUser) {
+                        UserService.setCurrentUser(newUser);
+                        $location.url("/profile");
                     }
                 });
         }

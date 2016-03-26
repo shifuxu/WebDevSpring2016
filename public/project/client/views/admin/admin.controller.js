@@ -25,14 +25,13 @@
                     var userTemp = response.data;
                     if (userTemp) {
                         vm.currentUser = userTemp;
-                        UserService
-                            .findAllUsers()
-                            .then(function(response) {
-                                var users = response.data;
-                                if (users) {
-                                    vm.users = users;
-                                }
-                            });
+                        return UserService.findAllUsers();
+                    }
+                })
+                .then(function(response) {
+                    var users = response.data;
+                    if (users) {
+                        vm.users = users;
                     }
                 });
         }
@@ -44,14 +43,13 @@
                 .then(function(response) {
                     var user = response.data;
                     if (user) {
-                        UserService
-                            .findAllUsers()
-                            .then(function(response) {
-                                var users = response.data;
-                                if (users) {
-                                    vm.users = users;
-                                }
-                            });
+                        return UserService.findAllUsers();
+                    }
+                })
+                .then(function(response) {
+                    var users = response.data;
+                    if (users) {
+                        vm.users = users;
                     }
                 });
         }
@@ -62,14 +60,13 @@
                 .then(function(response) {
                     var userTemp = response.data;
                     if (userTemp) {
-                        UserService
-                            .findAllUsers()
-                            .then(function(response) {
-                                var users = response.data;
-                                if (users) {
-                                    vm.users = users;
-                                }
-                            });
+                        return UserService.findAllUsers();
+                    }
+                })
+                .then(function(response) {
+                    var users = response.data;
+                    if (users) {
+                        vm.users = users;
                     }
                 });
         }
@@ -84,14 +81,13 @@
             UserService
                 .deleteUserById(selectedUserId)
                 .then(function() {
-                    UserService
-                        .findAllUsers()
-                        .then(function(response) {
-                            var users = response.data;
-                            if (users) {
-                                vm.users = users;
-                            }
-                        });
+                    return UserService.findAllUsers();
+                })
+                .then(function(response) {
+                    var users = response.data;
+                    if (users) {
+                        vm.users = users;
+                    }
                 });
         }
 
@@ -115,6 +111,6 @@
                     }
                 });
         }
-
     }
+
 })();
