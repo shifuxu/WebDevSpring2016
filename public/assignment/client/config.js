@@ -24,7 +24,10 @@
                 }
             })
             .when("/admin", {
-                templateUrl: "views/admin/admin.view.html"
+                templateUrl: "views/admin/admin.view.html",
+                resolve: {
+                    checkLoggedIn: checkLoggedIn
+                }
             })
             .when("/home", {
                 templateUrl: "views/home/home.view.html",
