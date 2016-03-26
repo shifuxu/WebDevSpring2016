@@ -189,7 +189,7 @@ module.exports = function(db, mongoose) {
         return deferred.promise;
     }
 
-    // ? not sure i am right
+    // ? not sure it is okay
     function findFieldByFieldIdAndFormId(formId, fieldId) {
         var deferred = q.defer();
 
@@ -197,7 +197,7 @@ module.exports = function(db, mongoose) {
             .find(
                 {
                     _id: formId,
-                    fields: {$elemMatch: {_id: fieldId}}
+                    'fields._id': fieldId
                 },
                 function(err, doc) {
                     if (err) {
@@ -255,50 +255,45 @@ module.exports = function(db, mongoose) {
             );
 
         return deferred.promise;
-        //var newField = {
-        //    _id: (new Date).getTime().toString(),
-        //    label: field.label,
-        //    type: field.type,
-        //    placeholder: field.placeholder,
-        //    options: field.options
-        //};
-        //
-        //var fields = findAllFieldsById(formId);
-        //fields.push(newField);
-        //
-        //var form = findFormById(formId);
-        //var newForm = {
-        //    _id: form._id,
-        //    title: form.title,
-        //    userId: form.userId,
-        //    fields: fields
-        //};
-        //
-        //updateFormById(formId, newForm);
-        //
-        //return newField;
     }
 
     function updateFieldForForm(formId, fieldId, field) {
         var deferred = q.defer();
 
+        var newPlaceholder = "";
+        var newOptions = [];
+
+        if (field.placeholder) {
+            newPlaceholder = field.placeholder;
+        }
+
+        if (field.options) {
+            newOptions = field.options;
+        }
+
         FormModel
-            .update();
+            .update(
+                {
+                    _id: formId,
+                    'fields._id': fieldId
+                },
+                {
+                    $set: {
+                        'fields.$.label': field.label,
+                        'fields.$.placeholder': newPlaceholder,
+                        'fields.$.options': newOptions
+                    }
+                },
+                function(err, doc) {
+                    if (err) {
+                        deferred.reject(err);
+                    } else {
+                        deferred.resolve(doc);
+                    }
+                }
+            );
 
         return deferred.promise;
-        //var fieldTemp = findFieldByFieldIdAndFormId(formId, fieldId);
-        //if (fieldTemp) {
-        //    fieldTemp.label = field.label;
-        //    if (field.placeholder) {
-        //        fieldTemp.placeholder = field.placeholder;
-        //    }
-        //    if (field.options) {
-        //        fieldTemp.options = field.options;
-        //    }
-        //    return fieldTemp;
-        //} else {
-        //    return null;
-        //}
     }
 
     // leave it here for further confirmation
