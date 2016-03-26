@@ -22,18 +22,20 @@
                         class="btn btn-danger"
                         ng-click="model.favorite(model.movie)"
                         style="float: left; margin-left: 10px;">
-                    <span class="glyphicon glyphicon-star-empty"></span>
+                    <span ng-show="model.movie.likes.indexOf(currentUser._id) > -1"
+                          class="glyphicon glyphicon-star"></span>
+                    <span ng-show="!model.movie || !model.movie.likes || model.movie.likes.indexOf(currentUser._id) == -1"
+                          class="glyphicon glyphicon-star-empty">
+                    </span>
                 </button>
             </div>
             <div class="clearfix"> </div>
             <p class="m_4">{{model.movie.Plot}}</p>
-            <form ng-if="currentUser" method="post">
-                <div class="to">
-                    <input type="text" class="text" value="Name" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Name';}">
-                    <input type="text" class="text" value="Email" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Email';}" style="margin-left:3%">
-                </div>
+            <form ng-if="currentUser" class="single">
                 <div class="text">
-                    <textarea value="Message:" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Message';}">Message:</textarea>
+                    <textarea onfocus="this.value = '';"
+                              onblur="if (this.value == '') {this.value = 'Message';}">Message:
+                    </textarea>
                 </div>
                 <div class="form-submit1">
                     <input name="submit" type="submit" id="submit" value="Submit"><br>
@@ -41,18 +43,17 @@
                 <div class="clearfix"></div>
             </form>
             <div class="clearfix"></div>
-            <br/>
-            <div ng-if="model.data.userLikes">
-                <h3>Other Users that Like This Movie</h3>
+            <div ng-if="model.data.userLikes" class="single">
+                <h1>Other Users that Like This Movie</h1>
                 <ul>
-                    <li ng-repeat="user in model.data.userLikes"
-                        style="font-size: 25px;">
-                        <a href="#/profile/{{user.username}}">
+                    <li ng-repeat="user in model.data.userLikes" style="font-size: 25px;">
+                        <a href="#/others/{{user.username}}">
                             {{user.username}}
                         </a>
                     </li>
                 </ul>
             </div>
+            <!-- Leave the comments here for a while -->
             <div class="clearfix"></div>
             <div ng-if="currentUser" class="single">
                 <h1>10 Comments</h1>
