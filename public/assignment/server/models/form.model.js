@@ -273,16 +273,29 @@ module.exports = function(db, mongoose) {
         return deferred.promise;
     }
 
-    // leave it here for further confirmation
     function updateFieldsForForm(formId, fields) {
-        var form = findFormById(formId);
-        var newForm = {
-            _id: form._id,
-            title: form.title,
-            userId: form.userId,
-            fields: fields
-        };
-        return updateFormById(formId, newForm);
+        var deferred = q.defer();
+
+        FormModel
+            .update(
+                {
+                    _id: formId
+                },
+                {
+                    $set: {
+                        fields: fields
+                    }
+                },
+                function(err, doc) {
+                    if (err) {
+                        deferred.reject(err);
+                    } else {
+                        deferred.resolve(doc);
+                    }
+                }
+            );
+
+        return deferred.promise;
     }
 
 };

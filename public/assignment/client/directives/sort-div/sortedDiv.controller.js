@@ -3,9 +3,16 @@
         .module("FormBuilderApp")
         .directive("sortedDiv", sortedDiv);
 
-    function sortedDiv() {
+    function sortedDiv($routeParams, FieldsService) {
         var start = null;
         var end = null;
+        var formId = null;
+
+        function init() {
+            formId = $routeParams.formId;
+        }
+        init();
+
         function link (scope, element, attrs) {
             element = $(element);
             element.sortable({
@@ -17,6 +24,15 @@
                     end = ui.item.index();
                     scope.data.splice(end, 0, scope.data.splice(start, 1)[0]);
                     scope.$apply();
+                    // achieve the new formId
+                    init();
+                    FieldsService
+                        .updateFields(formId, scope.data)
+                        .then(
+                            function(response) {
+                                // do nothing here
+                            }
+                        );
                 }
             });
         }
