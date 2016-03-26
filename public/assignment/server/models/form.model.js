@@ -220,9 +220,7 @@ module.exports = function(db, mongoose) {
                     _id: formId
                 },
                 {
-                    $pull: {
-                        fields: {$elemMatch: {_id: fieldId}}
-                    }
+                    $pull: {fields: {_id: fieldId}}
                 },
                 function(err, doc) {
                     if (err) {

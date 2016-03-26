@@ -30,8 +30,24 @@ module.exports = function (app, userModel, formModel) {
     function deleteFieldByFieldIdAndFormId(req, res) {
         var formId = req.params.formId;
         var fieldId = req.params.fieldId;
-        var field = formModel.deleteFieldByFieldIdAndFormId(formId, fieldId);
-        res.json(formModel.findAllFieldsById(formId));
+        formModel
+            .deleteFieldByFieldIdAndFormId(formId, fieldId)
+            .then(
+                function(doc) {
+                    return formModel.findAllFieldsById(formId);
+                },
+                function(err) {
+                    res.status(400).send(err);
+                }
+            )
+            .then(
+                function(fields) {
+                    res.json(fields);
+                },
+                function(err) {
+                    res.status(400).send(err);
+                }
+            );
     }
 
     function createFieldForForm(req, res) {
