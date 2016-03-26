@@ -18,7 +18,6 @@ module.exports = function(db, mongoose) {
         updateFormById: updateFormById,
         findFormByTitle: findFormByTitle,
         findAllFieldsById: findAllFieldsById,
-        findFieldByFieldIdAndFormId: findFieldByFieldIdAndFormId,
         deleteFieldByFieldIdAndFormId: deleteFieldByFieldIdAndFormId,
         createFieldForForm: createFieldForForm,
         updateFieldForForm: updateFieldForForm,
