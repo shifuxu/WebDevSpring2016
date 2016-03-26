@@ -15,7 +15,8 @@
             setCurrentUser: setCurrentUser,
             getCurrentUser: getCurrentUser,
             logout: logout,
-            getProfile: getProfile
+            getProfile: getProfile,
+            getUpdatedCurrentUser: getUpdatedCurrentUser
         };
 
         return service;
@@ -58,6 +59,10 @@
 
         function getProfile() {
             return $http.get("/api/project/omdb/profile/" + $rootScope.currentUser._id);
+        }
+
+        function getUpdatedCurrentUser(userId) {
+            return $http.get("/api/project/omdb/loggedin/" + userId);
         }
     }
 })();

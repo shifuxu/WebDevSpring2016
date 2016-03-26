@@ -25,7 +25,6 @@
                     var userTemp = response.data;
                     if (userTemp) {
                         UserService.setCurrentUser(userTemp);
-                        console.log(userTemp.role);
                         if (userTemp.role == "admin") {
                             $location.url("/admin");
                         } else {

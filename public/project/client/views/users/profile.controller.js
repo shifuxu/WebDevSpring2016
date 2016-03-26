@@ -36,10 +36,13 @@
                     var userTemp = response.data;
                     if (userTemp) {
                         vm.message = "User update successfully";
-                        UserService.setCurrentUser(userTemp);
+                        return UserService.getUpdatedCurrentUser(vm.currentUser._id);
                     } else {
                         vm.error = "Unable to update the user";
                     }
+                })
+                .then(function(response) {
+                    // do nothing here
                 });
         }
     }

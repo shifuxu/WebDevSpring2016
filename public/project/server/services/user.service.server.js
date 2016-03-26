@@ -3,6 +3,7 @@ module.exports = function(app, movieModel, userModel) {
     app.get("/api/project/omdb/user/:username", findUserByUsername);
     app.get("/api/project/omdb/profile/:userId", profile);
     app.get("/api/project/omdb/user", findAllUsers);
+    app.get("/api/project/omdb/loggedin/:userId", getUpdatedCurrentUser);
     app.post("/api/project/omdb/login", login);
     app.post("/api/project/omdb/logout", logout);
     app.post("/api/project/omdb/register", register);
@@ -62,5 +63,12 @@ module.exports = function(app, movieModel, userModel) {
 
     function findAllUsers(req, res) {
         res.json(userModel.findAllUsers())
+    }
+
+    function getUpdatedCurrentUser(req, res) {
+        var userId = req.params.userId;
+        var user = userModel.findUserById(userId);
+        req.session.currentUser = user;
+        res.json(user);
     }
 };

@@ -7,7 +7,6 @@ module.exports = function(app, movieModel, userModel) {
         var movie = movieModel.findMovieByImdbID(imdbID);
         if(movie) {
             var userLikes = movie.likes;
-            console.log(userLikes);
             var users = userModel.findUsersByIds(userLikes);
             movie.userLikes = users;
         }
