@@ -20,6 +20,8 @@
                 .getFieldsForForm(formId)
                 .then(function(response) {
                     var fields = response.data;
+                    console.log("init");
+                    console.log(fields);
                     if (fields) {
                         vm.fields = fields;
                     }

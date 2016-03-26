@@ -240,7 +240,21 @@ module.exports = function(db, mongoose) {
         var deferred = q.defer();
 
         FormModel
-            .create();
+            .update(
+                {
+                    _id: formId
+                },
+                {
+                    $push: {fields: field}
+                },
+                function(err, doc) {
+                    if (err) {
+                        deferred.reject(err);
+                    } else {
+                        deferred.resolve(doc);
+                    }
+                }
+            );
 
         return deferred.promise;
         //var newField = {
