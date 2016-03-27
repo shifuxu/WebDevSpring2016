@@ -34,7 +34,7 @@
             .when("/home", {
                 templateUrl: "views/home/home.view.html",
                 controller: "HomeController",
-                controllerAs: "model",
+                controllerAs: "model"
             })
             .when("/search", {
                 templateUrl: "views/search/search.view.html",
@@ -59,6 +59,14 @@
                 resolve: {
                     getLoggedIn: getLoggedIn
                 }
+            })
+            .when("/others/:username", {
+                templateUrl: "views/users/others.view.html",
+                controller: "OthersController",
+                controllerAs: "model",
+                //resolve: {
+                //    checkLoggedIn: checkLoggedIn
+                //}
             })
             .otherwise("/home")
     }

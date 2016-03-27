@@ -27,13 +27,18 @@
                     Profile
                 </a>
             </li>
+            <li ng-show="model.$location.url().indexOf('/others') >= 0">
+                <a ng-class="{'active': model.$location.url().indexOf('/others') >= 0}">
+                    Others
+                </a>
+            </li>
             <li ng-show="currentUser"><a ng-click="model.logout()">Logout</a></li>
             <li><a href="#/search" ng-class="{'active': model.$location.url().indexOf('/search') >= 0}">
                     Search
                 </a>
             </li>
-            <li ng-show="model.$location.url().indexOf('/details')>=0">
-                <a ng-class="{'active': model.$location.url().indexOf('/details')>=0}">
+            <li ng-show="model.$location.url().indexOf('/details') >= 0">
+                <a ng-class="{'active': model.$location.url().indexOf('/details') >= 0}">
                     Details
                 </a>
             </li>
