@@ -44,6 +44,18 @@
                     "type": "TEXTAREA",
                     "placeholder": "New Field"
                 },
+                "email": {
+                    "id": null,
+                    "label": "New Email Field",
+                    "type": "EMAIL",
+                    "placeholder": "New Field"
+                },
+                "password": {
+                    "id": null,
+                    "label": "New Password Field",
+                    "type": "PASSWORD",
+                    "placeholder": "New Field"
+                },
                 "date": {
                     "id": null,
                     "label": "New Date Field",
@@ -164,7 +176,7 @@
                 return ;
             }
 
-            if ((type == "TEXT" || type == "TEXTAREA") && !field.placeholder) {
+            if ((type == "TEXT" || type == "TEXTAREA" || type == "EMAIL" || type == "PASSWORD") && !field.placeholder) {
                 vm.message = "The placeholder can not be empty";
                 return ;
             }

@@ -7,6 +7,8 @@ module.exports = function(mongoose) {
             firstName: String,
             lastName: String,
             email: String,
+            //email: [String],
+            //phones: [String],
             roles: [String]
         }, {collection: 'assignment.formbuilder.user'});
 

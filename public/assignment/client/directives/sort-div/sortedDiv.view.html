@@ -15,9 +15,17 @@
             </div>
             <div ng-switch-when="EMAIL" class="form-group">
                 <label>{{field.label}}</label>
-                <input class="form-control"
-                       type="email"
-                       placeholder="{{field.placeholder}}"/>
+                        <input class="form-control"
+                               type="email"
+                               placeholder="{{field.placeholder}}">
+                        </input>
+            </div>
+            <div ng-switch-when="PASSWORD" class="form-group">
+                <label>{{field.label}}</label>
+                        <input class="form-control"
+                               type="password"
+                               placeholder="{{field.placeholder}}">
+                        </input>
             </div>
             <div ng-switch-when="OPTIONS" class="form-group">
                 <label>{{field.label}}</label>

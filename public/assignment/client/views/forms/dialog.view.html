@@ -2,6 +2,8 @@
     <div class="modal-header">
         <h3 ng-if="model.type == 'TEXT'" class="modal-title">Single Line Field</h3>
         <h3 ng-if="model.type == 'TEXTAREA'" class="modal-title">Multiples Lines Field</h3>
+        <h3 ng-if="model.type == 'EMAIL'" class="modal-title">Email Field</h3>
+        <h3 ng-if="model.type == 'PASSWORD'" class="modal-title">Password Field</h3>
         <h3 ng-if="model.type == 'DATE'" class="modal-title">Date Field</h3>
         <h3 ng-if="model.type == 'OPTIONS'" class="modal-title">Dropdown Field</h3>
         <h3 ng-if="model.type == 'CHECKBOXES'" class="modal-title">Checkbox Field</h3>
@@ -13,7 +15,7 @@
             <label class="control-label">Label</label>
             <input class="form-control" ng-model="model.field.label">
         </div>
-        <div ng-if="model.type == 'TEXT' || model.type == 'TEXTAREA'"
+        <div ng-if="model.type == 'TEXT' || model.type == 'TEXTAREA' || model.type == 'EMAIL' || model.type == 'PASSWORD'"
              class="form-group">
             <label class="control-label">Placeholder</label>
             <input class="form-control" ng-model="model.field.placeholder">
