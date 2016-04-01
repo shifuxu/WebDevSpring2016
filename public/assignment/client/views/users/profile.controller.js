@@ -23,6 +23,24 @@
         init();
 
         function update(user) {
+            var emails = [];
+            var phones = [];
+
+            if (user.emails instanceof Array) {
+                emails = user.emails;
+            } else if (user.emails != "") {
+                emails = user.emails.split(',');
+            }
+
+            if (user.phones instanceof Array) {
+                phones = user.phones;
+            } else if (user.phones != "") {
+                phones = user.phones.split(',');
+            }
+
+            user.emails = emails;
+            user.phones = phones;
+
             UserService
                 .updateUser(vm.currentUser._id, user)
                 .then(function(response) {

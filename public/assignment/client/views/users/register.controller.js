@@ -15,6 +15,8 @@
         init();
 
         function register(user) {
+            var emails = [];
+
             if (user == null) {
                 vm.message = "Please fill in the required fields";
                 return ;
@@ -31,10 +33,20 @@
                 vm.message = "Passwords must match";
                 return ;
             }
-            if (!user.email) {
+            if (!user.emails) {
                 vm.message = "Please provide a email address";
                 return ;
             }
+            if (user.emails.indexOf('@') < 0) {
+                vm.message = "Email address mush provide @";
+                return ;
+            }
+
+            if (user.emails != "") {
+                emails = user.emails.split(',');
+            }
+
+            user.emails = emails;
 
             UserService
                 .findUserByUsername(user.username)
