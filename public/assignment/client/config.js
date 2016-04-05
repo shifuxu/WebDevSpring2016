@@ -26,14 +26,11 @@
             .when("/admin", {
                 templateUrl: "views/admin/admin.view.html",
                 resolve: {
-                    checkLoggedIn: checkLoggedIn
+                    checkAdmin: checkAdmin
                 }
             })
             .when("/home", {
-                templateUrl: "views/home/home.view.html",
-                resolve: {
-                    getLoggedIn: getLoggedIn
-                }
+                templateUrl: "views/home/home.view.html"
             })
             .when("/forms", {
                 templateUrl: "views/forms/forms.view.html",
@@ -54,30 +51,34 @@
             .otherwise("/home")
     }
 
-    function getLoggedIn(UserService, $q) {
-        var deferred = $q.defer();
-
-        UserService
-            .getCurrentUser()
-            .then(function(response){
-                var currentUser = response.data;
-                UserService.setCurrentUser(currentUser);
-                deferred.resolve();
-            });
-
-        return deferred.promise;
-    }
-
     function checkLoggedIn(UserService, $q, $location) {
-
         var deferred = $q.defer();
 
         UserService
             .getCurrentUser()
             .then(function(response) {
-                var currentUser = response.data;
-                if(currentUser) {
-                    UserService.setCurrentUser(currentUser);
+                var user = response.data;
+                if(user != '0') {
+                    UserService.setCurrentUser(user);
+                    deferred.resolve();
+                } else {
+                    deferred.reject();
+                    $location.url("/home");
+                }
+            });
+
+        return deferred.promise;
+    }
+
+    function checkAdmin(UserService, $q, $location) {
+        var deferred = $q.defer();
+
+        UserService
+            .getCurrentUser()
+            .then(function(response) {
+                var user = response.data;
+                if (user != '0' && user.roles.indexOf('admin') != -1) {
+                    UserService.setCurrentUser(user);
                     deferred.resolve();
                 } else {
                     deferred.reject();
