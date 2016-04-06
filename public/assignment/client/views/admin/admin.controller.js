@@ -82,7 +82,9 @@
         }
 
         function updateUser(user) {
-            convertToArray(user);
+            if (!user.roles instanceof Array) {
+                convertToArray(user);
+            }
             if (selectedUserId) {
                 UserService
                     .updateUserByIdFromAdmin(selectedUserId, user)
