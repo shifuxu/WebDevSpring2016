@@ -2,7 +2,7 @@
     <h1 class="page-header">Admin</h1>
     <h3>Users</h3>
     <div class="table-responsive">
-        <table class="table table-striped">
+        <table class="table table-striped table-condensed">
             <thead>
                 <tr>
                     <th>
@@ -53,10 +53,11 @@
                     </td>
                     <td>
                         <div>
-                            <button class="btn btn-primary pull-middle" ng-click="model.addUser(model.user)">
+                            <button style="float: left;"
+                                    class="btn btn-primary" ng-click="model.addUser(model.user)">
                                 <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
                             </button>
-                            <button class="btn btn-success pull-middle" ng-click="model.updateUser(model.user)">
+                            <button class="btn btn-success" ng-click="model.updateUser(model.user)">
                                 <span class="glyphicon glyphicon-ok" aria-hidden="true"></span>
                             </button>
                         </div>
@@ -69,7 +70,6 @@
                         {{user.username}}
                     </td>
                     <td>
-
                     </td>
                     <td>
                         {{user.firstName}}
@@ -82,10 +82,11 @@
                     </td>
                     <td>
                         <div>
-                            <button class="btn btn-danger pull-middle" ng-click="model.deleteUser($index)">
+                            <button style="float: left;"
+                                    class="btn btn-danger" ng-click="model.deleteUser($index)">
                                 <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
                             </button>
-                            <button class="btn btn-warning pull-middle" ng-click="model.selectUser($index)">
+                            <button class="btn btn-warning" ng-click="model.selectUser($index)">
                                 <span class="glyphicon glyphicon-cog" aria-hidden="true"></span>
                             </button>
                         </div>
