@@ -218,7 +218,6 @@ module.exports = function(app, userModel) {
             .findUserById(id)
             .then(
                 function(doc) {
-                    // req.user = doc;
                     res.json(doc);
                 },
                 function(err) {

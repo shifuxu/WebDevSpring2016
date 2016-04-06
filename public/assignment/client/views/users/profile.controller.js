@@ -17,29 +17,46 @@
                     var currentUser = response.data;
                     if (currentUser) {
                         vm.currentUser = currentUser;
+                        vm.currentUser.emails = convertToString(vm.currentUser.emails);
+                        vm.currentUser.phones = convertToString(vm.currentUser.phones);
                     }
                 });
         }
         init();
 
+        function convertToString(arr) {
+            var str = "";
+            for (var i in arr) {
+                str += arr[i] + ",";
+            }
+            var len = str.length;
+            if (len != 0) {
+                return str.substring(0, len - 1);
+            } else {
+                return str;
+            }
+        }
+
+        function convertToArray(str) {
+            var arr = [];
+            if (str.length != 0) {
+                arr = str.split(",");
+            }
+            return arr;
+        }
+
         function update(user) {
-            var emails = [];
-            var phones = [];
-
-            if (user.emails instanceof Array) {
-                emails = user.emails;
-            } else if (user.emails != "") {
-                emails = user.emails.split(',');
+            if (typeof user.emails != "undefined") {
+                user.emails = convertToArray(user.emails);
+            } else {
+                user.emails = [];
             }
 
-            if (user.phones instanceof Array) {
-                phones = user.phones;
-            } else if (user.phones != "") {
-                phones = user.phones.split(',');
+            if (typeof user.phones != "undefined") {
+                user.phones = convertToArray(user.phones);
+            } else {
+                user.phones = [];
             }
-
-            user.emails = emails;
-            user.phones = phones;
 
             UserService
                 .updateUser(vm.currentUser._id, user)
@@ -53,7 +70,10 @@
                     }
                 })
                 .then(function(response) {
-                    // do nothing here
+                    var currentUser = response.data;
+                    vm.currentUser = currentUser;
+                    vm.currentUser.emails = convertToString(vm.currentUser.emails);
+                    vm.currentUser.phones = convertToString(vm.currentUser.phones);
                 });
         }
     }
