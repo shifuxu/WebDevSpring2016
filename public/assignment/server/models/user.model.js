@@ -143,7 +143,8 @@ module.exports = function (db, mongoose) {
                     firstName: user.firstName,
                     lastName: user.lastName,
                     emails: user.emails,
-                    phones: user.phones
+                    phones: user.phones,
+                    roles: user.roles
                 }
             },
             function(err, doc) {

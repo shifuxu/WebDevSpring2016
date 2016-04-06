@@ -7,16 +7,18 @@
 
         var service = {
             findUserByCredentials: findUserByCredentials,
-            findUserById: findUserById,
             findUserByUsername: findUserByUsername,
-            findAllUsers: findAllUsers,
+            findAllUsersFromAdmin: findAllUsersFromAdmin,
             createUser: createUser,
-            deleteUserById: deleteUserById,
+            deleteUserByIdFromAdmin: deleteUserByIdFromAdmin,
             updateUser: updateUser,
             setCurrentUser: setCurrentUser,
             logout: logout,
             getCurrentUser: getCurrentUser,
-            getUpdatedCurrentUser: getUpdatedCurrentUser
+            getUpdatedCurrentUser: getUpdatedCurrentUser,
+            createUserFromAdmin: createUserFromAdmin,
+            findUserByIdFromAdmin: findUserByIdFromAdmin,
+            updateUserByIdFromAdmin: updateUserByIdFromAdmin
         };
 
         return service;
@@ -29,24 +31,32 @@
             return $http.post("/api/assignment/login", credentials);
         }
 
-        function findUserById(userId) {
-            return $http.get("/api/assignment/user/" + userId);
-        }
-
         function findUserByUsername(username) {
             return $http.get("/api/assignment/user/" + username);
         }
 
-        function findAllUsers() {
-            return $http.get("/api/assignment/user");
+        function findAllUsersFromAdmin() {
+            return $http.get("/api/assignment/admin/user");
         }
 
         function createUser(user) {
             return $http.post("/api/assignment/user", user);
         }
 
-        function deleteUserById(userId) {
-            return $http.delete("/api/assignment/user/" + userId);
+        function createUserFromAdmin(user) {
+            return $http.post("/api/assignment/admin/user", user);
+        }
+
+        function findUserByIdFromAdmin(userId) {
+            return $http.get("/api/assignment/admin/user/" + userId);
+        }
+
+        function deleteUserByIdFromAdmin(userId) {
+            return $http.delete("/api/assignment/admin/user/" + userId);
+        }
+
+        function updateUserByIdFromAdmin(userId, user) {
+            return $http.put("/api/assignment/admin/user/" + userId, user);
         }
 
         function updateUser(userId, user) {
