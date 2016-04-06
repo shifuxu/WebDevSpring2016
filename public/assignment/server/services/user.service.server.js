@@ -81,7 +81,7 @@ module.exports = function(app, userModel) {
 
     function createUser(req, res) {
         var user = req.body;
-        user.roles = ["student", "admin"];
+        user.roles = ["student"];
         userModel
             .createUser(user)
             .then(
