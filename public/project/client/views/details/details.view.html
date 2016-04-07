@@ -17,7 +17,11 @@
                 <p class="movie_option"><strong>Director: </strong>{{model.movie.Director}}</p>
                 <p class="movie_option"><strong>Actors: </strong>{{model.movie.Actors}}</p>
                 <p class="movie_option"><strong>Runtime: </strong>{{model.movie.Runtime}}</p>
-                <p class="movie_option" style="float: left;"><strong>Like then click here</strong></p>
+                <p ng-if="currentUser"
+                   class="movie_option"
+                   style="float: left;">
+                    <strong>Like then click here</strong>
+                </p>
                 <button ng-if="currentUser"
                         class="btn btn-danger"
                         ng-click="model.favorite(model.movie)"
