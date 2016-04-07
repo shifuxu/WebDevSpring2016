@@ -6,15 +6,39 @@
             <thead>
                 <tr>
                     <th>
+                        <a ng-hide="model.showDscendUsername"
+                           ng-click="model.sortAscend(model.username)"
+                           class="glyphicon glyphicon-triangle-top">
+                        </a>
+                        <a ng-show="model.showDscendUsername"
+                           ng-click="model.sortDescend(model.username)"
+                           class="glyphicon glyphicon-triangle-bottom">
+                        </a>
                         Username
                     </th>
                     <th>
                         Password
                     </th>
                     <th>
+                        <a ng-hide="model.showDscendFirstName"
+                           ng-click="model.sortAscend(model.firstName)"
+                           class="glyphicon glyphicon-triangle-top">
+                        </a>
+                        <a ng-show="model.showDscendFirstName"
+                           ng-click="model.sortDescend(model.firstName)"
+                           class="glyphicon glyphicon-triangle-bottom">
+                        </a>
                         First Name
                     </th>
                     <th>
+                        <a ng-hide="model.showDscendLastName"
+                           ng-click="model.sortAscend(model.lastName)"
+                           class="glyphicon glyphicon-triangle-top">
+                        </a>
+                        <a ng-show="model.showDscendLastName"
+                           ng-click="model.sortDescend(model.lastName)"
+                           class="glyphicon glyphicon-triangle-bottom">
+                        </a>
                         Last Name
                     </th>
                     <th>
@@ -65,7 +89,7 @@
                 </tr>
             </thead>
             <tbody>
-                <tr ng-repeat="user in model.users">
+                <tr ng-repeat="user in model.users | orderBy: model.type">
                     <td>
                         {{user.username}}
                     </td>
@@ -83,10 +107,10 @@
                     <td>
                         <div>
                             <button style="float: left;"
-                                    class="btn btn-danger" ng-click="model.deleteUser($index)">
+                                    class="btn btn-danger" ng-click="model.deleteUser(user)">
                                 <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
                             </button>
-                            <button class="btn btn-warning" ng-click="model.selectUser($index)">
+                            <button class="btn btn-warning" ng-click="model.selectUser(user)">
                                 <span class="glyphicon glyphicon-cog" aria-hidden="true"></span>
                             </button>
                         </div>

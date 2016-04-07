@@ -8,10 +8,20 @@
         var selectedUserId = null;
 
         vm.users = null;
+        vm.type = '';
+        vm.showDscendUsername = true;
+        vm.showDscendFirstName = true;
+        vm.showDscendLastName = true;
+        vm.username = "username";
+        vm.firstName = "firstName";
+        vm.lastName = "lastName";
+
         vm.addUser = addUser;
         vm.updateUser = updateUser;
         vm.selectUser = selectUser;
         vm.deleteUser = deleteUser;
+        vm.sortAscend = sortAscend;
+        vm.sortDescend = sortDescend;
 
         function init() {
             UserService
@@ -25,6 +35,28 @@
                 });
         }
         init();
+
+        function sortAscend(type) {
+            vm.type = type;
+            if (type == "username") {
+                vm.showDscendUsername = true;
+            } else if (type == "firstName") {
+                vm.showDscendFirstName = true;
+            } else if (type == "lastName") {
+                vm.showDscendLastName = true;
+            }
+        }
+
+        function sortDescend(type) {
+            vm.type = "-" + type;
+            if (type == "username") {
+                vm.showDscendUsername = false;
+            } else if (type == "firstName") {
+                vm.showDscendFirstName = false;
+            } else if (type == "lastName") {
+                vm.showDscendLastName = false;
+            }
+        }
 
         function convertToStrings(users) {
             for (var u in users) {
@@ -102,8 +134,16 @@
             }
         }
 
-        function selectUser(index) {
+        function selectUser(user) {
+            // find user id from vm.users
+            var index = null;
+            for (var u in vm.users) {
+                if (vm.users[u].username == user.username) {
+                    index = u;
+                }
+            }
             selectedUserId = vm.users[index]._id;
+
             UserService
                 .findUserByIdFromAdmin(selectedUserId)
                 .then(function(response) {
@@ -120,8 +160,16 @@
                 });
         }
 
-        function deleteUser(index) {
+        function deleteUser(user) {
+            // find user id from vm.users
+            var index = null;
+            for (var u in vm.users) {
+                if (vm.users[u].username == user.username) {
+                    index = u;
+                }
+            }
             selectedUserId = vm.users[index]._id;
+
             UserService
                 .deleteUserByIdFromAdmin(selectedUserId)
                 .then(function() {
