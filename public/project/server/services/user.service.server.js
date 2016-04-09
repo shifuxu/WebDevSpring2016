@@ -12,25 +12,63 @@ module.exports = function(app, movieModel, userModel) {
 
     function profile(req, res) {
         var userId = req.params.userId;
-        var user = userModel.findUserById(userId);
-        var movieImdbIDs = user.likes;
-        var movies = movieModel.findMoviesByImdbIDs(movieImdbIDs);
-        user.likesMovies = movies;
-        res.json(user);
+        var user = null;
+
+        userModel
+            .findUserById(userId)
+            .then(
+                function(doc) {
+                    user = doc;
+                    return movieModel.findMoviesByImdbIDs(user.likes);
+                },
+                function(err) {
+                    res.status(400).send(err);
+                }
+            )
+            .then(
+                // fetch movies this user likes
+                function(movies) {
+                    // list of movies this user likes
+                    user.likesMovies = movies;
+                    res.json(user);
+                },
+                function(err) {
+                    res.status(400).send(err);
+                }
+            );
     }
 
     function register(req, res) {
         var user = req.body;
-        user = userModel.createUser(user);
-        req.session.currentUser = user;
-        res.json(user);
+        // set default role as admin for testing
+        user.role = "admin";
+
+        userModel
+            .createUser(user)
+            .then(
+                function(user) {
+                    req.session.currentUser = user;
+                    res.json(user);
+                },
+                function(err) {
+                    res.status(400).send(err);
+                }
+            );
     }
 
     function login(req, res) {
         var credentials = req.body;
-        var user = userModel.findUserByCredentials(credentials);
-        req.session.currentUser = user;
-        res.json(user);
+        userModel
+            .findUserByCredentials(credentials)
+            .then(
+                function(user) {
+                    req.session.currentUser = user;
+                    res.json(user);
+                },
+                function(err) {
+                    res.status(400).send(err);
+                }
+            );
     }
 
     function loggedin(req, res) {
@@ -43,32 +81,72 @@ module.exports = function(app, movieModel, userModel) {
     }
 
     function updateUser(req, res) {
-        var userId = Number(req.params.userId);
+        var userId = req.params.userId;
         var user = req.body;
-        var userTemp = userModel.updateUser(userId, user);
-        res.json(userTemp);
+        userModel
+            .updateUser(userId, user)
+            .then(
+                function(user) {
+                    res.json(user);
+                }, function(err) {
+                    res.status(400).send(err);
+                }
+            );
     }
 
     function findUserByUsername(req, res) {
         var username = req.params.username;
-        var user = userModel.findUserByUsername(username);
-        res.json(user);
+        userModel
+            .findUserByUsername(username)
+            .then(
+                function(user) {
+                    res.json(user);
+                },
+                function(err) {
+                    res.status(400).send(err);
+                }
+            );
     }
 
     function deleteUserById(req, res) {
         var userId= req.params.userId;
-        var user = userModel.deleteUserById(userId);
-        res.json(user);
+        userModel
+            .deleteUserById(userId)
+            .then(
+                function(doc) {
+                    res.send(200);
+                },
+                function (err) {
+                    res.status(400).send(err);
+                }
+            );
     }
 
     function findAllUsers(req, res) {
-        res.json(userModel.findAllUsers())
+        userModel
+            .findAllUsers()
+            .then(
+                function(users) {
+                    res.json(users);
+                },
+                function(err) {
+                    res.status(400).send(err);
+                }
+            );
     }
 
     function getUpdatedCurrentUser(req, res) {
         var userId = req.params.userId;
-        var user = userModel.findUserById(userId);
-        req.session.currentUser = user;
-        res.json(user);
+        userModel
+            .findUserById(userId)
+            .then(
+                function(user) {
+                    req.session.currentUser = user;
+                    res.json(user);
+                },
+                function(err) {
+                    res.status(400).send(err);
+                }
+            );
     }
 };
