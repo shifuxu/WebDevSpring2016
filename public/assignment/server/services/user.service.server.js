@@ -87,7 +87,7 @@ module.exports = function(app, userModel) {
         var user = req.body;
         // encode the password for user
         // user.password = bcrypt.hashSync(user.password);
-        user.roles = ["student", "admin"];
+        user.roles = ["student"];
         userModel
             .createUser(user)
             .then(
