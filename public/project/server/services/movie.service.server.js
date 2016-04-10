@@ -4,33 +4,55 @@ module.exports = function(app, movieModel, userModel) {
 
     function findUserLikes (req, res) {
         var imdbID = req.params.imdbID;
-        var movie = movieModel.findMovieByImdbID(imdbID);
-        if(movie) {
-            var userLikes = movie.likes;
-            var users = userModel.findUsersByIds(userLikes);
-            movie.userLikes = users;
-        }
-        res.json(movie);
+        var movie = null;
+
+        movieModel
+            .findMovieByImdbID(imdbID)
+            .then(
+                function(doc) {
+                    movie = doc;
+                    if (movie) {
+                        return userModel.findUsersByIds(movie.likes);
+                    } else {
+                        res.json([]);
+                    }
+                },
+                function(err) {
+                    res.status(400).send(err);
+                }
+            )
+            .then(
+                function(users) {
+                    res.json(users);
+                },
+                function(err) {
+                    res.status(400).send(err);
+                }
+            );
     }
 
     function userLikesMovie(req, res) {
         var movieOmdb  = req.body;
         var userId = req.params.userId;
         var imdbID = req.params.imdbID;
-        var movie = movieModel.findMovieByImdbID(imdbID);
-        if(!movie) {
-            movie = movieModel.createMovie(movieOmdb);
-        }
-        if(!movie.likes) {
-            movie.likes = [];
-        }
-        movie.likes.push(userId);
-
-        var user = userModel.findUserById(userId);
-        if(!user.likes) {
-            user.likes = [];
-        }
-        user.likes.push(imdbID);
-        res.send(200);
+        var movie = null;
+        movieModel
+            .userLikesMovie(userId, movieOmdb)
+            .then(
+                function(movie) {
+                    return userModel.userLikesMovie(userId, movie)
+                },
+                function(err) {
+                    res.status(400).send(err);
+                }
+            )
+            .then(
+                function(user) {
+                    res.json(user);
+                },
+                function(err) {
+                    res.status(400).send(err);
+                }
+            );
     }
 };

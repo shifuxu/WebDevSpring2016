@@ -17,9 +17,39 @@ module.exports = function(db, mongoose) {
         findUsersByIds: findUsersByIds,
         updateUser: updateUser,
         deleteUserById: deleteUserById,
-        findAllUsers: findAllUsers
+        findAllUsers: findAllUsers,
+        userLikesMovie: userLikesMovie
     };
     return api;
+
+    function userLikesMovie(userId, movie) {
+        var deferred = q.defer();
+
+        UserModel
+            .findById(
+                userId,
+                function(err, doc) {
+                    if (err) {
+                        deferred.reject(err);
+                    } else {
+                        // add movie id to user likes
+                        doc.likes.push(movie.imdbID);
+                        // save docs
+                        doc.save(
+                            function(err, doc) {
+                                if (err) {
+                                    deferred.reject(err);
+                                } else {
+                                    deferred.resolve(doc);
+                                }
+                            }
+                        );
+                    }
+                }
+            );
+
+        return deferred.promise;
+    }
 
     function findUsersByIds (userIds) {
         var deferred = q.defer();

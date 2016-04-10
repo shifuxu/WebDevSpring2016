@@ -29,9 +29,9 @@
                 });
 
             MovieService
-                .findUserLikes (vm.imdbID)
+                .findUserLikes(vm.imdbID)
                 .then(function(response){
-                    vm.data = response.data;
+                    vm.users = response.data;
                 });
         }
         init();

@@ -47,10 +47,10 @@
                 <div class="clearfix"></div>
             </form>
             <div class="clearfix"></div>
-            <div ng-if="model.data.userLikes" class="single">
-                <h1>Other Users that Like This Movie</h1>
+            <div ng-if="currentUser" class="single">
+                <h1 ng-show="model.users.length != 0">Other Users that Like This Movie</h1>
                 <ul>
-                    <li ng-repeat="user in model.data.userLikes" style="font-size: 25px;">
+                    <li ng-repeat="user in model.users" style="font-size: 25px;">
                         <a href="#/others/{{user.username}}">
                             {{user.username}}
                         </a>
@@ -116,28 +116,13 @@
         <div class="col-md-3">
             <div class="movie_img"><div class="grid_2">
                 <img src="images/pic6.jpg" class="img-responsive" alt="">
-                <div class="caption1">
-                    <ul class="list_5 list_7">
-                        <li><i class="icon5"></i><p>3,548</p></li>
-                    </ul>
-                </div>
             </div>
             </div>
             <div class="grid_2 col_1">
                 <img src="images/pic7.jpg" class="img-responsive" alt="">
-                <div class="caption1">
-                    <ul class="list_3 list_7">
-                        <li><i class="icon5"> </i><p>2,000</p></li>
-                    </ul>
-                </div>
             </div>
             <div class="grid_2 col_1">
                 <img src="images/pic9.jpg" class="img-responsive" alt="">
-                <div class="caption1">
-                    <ul class="list_3 list_7">
-                        <li><i class="icon5"> </i><p>4,228</p></li>
-                    </ul>
-                </div>
             </div>
         </div>
         <div class="clearfix"> </div>
