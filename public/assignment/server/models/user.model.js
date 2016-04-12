@@ -134,27 +134,50 @@ module.exports = function (db, mongoose) {
     function updateUserById(userId, user) {
         var deferred = q.defer();
 
-        UserModel.update(
-            {_id: userId},
-            {
-                $set: {
-                    username: user.username,
-                    password: user.password,
-                    firstName: user.firstName,
-                    lastName: user.lastName,
-                    emails: user.emails,
-                    phones: user.phones,
-                    roles: user.roles
+        if (user.password != null && user.password != "" && typeof user.password != "undefined") {
+            UserModel.update(
+                {_id: userId},
+                {
+                    $set: {
+                        username: user.username,
+                        password: user.password,
+                        firstName: user.firstName,
+                        lastName: user.lastName,
+                        emails: user.emails,
+                        phones: user.phones,
+                        roles: user.roles
+                    }
+                },
+                function (err, doc) {
+                    if (err) {
+                        deferred.reject(err);
+                    } else {
+                        deferred.resolve(doc);
+                    }
                 }
-            },
-            function(err, doc) {
-                if (err) {
-                    deferred.reject(err);
-                } else {
-                    deferred.resolve(doc);
+            );
+        } else {
+            UserModel.update(
+                {_id: userId},
+                {
+                    $set: {
+                        username: user.username,
+                        firstName: user.firstName,
+                        lastName: user.lastName,
+                        emails: user.emails,
+                        phones: user.phones,
+                        roles: user.roles
+                    }
+                },
+                function (err, doc) {
+                    if (err) {
+                        deferred.reject(err);
+                    } else {
+                        deferred.resolve(doc);
+                    }
                 }
-            }
-        );
+            );
+        }
 
         return deferred.promise;
     }

@@ -114,9 +114,10 @@
         }
 
         function updateUser(user) {
-            if (!user.roles instanceof Array) {
+            if (typeof user.roles == 'string') {
                 convertToArray(user);
             }
+
             if (selectedUserId) {
                 UserService
                     .updateUserByIdFromAdmin(selectedUserId, user)
@@ -150,13 +151,14 @@
                     var user = response.data;
                     vm.user = {
                         username: user.username,
-                        password: user.password,
+                        // clear the password
+                        password: null,
                         firstName: user.firstName,
                         lastName: user.lastName,
                         emails: user.emails,
                         phones: user.phones,
                         roles: convertToString(user.roles)
-                    }
+                    };
                 });
         }
 

@@ -17,6 +17,8 @@
                     var currentUser = response.data;
                     if (currentUser) {
                         vm.currentUser = currentUser;
+                        // clear the password here
+                        vm.currentUser.password = null;
                         vm.currentUser.emails = convertToString(vm.currentUser.emails);
                         vm.currentUser.phones = convertToString(vm.currentUser.phones);
                     }
@@ -72,6 +74,8 @@
                 .then(function(response) {
                     var currentUser = response.data;
                     vm.currentUser = currentUser;
+                    // clear the password field
+                    vm.currentUser.password = null;
                     vm.currentUser.emails = convertToString(vm.currentUser.emails);
                     vm.currentUser.phones = convertToString(vm.currentUser.phones);
                 });

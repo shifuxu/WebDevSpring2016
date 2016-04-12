@@ -27,12 +27,11 @@ module.exports = function(app, userModel) {
     // implement local strategy
     function localStrategy(username, password, done) {
         userModel
-            .findUserByCredentials({username: username, password: password})
+            .findUserByUsername(username)
             .then(
                 function(user) {
                     // if user exists, compare passwords with bcrypt.compareSync
-                    // if (user && bcrypt.compareSync(password, user.password)) {
-                    if (user) {
+                    if (user && bcrypt.compareSync(password, user.password)) {
                         return done(null, user);
                     } else {
                         return done(null, false);
@@ -86,8 +85,8 @@ module.exports = function(app, userModel) {
     function createUser(req, res) {
         var user = req.body;
         // encode the password for user
-        // user.password = bcrypt.hashSync(user.password);
-        user.roles = ["student"];
+        user.password = bcrypt.hashSync(user.password);
+        user.roles = ["student", "admin"];
         userModel
             .createUser(user)
             .then(
@@ -136,6 +135,9 @@ module.exports = function(app, userModel) {
     function updateUserById(req, res) {
         var id = req.params.id;
         var user = req.body;
+        if (user.password != null && user.password != "" && typeof user.password != "undefined") {
+            user.password = bcrypt.hashSync(user.password);
+        }
         userModel
             .updateUserById(id, user)
             .then(
@@ -164,7 +166,7 @@ module.exports = function(app, userModel) {
 
     function createUserFromAdmin(req, res) {
         var newUser = req.body;
-        // newUser.password = bcrypt.hashSync(newUser.password);
+        newUser.password = bcrypt.hashSync(newUser.password);
         userModel
             .createUser(newUser)
             .then(
@@ -180,6 +182,10 @@ module.exports = function(app, userModel) {
     function updateUserByIdFromAdmin(req, res) {
         var id = req.params.id;
         var user = req.body;
+        if (user.password != null && user.password != "" && typeof user.password != "undefined") {
+            user.password = bcrypt.hashSync(user.password);
+        }
+
         userModel
             .updateUserById(id, user)
             .then(
