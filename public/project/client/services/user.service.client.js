@@ -16,7 +16,8 @@
             getCurrentUser: getCurrentUser,
             logout: logout,
             getProfile: getProfile,
-            getUpdatedCurrentUser: getUpdatedCurrentUser
+            getUpdatedCurrentUser: getUpdatedCurrentUser,
+            followUser: followUser
         };
 
         return service;
@@ -63,6 +64,10 @@
 
         function getUpdatedCurrentUser(userId) {
             return $http.get("/api/project/omdb/loggedin/" + userId);
+        }
+
+        function followUser(userId, username) {
+            return $http.post("/api/project/omdb/user/" + userId + "/follow/" + username);
         }
     }
 })();

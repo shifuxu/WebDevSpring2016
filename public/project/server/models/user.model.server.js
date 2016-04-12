@@ -18,7 +18,8 @@ module.exports = function(db, mongoose) {
         updateUser: updateUser,
         deleteUserById: deleteUserById,
         findAllUsers: findAllUsers,
-        userLikesMovie: userLikesMovie
+        userLikesMovie: userLikesMovie,
+        followUser: followUser
     };
     return api;
 
@@ -32,18 +33,21 @@ module.exports = function(db, mongoose) {
                     if (err) {
                         deferred.reject(err);
                     } else {
-                        // add movie id to user likes
-                        doc.likes.push(movie.imdbID);
-                        // save docs
-                        doc.save(
-                            function(err, doc) {
-                                if (err) {
-                                    deferred.reject(err);
-                                } else {
-                                    deferred.resolve(doc);
+                        // check if there are no duplicate imdbID
+                        if (doc.likes.indexOf(movie.imdbID) < 0) {
+                            // add movie id to user likes
+                            doc.likes.push(movie.imdbID);
+                            // save docs
+                            doc.save(
+                                function (err, doc) {
+                                    if (err) {
+                                        deferred.reject(err);
+                                    } else {
+                                        deferred.resolve(doc);
+                                    }
                                 }
-                            }
-                        );
+                            );
+                        }
                     }
                 }
             );
@@ -201,6 +205,38 @@ module.exports = function(db, mongoose) {
                         deferred.reject(err);
                     } else {
                         deferred.resolve(doc);
+                    }
+                }
+            );
+
+        return deferred.promise;
+    }
+
+    function followUser(userId, followedUsername) {
+        var deferred = q.defer();
+
+        UserModel
+            .findById(
+                {_id: userId},
+                function (err, doc) {
+                    if (err) {
+                        deferred.reject(err)
+                    } else {
+                        // check there is no duplicates followed user
+                        if (doc.follows.indexOf(followedUsername) < 0) {
+                            // add follow friends
+                            doc.follows.push(followedUsername);
+                            // save docs
+                            doc.save(
+                                function(err, doc) {
+                                    if (err) {
+                                        deferred.reject(err);
+                                    } else {
+                                        deferred.resolve(doc);
+                                    }
+                                }
+                            );
+                        }
                     }
                 }
             );

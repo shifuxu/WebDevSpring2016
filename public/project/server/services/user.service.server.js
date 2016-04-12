@@ -7,6 +7,7 @@ module.exports = function(app, movieModel, userModel) {
     app.post("/api/project/omdb/login", login);
     app.post("/api/project/omdb/logout", logout);
     app.post("/api/project/omdb/register", register);
+    app.post("/api/project/omdb/user/:userId/follow/:username", followUser);
     app.put("/api/project/omdb/user/:userId", updateUser);
     app.delete("/api/project/omdb/:userId", deleteUserById);
 
@@ -142,6 +143,21 @@ module.exports = function(app, movieModel, userModel) {
             .then(
                 function(user) {
                     req.session.currentUser = user;
+                    res.json(user);
+                },
+                function(err) {
+                    res.status(400).send(err);
+                }
+            );
+    }
+
+    function followUser(req, res) {
+        var userId = req.params.userId;
+        var followedUsername = req.params.username;
+        userModel
+            .followUser(userId, followedUsername)
+            .then(
+                function(user) {
                     res.json(user);
                 },
                 function(err) {
