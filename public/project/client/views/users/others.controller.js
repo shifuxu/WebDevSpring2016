@@ -37,7 +37,7 @@
             UserService
                 .followUser(vm.currentUser._id, user.username)
                 .then(function(response) {
-                    console.log(response.data);
+                    var user = response.data;
                 });
         }
     }
