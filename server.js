@@ -11,15 +11,10 @@ var ipaddress = process.env.OPENSHIFT_NODEJS_IP || '127.0.0.1';
 var port = process.env.OPENSHIFT_NODEJS_PORT || 3020;
 var cookie_secret = process.env.COOKIE_SECRET;
 
-function rootRequest (req, res) {
-    res.send('hello world')
-}
-
 // create a default connection string
 var connectionString = 'mongodb://127.0.0.1:27017/cs5610sp16Assignment';
 
-// use remote connection string
-// if running in remote server
+// use remote connection string, if running in remote server
 if (process.env.OPENSHIFT_MONGODB_DB_PASSWORD) {
     connectionString = process.env.OPENSHIFT_MONGODB_DB_USERNAME + ":" +
         process.env.OPENSHIFT_MONGODB_DB_PASSWORD + "@" +
@@ -28,8 +23,10 @@ if (process.env.OPENSHIFT_MONGODB_DB_PASSWORD) {
         process.env.OPENSHIFT_APP_NAME;
 }
 
+// connect to mongodb
 var db = mongoose.connect(connectionString);
 
+// add body parser, multer, express, cookie parser, session and passport js
 app.use(express.static(__dirname + '/public'));
 app.use(multer());
 app.use(bodyParser.json());
@@ -43,8 +40,7 @@ app.use(session({
 app.use(passport.initialize());
 app.use(passport.session());
 
-app.get('/hello', rootRequest);
-
+// pass app, db, mongoose for different project
 require("./public/assignment/server/app.js")(app, db, mongoose);
 require("./public/project/server/app.js")(app, db, mongoose);
 
