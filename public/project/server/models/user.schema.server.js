@@ -16,15 +16,7 @@ module.exports = function(mongoose) {
             // imdb ids of movies this user likes
             likes: [String],
             // movies this user likes
-            likesMovies: [MovieSchema],
-            // reviews that this user make
-            reviews: [
-                {
-                    imdbID: String,
-                    title: String,
-                    comments: String
-                }
-            ]
+            likesMovies: [MovieSchema]
         }, {collection: 'project.omdb.user'});
 
     return UserSchema;

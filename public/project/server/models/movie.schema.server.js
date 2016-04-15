@@ -11,13 +11,6 @@ module.exports = function(mongoose) {
             // list of users that like this movie
             userLikes: [
                 {username: String}
-            ],
-            // list of users that has reviewed this movie
-            userReviews: [
-                {
-                    username: String,
-                    comments: String
-                }
             ]
         }, {collection: 'project.omdb.movie'});
 
