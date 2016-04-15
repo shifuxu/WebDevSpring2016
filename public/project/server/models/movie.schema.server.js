@@ -15,5 +15,4 @@ module.exports = function(mongoose) {
         }, {collection: 'project.omdb.movie'});
 
     return MovieSchema;
-
 };
