@@ -1,6 +1,22 @@
 module.exports = function(app, movieModel, userModel) {
     app.post("/api/project/user/:userId/movie/:imdbID", userLikesMovie);
     app.get("/api/project/movie/:imdbID/user", findUserLikes);
+    app.get("/api/project/movie/:imdbID", findMovieByImdbID);
+
+    function findMovieByImdbID(req, res) {
+        var imdbID = req.params.imdbID;
+
+        movieModel
+            .findMovieByImdbID(imdbID)
+            .then(
+                function(movie) {
+                    res.json(movie);
+                },
+                function(err) {
+                    res.status(400).send(err);
+                }
+            )
+    }
 
     function findUserLikes (req, res) {
         var imdbID = req.params.imdbID;

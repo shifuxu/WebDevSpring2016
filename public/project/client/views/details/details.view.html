@@ -26,9 +26,9 @@
                         class="btn btn-danger"
                         ng-click="model.favorite(model.movie)"
                         style="float: left; margin-left: 10px;">
-                    <span ng-show="model.movie.likes.indexOf(currentUser._id) > -1"
+                    <span ng-show="model.record.likes.indexOf(currentUser._id) > -1"
                           class="glyphicon glyphicon-star"></span>
-                    <span ng-show="!model.movie || !model.movie.likes || model.movie.likes.indexOf(currentUser._id) == -1"
+                    <span ng-show="!model.record || !model.record.likes || model.record.likes.indexOf(currentUser._id) == -1"
                           class="glyphicon glyphicon-star-empty">
                     </span>
                 </button>

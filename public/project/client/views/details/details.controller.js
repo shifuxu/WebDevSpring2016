@@ -8,6 +8,7 @@
 
         vm.imdbID = null;
         vm.currentUser = null;
+        vm.record = null;
         vm.favorite = favorite;
 
         function init() {
@@ -29,7 +30,13 @@
                 });
 
             MovieService
-                .findUserLikes(vm.imdbID)
+                .findMovieByImdbID(vm.imdbID)
+                .then(function(response) {
+                    vm.record = response.data;
+                    if (vm.record) {
+                        return MovieService.findUserLikes(vm.imdbID);
+                    }
+                })
                 .then(function(response){
                     vm.users = response.data;
                 });
@@ -38,7 +45,13 @@
 
         function favorite(movie) {
             MovieService
-                .userLikesMovie(vm.currentUser._id, movie);
+                .userLikesMovie(vm.currentUser._id, movie)
+                .then(function() {
+                    return MovieService.findMovieByImdbID(vm.imdbID);
+                })
+                .then(function(response) {
+                    vm.record = response.data;
+                });
         }
     }
 })();
