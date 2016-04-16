@@ -38,12 +38,13 @@
                         return MovieService.findUserLikes(vm.imdbID);
                     }
                 })
-                .then(function(response){
-                    vm.users = response.data;
+                .then(function(response) {
+                    if (response) {
+                        vm.users = response.data;
+                    }
                 });
         }
         init();
-
 
         // implement like feature
         function favorite(movie) {
