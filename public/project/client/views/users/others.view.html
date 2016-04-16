@@ -18,20 +18,20 @@
             </div>
             <a class="divider"></a>
         </div>
-        <!--<div ng-if="model.profile.likesMovies.length" class="register-bottom-grid">-->
-            <!--<h3>Movie Likes</h3>-->
-            <!--<div class="panel panel-default self-panel"-->
-                 <!--style="width: 150px;"-->
-                 <!--ng-repeat="movie in model.profile.likesMovies">-->
-                <!--<div class="panel-body">-->
-                    <!--<a href="#/details/{{movie.imdbID}}">-->
-                        <!--<img ng-src="http://img.omdbapi.com/?i={{movie.imdbID}}&apikey=2bf5ee9" width="100px"/>-->
-                    <!--</a>-->
-                <!--</div>-->
-            <!--</div>-->
-            <!--<a class="divider"></a>-->
-            <!--<div class="clearfix"> </div>-->
-        <!--</div>-->
+        <div ng-if="model.user.likes.length" class="register-bottom-grid">
+            <h3>Movie Likes</h3>
+            <div class="panel panel-default self-panel"
+                 style="width: 150px;"
+                 ng-repeat="imdbID in model.user.likes">
+                <div class="panel-body">
+                    <a href="#/details/{{imdbID}}">
+                        <img ng-src="http://img.omdbapi.com/?i={{imdbID}}&apikey=2bf5ee9" width="100px"/>
+                    </a>
+                </div>
+            </div>
+            <a class="divider"></a>
+            <div class="clearfix"> </div>
+        </div>
         <div class="register-bottom-grid">
             <h3>Movie Comments</h3>
             <a class="divider"></a>
