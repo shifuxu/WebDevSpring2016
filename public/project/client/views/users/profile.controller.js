@@ -11,6 +11,7 @@
         vm.currentUser = null;
         vm.profile = null;
         vm.update = update;
+        vm.unfollow = unfollow;
 
         function init() {
             UserService
@@ -42,6 +43,28 @@
                 })
                 .then(function(response) {
                     // do nothing here
+                });
+        }
+
+        function unfollow(username) {
+            UserService
+                .unfollowUser(vm.currentUser._id, username)
+                .then(function(response) {
+                    var user = response.data;
+                    if (user) {
+                        return UserService.getUpdatedCurrentUser(vm.currentUser._id);
+                    }
+                })
+                .then(function(response) {
+                    if (response) {
+                        vm.currentUser = response.data;
+                        return UserService.getProfile();
+                    }
+                })
+                .then(function(response) {
+                    if (response) {
+                        vm.profile = response.data;
+                    }
                 });
         }
     }

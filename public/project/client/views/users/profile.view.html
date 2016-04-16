@@ -38,11 +38,16 @@
             <a class="divider"></a>
         </div>
         <div>
-            <button type="submit" ng-click="model.update(model.currentUser)" class="update-btn">Update</button>
+            <button type="submit" ng-click="model.update(model.currentUser)" class="update-btn">
+                Update
+            </button>
             <div class="clearfix"> </div>
         </div>
-        <div ng-if="model.profile.likesMovies.length" class="register-bottom-grid">
+        <div class="register-bottom-grid">
             <h3>Movie Likes</h3>
+            <p ng-if="!model.profile.likesMovies.length">
+                No movies liked, please add from the search page!
+            </p>
             <div class="panel panel-default self-panel"
                  style="width: 150px;"
                  ng-repeat="movie in model.profile.likesMovies">
@@ -57,11 +62,28 @@
         </div>
         <div class="register-bottom-grid">
             <h3>Movie Comments</h3>
+            <p>No comments made yet, please add comments in the details page!</p>
             <a class="divider"></a>
             <div class="clearfix"> </div>
         </div>
         <div class="register-bottom-grid">
             <h3>Followed Friends</h3>
+            <p ng-if="!model.profile.follows.length">
+                You do not have any followed friends, please search
+            </p>
+            <table class="table table-hover" style="font-size: 20px;">
+                <thead></thead>
+                <tbody>
+                    <tr ng-repeat="username in model.profile.follows">
+                        <td><a href="#/others/{{username}}">{{username}}</a></td>
+                        <td>
+                            <button class="btn btn-primary" ng-click="model.unfollow(username)">
+                                <span class="glyphicon glyphicon-remove"></span>
+                            </button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
             <div class="clearfix"> </div>
         </div>
     </form>
