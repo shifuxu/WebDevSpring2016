@@ -7,7 +7,8 @@
         var service = {
             userLikesMovie: userLikesMovie,
             findUserLikes: findUserLikes,
-            findMovieByImdbID: findMovieByImdbID
+            findMovieByImdbID: findMovieByImdbID,
+            userUnlikesMovie: userUnlikesMovie
         };
 
         return service;
@@ -22,6 +23,10 @@
 
         function findMovieByImdbID(imdbID) {
             return $http.get("/api/project/movie/" + imdbID);
+        }
+
+        function userUnlikesMovie(userId, movie) {
+            return $http.delete("/api/project/user/" + userId + "/movie/" + movie.imdbID);
         }
     }
 })();

@@ -19,7 +19,8 @@ module.exports = function(db, mongoose) {
         deleteUserById: deleteUserById,
         findAllUsers: findAllUsers,
         userLikesMovie: userLikesMovie,
-        followUser: followUser
+        followUser: followUser,
+        userUnlikesMovie: userUnlikesMovie
     };
     return api;
 
@@ -227,6 +228,39 @@ module.exports = function(db, mongoose) {
                             // add follow friends
                             doc.follows.push(followedUsername);
                             // save docs
+                            doc.save(
+                                function(err, doc) {
+                                    if (err) {
+                                        deferred.reject(err);
+                                    } else {
+                                        deferred.resolve(doc);
+                                    }
+                                }
+                            );
+                        }
+                    }
+                }
+            );
+
+        return deferred.promise;
+    }
+
+    // delete movie that this person likes
+    function userUnlikesMovie(userId, imdbID) {
+        var deferred = q.defer();
+
+        UserModel
+            .findById(
+                userId,
+                function(err, doc) {
+                    if (err) {
+                        deferred.reject(err);
+                    } else {
+                        var index = doc.likes.indexOf(imdbID);
+                        // found the given imdbID in the likes array
+                        if (index > -1) {
+                            doc.likes.splice(index, 1);
+                            // save the change
                             doc.save(
                                 function(err, doc) {
                                     if (err) {

@@ -20,7 +20,7 @@
                 <p ng-if="currentUser"
                    class="movie_option"
                    style="float: left;">
-                    <strong>Like then click here</strong>
+                    <strong>Like it?</strong>
                 </p>
                 <button ng-if="currentUser"
                         class="btn btn-danger"
@@ -31,6 +31,12 @@
                     <span ng-show="!model.record || !model.record.likes || model.record.likes.indexOf(currentUser._id) == -1"
                           class="glyphicon glyphicon-star-empty">
                     </span>
+                </button>
+                <button ng-if="currentUser && model.record && model.record.likes && model.record.likes.indexOf(currentUser._id) > -1"
+                        class="btn btn-primary"
+                        ng-click="model.unfavorite(model.movie)"
+                        style="float: left; margin-left: 10px;">
+                    <span class="glyphicon glyphicon-remove"></span>
                 </button>
             </div>
             <div class="clearfix"> </div>

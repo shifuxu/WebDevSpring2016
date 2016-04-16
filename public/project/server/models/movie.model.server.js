@@ -14,7 +14,8 @@ module.exports = function(db, mongoose) {
         findMovieByImdbID: findMovieByImdbID,
         findMoviesByImdbIDs: findMoviesByImdbIDs,
         createMovie: createMovie,
-        userLikesMovie: userLikesMovie
+        userLikesMovie: userLikesMovie,
+        userUnlikesMovie: userUnlikesMovie
     };
     return api;
 
@@ -31,18 +32,22 @@ module.exports = function(db, mongoose) {
 
                     // if there's a movie
                     if (doc) {
-                        // add id of user to the likes list of movie
-                        doc.likes.push(userId);
-                        // save changes
-                        doc.save(
-                            function(err, doc) {
-                                if (err) {
-                                    deferred.reject(err);
-                                } else {
-                                    deferred.resolve(doc);
+                        // check userId is not in the exist likes array
+                        // avoid duplicates
+                        if (doc.likes.indexOf(userId) < 0) {
+                            // add id of user to the likes list of movie
+                            doc.likes.push(userId);
+                            // save changes
+                            doc.save(
+                                function (err, doc) {
+                                    if (err) {
+                                        deferred.reject(err);
+                                    } else {
+                                        deferred.resolve(doc);
+                                    }
                                 }
-                            }
-                        );
+                            );
+                        }
                     } else {
                         // if there's no movie
                         // create a new instance
@@ -118,6 +123,42 @@ module.exports = function(db, mongoose) {
                         deferred.reject(err);
                     } else {
                         deferred.resolve(doc);
+                    }
+                }
+            );
+
+        return deferred.promise;
+    }
+
+    function userUnlikesMovie(userId, imdbID) {
+        var deferred = q.defer();
+
+        MovieModel
+            .findOne(
+                {imdbID: imdbID},
+                function(err, doc) {
+                    if (err) {
+                        deferred.reject(err);
+                    }
+                    // found the movie
+                    if (doc) {
+                        var index = doc.likes.indexOf(userId);
+                        // remove userid from likes array
+                        if (index > -1) {
+                            doc.likes.splice(index, 1);
+                            // save the change
+                            doc.save(
+                                function(err, doc) {
+                                    if (err) {
+                                        deferred.reject(err);
+                                    } else {
+                                        deferred.resolve(doc);
+                                    }
+                                }
+                            );
+                        }
+                    } else {
+                        // do nothing here
                     }
                 }
             );

@@ -10,6 +10,7 @@
         vm.currentUser = null;
         vm.record = null;
         vm.favorite = favorite;
+        vm.unfavorite = unfavorite;
 
         function init() {
             vm.imdbID = $routeParams.imdbID;
@@ -43,9 +44,23 @@
         }
         init();
 
+
+        // implement like feature
         function favorite(movie) {
             MovieService
                 .userLikesMovie(vm.currentUser._id, movie)
+                .then(function() {
+                    return MovieService.findMovieByImdbID(vm.imdbID);
+                })
+                .then(function(response) {
+                    vm.record = response.data;
+                });
+        }
+
+        // implement unlike feature
+        function unfavorite(movie) {
+            MovieService
+                .userUnlikesMovie(vm.currentUser._id, movie)
                 .then(function() {
                     return MovieService.findMovieByImdbID(vm.imdbID);
                 })
