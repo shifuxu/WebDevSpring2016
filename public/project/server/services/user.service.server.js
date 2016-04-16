@@ -10,6 +10,7 @@ module.exports = function(app, movieModel, userModel) {
     app.post("/api/project/omdb/user/:userId/follow/:username", followUser);
     app.put("/api/project/omdb/user/:userId", updateUser);
     app.delete("/api/project/omdb/:userId", deleteUserById);
+    app.delete("/api/project/omdb/user/:userId/unfollow/:username", unfollowUser);
 
     function profile(req, res) {
         var userId = req.params.userId;
@@ -156,6 +157,21 @@ module.exports = function(app, movieModel, userModel) {
         var followedUsername = req.params.username;
         userModel
             .followUser(userId, followedUsername)
+            .then(
+                function(user) {
+                    res.json(user);
+                },
+                function(err) {
+                    res.status(400).send(err);
+                }
+            );
+    }
+
+    function unfollowUser(req, res) {
+        var userId = req.params.userId;
+        var unfollowedUsername = req.params.username;
+        userModel
+            .unfollowUser(userId, unfollowedUsername)
             .then(
                 function(user) {
                     res.json(user);

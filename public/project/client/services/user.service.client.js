@@ -17,7 +17,8 @@
             logout: logout,
             getProfile: getProfile,
             getUpdatedCurrentUser: getUpdatedCurrentUser,
-            followUser: followUser
+            followUser: followUser,
+            unfollowUser: unfollowUser
         };
 
         return service;
@@ -68,6 +69,10 @@
 
         function followUser(userId, username) {
             return $http.post("/api/project/omdb/user/" + userId + "/follow/" + username);
+        }
+
+        function unfollowUser(userId, username) {
+            return $http.delete("/api/project/omdb/user/" + userId + "/unfollow/" + username);
         }
     }
 })();

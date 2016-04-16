@@ -20,7 +20,8 @@ module.exports = function(db, mongoose) {
         findAllUsers: findAllUsers,
         userLikesMovie: userLikesMovie,
         followUser: followUser,
-        userUnlikesMovie: userUnlikesMovie
+        userUnlikesMovie: userUnlikesMovie,
+        unfollowUser: unfollowUser
     };
     return api;
 
@@ -261,6 +262,39 @@ module.exports = function(db, mongoose) {
                         if (index > -1) {
                             doc.likes.splice(index, 1);
                             // save the change
+                            doc.save(
+                                function(err, doc) {
+                                    if (err) {
+                                        deferred.reject(err);
+                                    } else {
+                                        deferred.resolve(doc);
+                                    }
+                                }
+                            );
+                        }
+                    }
+                }
+            );
+
+        return deferred.promise;
+    }
+
+    function unfollowUser(userId, unfollowedUsername) {
+        var deferred = q.defer();
+
+        UserModel
+            .findById(
+                userId,
+                function(err, doc) {
+                    if (err) {
+                        deferred.reject(err);
+                    } else {
+                        var index = doc.follows.indexOf(unfollowedUsername);
+                        // found the user that we want to unfollow
+                        if (index > -1) {
+                            // remove from the array
+                            doc.follows.splice(index, 1);
+                            // save doc
                             doc.save(
                                 function(err, doc) {
                                     if (err) {
