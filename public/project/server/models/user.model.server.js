@@ -21,7 +21,8 @@ module.exports = function(db, mongoose) {
         userLikesMovie: userLikesMovie,
         followUser: followUser,
         userUnlikesMovie: userUnlikesMovie,
-        unfollowUser: unfollowUser
+        unfollowUser: unfollowUser,
+        searchUser: searchUser
     };
     return api;
 
@@ -310,5 +311,11 @@ module.exports = function(db, mongoose) {
             );
 
         return deferred.promise;
+    }
+
+    function searchUser(username) {
+        return UserModel.find(
+            {'username': {$regex: username, $options: 'i'}}
+        );
     }
 };

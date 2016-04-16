@@ -1,5 +1,5 @@
 (function() {
     angular
-        .module("MovieHubApp", ["ngRoute"]);
+        .module("MovieHubApp", ["ngRoute", "angucomplete-alt"]);
 
 })();

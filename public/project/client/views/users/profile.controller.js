@@ -8,10 +8,12 @@
 
         vm.message = null;
         vm.error = null;
+        vm.searchError = null;
         vm.currentUser = null;
         vm.profile = null;
         vm.update = update;
         vm.unfollow = unfollow;
+        vm.search = search;
 
         function init() {
             UserService
@@ -49,6 +51,28 @@
         function unfollow(username) {
             UserService
                 .unfollowUser(vm.currentUser._id, username)
+                .then(function(response) {
+                    var user = response.data;
+                    if (user) {
+                        return UserService.getUpdatedCurrentUser(vm.currentUser._id);
+                    }
+                })
+                .then(function(response) {
+                    if (response) {
+                        vm.currentUser = response.data;
+                        return UserService.getProfile();
+                    }
+                })
+                .then(function(response) {
+                    if (response) {
+                        vm.profile = response.data;
+                    }
+                });
+        }
+
+        function search(searchUsername) {
+            UserService
+                .followUser(vm.currentUser._id, searchUsername)
                 .then(function(response) {
                     var user = response.data;
                     if (user) {

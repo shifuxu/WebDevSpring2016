@@ -66,24 +66,56 @@
             <a class="divider"></a>
             <div class="clearfix"> </div>
         </div>
-        <div class="register-bottom-grid">
-            <h3>Followed Friends</h3>
+        <div style="width: 48%;">
+            <h3 style="color:#000; font-size:1.5em; padding-bottom:20px; margin: 0;">Followed Friends</h3>
+            <div ng-show="model.searchError" class="alert alert-danger" role="alert">{{model.searchError}}</div>
             <p ng-if="!model.profile.follows.length">
                 You do not have any followed friends, please search
             </p>
-            <table class="table table-hover" style="font-size: 20px;">
-                <thead></thead>
-                <tbody>
-                    <tr ng-repeat="username in model.profile.follows">
-                        <td><a href="#/others/{{username}}">{{username}}</a></td>
-                        <td>
-                            <button class="btn btn-primary" ng-click="model.unfollow(username)">
-                                <span class="glyphicon glyphicon-remove"></span>
-                            </button>
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
+            <div class="input-group">
+                <div angucomplete-alt
+                     placeholder="Search friends"
+                     pause="500"
+                     selected-object="selectedUser"
+                     remote-url="/api/project/omdb/search/"
+                     title-field="username"
+                     minlength="1"
+                     input-class="form-control form-control-small"
+                     match-class="highlight">
+                </div>
+                <span class="input-group-btn">
+                    <button ng-click="model.search(selectedUser.originalObject.username)"
+                            class="btn btn-danger"
+                            type="button">
+                        <span class="glyphicon glyphicon-plus"></span>
+                    </button>
+                </span>
+            </div>
+            <br/>
+            <!--<table class="table table-hover" style="font-size: 20px;">-->
+                <!--<tbody>-->
+                    <!--<tr ng-repeat="username in model.profile.follows">-->
+                        <!--<td><a href="#/others/{{username}}">{{username}}</a></td>-->
+                        <!--<td>-->
+                            <!--<button class="btn btn-primary" ng-click="model.unfollow(username)">-->
+                                <!--<span class="glyphicon glyphicon-remove"></span>-->
+                            <!--</button>-->
+                        <!--</td>-->
+                    <!--</tr>-->
+                <!--</tbody>-->
+            <!--</table>-->
+            <div ng-repeat="username in model.profile.follows"
+                 class="row"
+                 style="padding: 8px; font-size: large;">
+                <div class="col-xs-11">
+                    {{username}}
+                </div>
+                <div class="col-xs-1">
+                    <a ng-click="model.unfollow(username)" class="pull-right">
+                        <span class="glyphicon glyphicon-remove"></span>
+                    </a>
+                </div>
+            </div>
             <div class="clearfix"> </div>
         </div>
     </form>
