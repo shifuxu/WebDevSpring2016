@@ -8,6 +8,7 @@
 
         vm.message = null;
         vm.error = null;
+        vm.searchError = null;
         vm.currentUser = null;
         vm.profile = null;
         vm.update = update;
@@ -71,6 +72,10 @@
 
         function search(searchUsername) {
             if (typeof searchUsername == "undefined") {
+                vm.searchError = "Can not be empty!";
+                return ;
+            } else if (searchUsername == vm.currentUser.username) {
+                vm.searchError = "Can not follow yourself!";
                 return ;
             }
 

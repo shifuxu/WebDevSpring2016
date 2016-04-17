@@ -68,6 +68,7 @@
         </div>
         <div class="search-grid">
             <h3>Followed Friends</h3>
+            <div ng-show="model.searchError" class="alert alert-danger" role="alert">{{model.searchError}}</div>
             <p ng-if="!model.profile.follows.length">
                 You do not have any followed friends, please search
             </p>
