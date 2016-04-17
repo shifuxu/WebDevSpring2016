@@ -8,7 +8,6 @@
 
         vm.message = null;
         vm.error = null;
-        vm.searchError = null;
         vm.currentUser = null;
         vm.profile = null;
         vm.update = update;
