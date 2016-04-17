@@ -71,7 +71,21 @@
             <p ng-if="!model.profile.follows.length">
                 You do not have any followed friends, please search
             </p>
-            <div class="input-group">
+            <div ng-repeat="username in model.profile.follows"
+                 class="row"
+                 style="font-size: large;">
+                <div class="col-xs-5">
+                    {{username}}
+                </div>
+                <div class="col-xs-1">
+                    <a ng-click="model.unfollow(username)" class="pull-right">
+                        <span class="glyphicon glyphicon-remove"></span>
+                    </a>
+                </div>
+                <div class="col-xs-6"></div>
+            </div>
+            <br/>
+            <div style="width: 48%">
                 <div angucomplete-alt
                      placeholder="Search friends"
                      pause="500"
@@ -83,26 +97,13 @@
                      match-class="highlight"
                      style="font-size: large">
                 </div>
-                <span class="input-group-btn">
-                    <button ng-click="model.search(selectedUser.originalObject.username)"
-                            class="btn btn-danger"
-                            type="button">
-                        <span class="glyphicon glyphicon-plus"></span>
-                    </button>
-                </span>
-            </div>
-            <br/>
-            <div ng-repeat="username in model.profile.follows"
-                 class="row"
-                 style="font-size: large;">
-                <div class="col-xs-11">
-                    {{username}}
-                </div>
-                <div class="col-xs-1">
-                    <button ng-click="model.unfollow(username)" class="btn btn-primary pull-right">
-                        <span class="glyphicon glyphicon-remove"></span>
-                    </button>
-                </div>
+                <!--<div>-->
+                <button ng-click="model.search(selectedUser.originalObject.username)"
+                        class="btn btn-danger btn-block"
+                        type="button">
+                    Add Friend
+                </button>
+                <!--</div>-->
             </div>
             <div class="clearfix"> </div>
         </div>
