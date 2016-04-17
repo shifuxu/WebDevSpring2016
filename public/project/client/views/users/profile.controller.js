@@ -71,6 +71,10 @@
         }
 
         function search(searchUsername) {
+            if (typeof searchUsername == "undefined") {
+                return ;
+            }
+
             UserService
                 .followUser(vm.currentUser._id, searchUsername)
                 .then(function(response) {
