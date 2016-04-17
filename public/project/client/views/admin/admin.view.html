@@ -6,19 +6,35 @@
             <thead>
                 <tr>
                     <th>
-                        <i>Username</i>
+                        <a ng-hide="model.showDscendUsername"
+                           ng-click="model.sortAscend(model.username)"
+                           class="glyphicon glyphicon-triangle-top">
+                        </a>
+                        <a ng-show="model.showDscendUsername"
+                           ng-click="model.sortDescend(model.username)"
+                           class="glyphicon glyphicon-triangle-bottom">
+                        </a>
+                        Username
                     </th>
                     <th>
-                        <i>Password</i>
+                        Password
                     </th>
                     <th>
-                        <i>Email</i>
+                        Email
                     </th>
                     <th>
-                        <i>Role</i>
+                        <a ng-hide="model.showDscendRole"
+                           ng-click="model.sortAscend(model.role)"
+                           class="glyphicon glyphicon-triangle-top">
+                        </a>
+                        <a ng-show="model.showDscendRole"
+                           ng-click="model.sortDescend(model.role)"
+                           class="glyphicon glyphicon-triangle-bottom">
+                        </a>
+                        Role
                     </th>
                     <th>
-                        <i>Action</i>
+                        Action
                     </th>
                 </tr>
                 <tr>
@@ -57,7 +73,7 @@
                 </tr>
             </thead>
             <tbody>
-                <tr ng-repeat="user in model.users">
+                <tr ng-repeat="user in model.users | orderBy: model.type">
                     <td><a href="#/others/{{user.username}}">{{user.username}}</a></td>
                     <td>{{user.password}}</td>
                     <td>{{user.email}}</td>

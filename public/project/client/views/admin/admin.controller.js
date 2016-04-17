@@ -10,13 +10,21 @@
         var selectedUserUsername = null;
         var selectedUserRole = null;
 
+        vm.type = '';
+        vm.showDscendUsername = true;
+        vm.showDscendRole = true;
+        vm.username = "username";
+        vm.role = "role";
+        vm.message = null;
+        vm.users = null;
+        vm.currentUser = null;
+
         vm.addUser = addUser;
         vm.updateUser = updateUser;
         vm.deleteUser = deleteUser;
         vm.selectUser = selectUser;
-        vm.message = null;
-        vm.users = null;
-        vm.currentUser = null;
+        vm.sortAscend = sortAscend;
+        vm.sortDescend = sortDescend;
 
         function init() {
             UserService
@@ -111,6 +119,23 @@
                     }
                 });
         }
-    }
 
+        function sortAscend(type) {
+            vm.type = type;
+            if (type == "username") {
+                vm.showDscendUsername = true;
+            } else if (type == "role") {
+                vm.showDscendRole = true;
+            }
+        }
+
+        function sortDescend(type) {
+            vm.type = "-" + type;
+            if (type == "username") {
+                vm.showDscendUsername = false;
+            } else if (type == "role") {
+                vm.showDscendRole = false;
+            }
+        }
+    }
 })();
