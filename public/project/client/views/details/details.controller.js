@@ -3,12 +3,13 @@
         .module("MovieHubApp")
         .controller("DetailsController", detailsController);
 
-    function detailsController($routeParams, OmdbService, MovieService, UserService) {
+    function detailsController($routeParams, OmdbService, MovieService, UserService, ReviewService) {
         var vm = this;
 
         vm.imdbID = null;
         vm.currentUser = null;
         vm.record = null;
+        vm.reviews = [];
         vm.favorite = favorite;
         vm.unfavorite = unfavorite;
 
@@ -43,6 +44,13 @@
                         vm.users = response.data;
                     }
                 });
+
+            //ReviewService
+            //    .findReviewsByImdbID(vm.imdbID)
+            //    .then(function(response) {
+            //        vm.reviews = response.data;
+            //        console.log(vm.reviews);
+            //    });
         }
         init();
 

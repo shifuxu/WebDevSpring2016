@@ -41,18 +41,18 @@
             </div>
             <div class="clearfix"> </div>
             <p class="m_4">{{model.movie.Plot}}</p>
+            <div class="clearfix"></div>
+            <!-- Leave the comments here for a while -->
             <form ng-if="currentUser" class="single">
                 <div class="text">
                     <textarea onfocus="this.value = '';"
-                              onblur="if (this.value == '') {this.value = 'Message';}">Message:
-                    </textarea>
+                              onblur="if (this.value == '') {this.value = 'Message';}">Message:</textarea>
                 </div>
                 <div class="form-submit1">
                     <input name="submit" type="submit" id="submit" value="Submit"><br>
                 </div>
                 <div class="clearfix"></div>
             </form>
-            <div class="clearfix"></div>
             <div ng-if="currentUser" class="single">
                 <h1 ng-show="model.users.length != 0">Other Users that Like This Movie</h1>
                 <ul>
@@ -63,13 +63,12 @@
                     </li>
                 </ul>
             </div>
-            <!-- Leave the comments here for a while -->
             <div class="clearfix"></div>
             <div ng-if="currentUser" class="single">
-                <h1>10 Comments</h1>
-                <ul class="single_list">
+                <h1>{{model.reviews.length}} Comments</h1>
+                <ul class="single_list" ng-repeat="review in model.reviews">
                     <li>
-                        <div class="preview"><a href="#"><img src="images/2.jpg" class="img-responsive" alt=""></a></div>
+                        <div class="preview"><span class="glyphicon glyphicon-user"></span></div>
                         <div class="data">
                             <div class="title">Movie  /  2 hours ago  /  <a href="#">reply</a></div>
                             <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat.</p>

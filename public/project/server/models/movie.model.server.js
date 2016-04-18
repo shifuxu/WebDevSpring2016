@@ -8,8 +8,6 @@ module.exports = function(db, mongoose) {
     // create movie from schema
     var MovieModel  = mongoose.model("Movie", MovieSchema);
 
-    var movies = [];
-
     var api = {
         findMovieByImdbID: findMovieByImdbID,
         findMoviesByImdbIDs: findMoviesByImdbIDs,
