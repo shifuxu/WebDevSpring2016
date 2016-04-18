@@ -12,6 +12,7 @@
         vm.reviews = [];
         vm.favorite = favorite;
         vm.unfavorite = unfavorite;
+        vm.comment = comment;
 
         function init() {
             vm.imdbID = $routeParams.imdbID;
@@ -45,12 +46,11 @@
                     }
                 });
 
-            //ReviewService
-            //    .findReviewsByImdbID(vm.imdbID)
-            //    .then(function(response) {
-            //        vm.reviews = response.data;
-            //        console.log(vm.reviews);
-            //    });
+            ReviewService
+                .findReviewsByImdbID(vm.imdbID)
+                .then(function(response) {
+                    vm.reviews = response.data;
+                });
         }
         init();
 
@@ -75,6 +75,20 @@
                 })
                 .then(function(response) {
                     vm.record = response.data;
+                });
+        }
+
+        // implement comment feature
+        function comment(review) {
+            ReviewService
+                .userReviewsMovie(vm.currentUser.username, vm.imdbID, review)
+                .then(function() {
+                    return ReviewService.findReviewsByImdbID(vm.imdbID);
+                })
+                .then(function(response) {
+                    if (response) {
+                        vm.reviews = response.data;
+                    }
                 });
         }
     }

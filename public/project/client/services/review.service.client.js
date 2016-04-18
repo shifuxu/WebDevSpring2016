@@ -6,7 +6,8 @@
     function reviewService($http) {
         var service = {
             findReviewsByImdbID: findReviewsByImdbID,
-            findReviewsByUserId: findReviewsByUserId
+            findReviewsByUserId: findReviewsByUsername,
+            userReviewsMovie: userReviewsMovie
         };
 
         return service;
@@ -15,8 +16,12 @@
             return $http.get("/api/project/review/movie/" + imdbID);
         }
 
-        function findReviewsByUserId(userId) {
-            return $http.get("/api/project/review/user/" + userId);
+        function findReviewsByUsername(username) {
+            return $http.get("/api/project/review/user/" + username);
+        }
+
+        function userReviewsMovie(username, imdbID, review) {
+            return $http.post("/api/project/review/user/" + username + "/movie/" + imdbID, review);
         }
     }
 })();

@@ -10,7 +10,8 @@ module.exports = function(db, mongoose) {
 
     var api = {
         findReviewsByImdbID: findReviewsByImdbID,
-        findReviewsByUserId: findReviewsByUserId
+        findReviewsByUsername: findReviewsByUsername,
+        userReviewsMovie: userReviewsMovie
     };
 
     return api;
@@ -33,17 +34,41 @@ module.exports = function(db, mongoose) {
         return deferred.promise;
     }
 
-    function findReviewsByUserId(userId) {
+    function findReviewsByUsername(username) {
         var deferred = q.defer();
 
         ReviewModel
             .find(
-                {userId: userId},
+                {username: username},
                 function(err, docs) {
                     if (err) {
                         deferred.reject(err);
                     } else {
                         deferred.resolve(docs);
+                    }
+                }
+            );
+
+        return deferred.promise;
+    }
+
+    function userReviewsMovie(username, imdbID, content) {
+        var deferred = q.defer();
+
+        var review = {
+            username: username,
+            imdbID: imdbID,
+            content: content
+        };
+
+        ReviewModel
+            .create(
+                review,
+                function(err, doc) {
+                    if (err) {
+                        deferred.reject(err);
+                    } else {
+                        deferred.resolve(doc);
                     }
                 }
             );
