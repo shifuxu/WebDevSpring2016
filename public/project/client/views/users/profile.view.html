@@ -63,7 +63,7 @@
         <div class="comment-grid">
             <h3>Movie Comments</h3>
             <p ng-show="model.reviews.length == 0">No comments made yet, please add comments in the details page!</p>
-            <div class="table-responsive">
+            <div class="table-responsive" ng-hide="model.reviews.length == 0">
                 <table class="table table-hover">
                     <thead>
                         <th>

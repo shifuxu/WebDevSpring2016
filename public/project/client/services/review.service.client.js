@@ -7,7 +7,8 @@
         var service = {
             findReviewsByImdbID: findReviewsByImdbID,
             findReviewsByUsername: findReviewsByUsername,
-            userReviewsMovie: userReviewsMovie
+            userReviewsMovie: userReviewsMovie,
+            deleteCommentById: deleteCommentById
         };
 
         return service;
@@ -22,6 +23,10 @@
 
         function userReviewsMovie(username, imdbID, review) {
             return $http.post("/api/project/review/user/" + username + "/movie/" + imdbID, review);
+        }
+
+        function deleteCommentById(reviewId) {
+            return $http.delete("/api/project/review/" + reviewId);
         }
     }
 })();

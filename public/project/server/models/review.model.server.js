@@ -11,7 +11,8 @@ module.exports = function(db, mongoose) {
     var api = {
         findReviewsByImdbID: findReviewsByImdbID,
         findReviewsByUsername: findReviewsByUsername,
-        userReviewsMovie: userReviewsMovie
+        userReviewsMovie: userReviewsMovie,
+        deleteCommentById: deleteCommentById
     };
 
     return api;
@@ -58,6 +59,24 @@ module.exports = function(db, mongoose) {
         ReviewModel
             .create(
                 review,
+                function(err, doc) {
+                    if (err) {
+                        deferred.reject(err);
+                    } else {
+                        deferred.resolve(doc);
+                    }
+                }
+            );
+
+        return deferred.promise;
+    }
+
+    function deleteCommentById(reviewId) {
+        var deferred = q.defer();
+
+        ReviewModel
+            .remove(
+                {_id: reviewId},
                 function(err, doc) {
                     if (err) {
                         deferred.reject(err);

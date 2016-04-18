@@ -2,6 +2,7 @@ module.exports = function(app, reviewModel) {
     app.get("/api/project/review/movie/:imdbID", findReviewsByImdbID);
     app.get("/api/project/review/user/:username", findReviewsByUsername);
     app.post("/api/project/review/user/:username/movie/:imdbID", userReviewsMovie);
+    app.delete("/api/project/review/:reviewId", deleteCommentById);
 
     function findReviewsByImdbID(req, res) {
         var imdbID = req.params.imdbID;
@@ -48,6 +49,21 @@ module.exports = function(app, reviewModel) {
             .then(
                 function(doc) {
                     res.json(doc);
+                },
+                function(err) {
+                    res.status(400).send(err);
+                }
+            );
+    }
+
+    function deleteCommentById(req, res) {
+        var reviewId = req.params.reviewId;
+
+        reviewModel
+            .deleteCommentById(reviewId)
+            .then(
+                function(doc) {
+                    res.send(200);
                 },
                 function(err) {
                     res.status(400).send(err);

@@ -35,7 +35,6 @@
                     var reviews = response.data;
                     if (reviews) {
                         vm.reviews = reviews;
-                        console.log(vm.reviews);
                     }
                 });
         }
@@ -110,8 +109,18 @@
                 });
         }
 
+        // add remove comment feature
         function deleteComment(review) {
-            console.log(review);
+            ReviewService
+                .deleteCommentById(review._id)
+                .then(function() {
+                    return ReviewService.findReviewsByUsername(vm.currentUser.username);
+                })
+                .then(function(response) {
+                    if (response.data) {
+                        vm.reviews = response.data;
+                    }
+                });
         }
     }
 })();
