@@ -79,7 +79,13 @@
                 });
         }
 
-        function deleteUser(index) {
+        function deleteUser(user) {
+            var index = null;
+            for (var u in vm.users) {
+                if (vm.users[u].username == user.username) {
+                    index = u;
+                }
+            }
             selectedUserId = vm.users[index]._id;
             selectedUserRole = vm.users[index].role;
             if (selectedUserRole == "admin") {
@@ -99,7 +105,13 @@
                 });
         }
 
-        function selectUser(index) {
+        function selectUser(user) {
+            var index = null;
+            for (var u in vm.users) {
+                if (vm.users[u].username == user.username) {
+                    index = u;
+                }
+            }
             selectedUserId = vm.users[index]._id;
             selectedUserUsername = vm.users[index].username;
             UserService
