@@ -64,9 +64,9 @@
                 templateUrl: "views/users/others.view.html",
                 controller: "OthersController",
                 controllerAs: "model",
-                //resolve: {
-                //    checkLoggedIn: checkLoggedIn
-                //}
+                resolve: {
+                    checkLoggedIn: checkLoggedIn
+                }
             })
             .otherwise("/home")
     }
