@@ -6,7 +6,7 @@
     function reviewService($http) {
         var service = {
             findReviewsByImdbID: findReviewsByImdbID,
-            findReviewsByUserId: findReviewsByUsername,
+            findReviewsByUsername: findReviewsByUsername,
             userReviewsMovie: userReviewsMovie
         };
 

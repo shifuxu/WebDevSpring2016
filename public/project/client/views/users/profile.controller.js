@@ -3,7 +3,7 @@
         .module("MovieHubApp")
         .controller("ProfileController", profileController);
 
-    function profileController(UserService) {
+    function profileController(UserService, ReviewService) {
         var vm = this;
 
         vm.message = null;
@@ -11,9 +11,11 @@
         vm.searchError = null;
         vm.currentUser = null;
         vm.profile = null;
+        vm.reviews = [];
         vm.update = update;
         vm.unfollow = unfollow;
         vm.search = search;
+        vm.deleteComment = deleteComment;
 
         function init() {
             UserService
@@ -27,6 +29,14 @@
                 })
                 .then(function(response) {
                     vm.profile = response.data;
+                    return ReviewService.findReviewsByUsername(vm.currentUser.username);
+                })
+                .then(function(response) {
+                    var reviews = response.data;
+                    if (reviews) {
+                        vm.reviews = reviews;
+                        console.log(vm.reviews);
+                    }
                 });
         }
         init();
@@ -98,6 +108,10 @@
                         vm.profile = response.data;
                     }
                 });
+        }
+
+        function deleteComment(review) {
+            console.log(review);
         }
     }
 })();

@@ -20,7 +20,7 @@ module.exports = function(app, reviewModel) {
     function findReviewsByUsername(req, res) {
         var username = req.params.username;
         reviewModel
-            .findReviewsByUserId(username)
+            .findReviewsByUsername(username)
             .then(
                 function(docs) {
                     res.json(docs);
@@ -35,8 +35,16 @@ module.exports = function(app, reviewModel) {
         var username = req.params.username;
         var imdbID = req.params.imdbID;
         var content = req.body.content;
+        var title = req.body.title;
+        var review = {
+            username: username,
+            imdbID: imdbID,
+            title: title,
+            content: content
+        };
+
         reviewModel
-            .userReviewsMovie(username, imdbID, content)
+            .userReviewsMovie(review)
             .then(
                 function(doc) {
                     res.json(doc);

@@ -60,9 +60,36 @@
             <a class="divider"></a>
             <div class="clearfix"> </div>
         </div>
-        <div class="register-bottom-grid">
+        <div class="comment-grid">
             <h3>Movie Comments</h3>
-            <p>No comments made yet, please add comments in the details page!</p>
+            <p ng-show="model.reviews.length == 0">No comments made yet, please add comments in the details page!</p>
+            <div class="table-responsive">
+                <table class="table table-hover">
+                    <thead>
+                        <th>
+                            Title
+                        </th>
+                        <th>
+                            Comment
+                        </th>
+                        <th>
+                            Action
+                        </th>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="review in model.reviews">
+                            <td><a href="#/details/{{review.imdbID}}">{{review.title}}</a></td>
+                            <td>{{review.content}}</td>
+                            <td>
+                                <button ng-click="model.deleteComment(review)"
+                                        class="btn btn-danger pull-middle">
+                                    <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+                                </button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
             <a class="divider"></a>
             <div class="clearfix"> </div>
         </div>
@@ -98,13 +125,11 @@
                      match-class="highlight"
                      style="font-size: large">
                 </div>
-                <!--<div>-->
                 <button ng-click="model.search(selectedUser.originalObject.username)"
                         class="btn btn-danger btn-block"
                         type="button">
                     Add Friend
                 </button>
-                <!--</div>-->
             </div>
             <div class="clearfix"> </div>
         </div>

@@ -80,6 +80,7 @@
 
         // implement comment feature
         function comment(review) {
+            review.title = vm.movie.Title;
             ReviewService
                 .userReviewsMovie(vm.currentUser.username, vm.imdbID, review)
                 .then(function() {

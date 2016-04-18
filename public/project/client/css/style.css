@@ -1204,7 +1204,7 @@ p.cart {
 }
 
 /*--register--*/
-.register-top-grid h3, .register-bottom-grid h3, .search-grid h3 {
+.register-top-grid h3, .register-bottom-grid h3, .search-grid h3, .comment-grid h3 {
 	color:#000;
 	font-size:1.5em;
 	padding-bottom:20px;
@@ -1318,6 +1318,9 @@ div.register-bottom-grid {
 }
 div.search-grid {
 	margin-top:3em;
+}
+div.comment-grid {
+	margin-top: 3em;
 }
 /*--responsive design--*/
 @media only screen and (max-width:1024px) {

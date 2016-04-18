@@ -52,14 +52,8 @@ module.exports = function(db, mongoose) {
         return deferred.promise;
     }
 
-    function userReviewsMovie(username, imdbID, content) {
+    function userReviewsMovie(review) {
         var deferred = q.defer();
-
-        var review = {
-            username: username,
-            imdbID: imdbID,
-            content: content
-        };
 
         ReviewModel
             .create(
