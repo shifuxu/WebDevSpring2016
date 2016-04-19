@@ -22,7 +22,8 @@ module.exports = function(db, mongoose, UserModel) {
         followUser: followUser,
         userUnlikesMovie: userUnlikesMovie,
         unfollowUser: unfollowUser,
-        searchUser: searchUser
+        searchUser: searchUser,
+        createUserFromAdmin: createUserFromAdmin
     };
     return api;
 
@@ -95,6 +96,24 @@ module.exports = function(db, mongoose, UserModel) {
     }
 
     function createUser(user) {
+        var deferred = q.defer();
+
+        UserModel
+            .create(
+                user,
+                function(err, doc) {
+                    if (err) {
+                        deferred.reject(err);
+                    } else {
+                        deferred.resolve(doc);
+                    }
+                }
+            );
+
+        return deferred.promise;
+    }
+
+    function createUserFromAdmin(user) {
         var deferred = q.defer();
 
         UserModel

@@ -18,7 +18,8 @@
             getProfile: getProfile,
             getUpdatedCurrentUser: getUpdatedCurrentUser,
             followUser: followUser,
-            unfollowUser: unfollowUser
+            unfollowUser: unfollowUser,
+            createUserFromAdmin: createUserFromAdmin
         };
 
         return service;
@@ -73,6 +74,10 @@
 
         function unfollowUser(userId, username) {
             return $http.delete("/api/project/omdb/user/" + userId + "/unfollow/" + username);
+        }
+
+        function createUserFromAdmin(user) {
+            return $http.post("/api/project/omdb/admin/create", user);
         }
     }
 })();

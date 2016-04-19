@@ -8,6 +8,7 @@ module.exports = function(app, movieModel, userModel, passport) {
     app.get("/api/project/omdb/user", findAllUsers);
     app.get("/api/project/omdb/loggedin/:userId", getUpdatedCurrentUser);
     app.get("/api/project/omdb/search/:username", searchUser);
+    app.post("/api/project/omdb/admin/create", createUserFromAdmin);
     app.post("/api/project/omdb/login", passport.authenticate("project"), login);
     app.post("/api/project/omdb/logout", logout);
     app.post("/api/project/omdb/register", register);
@@ -212,6 +213,20 @@ module.exports = function(app, movieModel, userModel, passport) {
             .then(
                 function(users) {
                     res.json(users);
+                },
+                function(err) {
+                    res.status(400).send(err);
+                }
+            );
+    }
+
+    function createUserFromAdmin(req, res) {
+        var user = req.body;
+        userModel
+            .createUserFromAdmin(user)
+            .then(
+                function(doc) {
+                    res.json(doc);
                 },
                 function(err) {
                     res.status(400).send(err);

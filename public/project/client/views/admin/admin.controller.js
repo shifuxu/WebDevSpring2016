@@ -47,7 +47,7 @@
 
         function addUser(user) {
             UserService
-                .createUser(user)
+                .createUserFromAdmin(user)
                 .then(function(response) {
                     var user = response.data;
                     if (user) {
