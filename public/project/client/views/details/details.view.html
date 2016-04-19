@@ -56,7 +56,7 @@
                 <div class="clearfix"></div>
             </form>
             <div ng-if="currentUser" class="single">
-                <h1 ng-show="model.users.length != 0">Other Users that Like This Movie</h1>
+                <h1>Other Users that Like This Movie</h1>
                 <ul>
                     <li ng-repeat="user in model.users" style="font-size: 25px;">
                         <a href="#/others/{{user.username}}">

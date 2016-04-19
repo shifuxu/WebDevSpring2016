@@ -10,6 +10,7 @@
         vm.currentUser = null;
         vm.record = null;
         vm.reviews = [];
+        vm.users = [];
         vm.favorite = favorite;
         vm.unfavorite = unfavorite;
         vm.comment = comment;
@@ -63,6 +64,12 @@
                 })
                 .then(function(response) {
                     vm.record = response.data;
+                    return MovieService.findUserLikes(vm.imdbID);
+                })
+                .then(function(response) {
+                    if (response) {
+                        vm.users = response.data;
+                    }
                 });
         }
 
@@ -75,6 +82,12 @@
                 })
                 .then(function(response) {
                     vm.record = response.data;
+                    return MovieService.findUserLikes(vm.imdbID);
+                })
+                .then(function(response) {
+                    if (response) {
+                        vm.users = response.data;
+                    }
                 });
         }
 
