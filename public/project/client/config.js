@@ -39,17 +39,26 @@
             .when("/search", {
                 templateUrl: "views/search/search.view.html",
                 controller: "SearchController",
-                controllerAs: "model"
+                controllerAs: "model",
+                resolve: {
+                    getLoggedIn: getLoggedIn
+                }
             })
             .when("/search/:title", {
                 templateUrl: "views/search/search.view.html",
                 controller: "SearchController",
-                controllerAs: "model"
+                controllerAs: "model",
+                resolve: {
+                    getLoggedIn: getLoggedIn
+                }
             })
             .when("/details/:imdbID", {
                 templateUrl: "views/details/details.view.html",
                 controller: "DetailsController",
-                controllerAs: "model"
+                controllerAs: "model",
+                resolve: {
+                    getLoggedIn: getLoggedIn
+                }
             })
             .when("/others/:username", {
                 templateUrl: "views/users/others.view.html",
@@ -60,6 +69,22 @@
                 }
             })
             .otherwise("/home")
+    }
+
+    function getLoggedIn(UserService, $q) {
+        var deferred = $q.defer();
+
+        UserService
+            .getCurrentUser()
+            .then(function(response){
+                var currentUser = response.data;
+                if (currentUser != '0') {
+                    UserService.setCurrentUser(currentUser);
+                }
+                deferred.resolve();
+            });
+
+        return deferred.promise;
     }
 
     function checkLoggedIn(UserService, $q, $location) {
