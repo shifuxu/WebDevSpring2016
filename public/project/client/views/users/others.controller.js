@@ -3,13 +3,14 @@
         .module("MovieHubApp")
         .controller("OthersController", othersController);
 
-    function othersController($routeParams, UserService) {
+    function othersController($routeParams, UserService, ReviewService) {
         var vm = this;
 
         vm.message = null;
         vm.error = null;
         vm.user = null;
         vm.currentUser = null;
+        vm.reviews = [];
         vm.follow = follow;
         vm.unfollow = unfollow;
         var username = null;
@@ -29,6 +30,13 @@
                     var user = response.data;
                     if (user) {
                         vm.currentUser = user;
+                        return ReviewService.findReviewsByUsername(username);
+                    }
+                })
+                .then(function(response) {
+                    var reviews = response.data;
+                    if (reviews) {
+                        vm.reviews = reviews;
                     }
                 });
         }

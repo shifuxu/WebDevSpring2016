@@ -32,13 +32,39 @@
             <a class="divider"></a>
             <div class="clearfix"> </div>
         </div>
-        <div class="register-bottom-grid">
+        <div class="comment-grid">
             <h3>Movie Comments</h3>
+            <div class="table-responsive" ng-hide="model.reviews.length == 0">
+                <table class="table table-hover">
+                    <thead>
+                    <th>
+                        Title
+                    </th>
+                    <th>
+                        Comment
+                    </th>
+                    </thead>
+                    <tbody>
+                    <tr ng-repeat="review in model.reviews">
+                        <td><a href="#/details/{{review.imdbID}}">{{review.title}}</a></td>
+                        <td>{{review.content}}</td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
             <a class="divider"></a>
             <div class="clearfix"> </div>
         </div>
-        <div class="register-bottom-grid">
+        <div class="search-grid">
             <h3>Followed Friends</h3>
+            <div ng-repeat="username in model.user.follows"
+                 class="row"
+                 style="font-size: large;">
+                <div class="col-xs-6">
+                    <a href="#/others/{{username}}">{{username}}</a>
+                </div>
+                <div class="col-xs-6"></div>
+            </div>
             <div class="clearfix"> </div>
         </div>
         <div class="register-bottom-grid">
