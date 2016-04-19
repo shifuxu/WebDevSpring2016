@@ -69,8 +69,10 @@ module.exports = function(app, movieModel, userModel, passport) {
 
     function register(req, res) {
         var user = req.body;
-        // set default role as admin for testing
-        user.role = "admin";
+        // set default role as user
+        if (typeof user.role == "undefined") {
+            user.role = "user";
+        }
 
         userModel
             .createUser(user)
