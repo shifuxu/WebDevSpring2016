@@ -1,12 +1,12 @@
 // import q library
 var q = require("q");
 
-module.exports = function (db, mongoose) {
+module.exports = function (db, mongoose, UserModel) {
     // define schema
-    var UserSchema = require("./user.schema.server.js")(mongoose);
+    // var UserSchema = require("./user.schema.server.js")(mongoose);
 
     // define model
-    var UserModel = mongoose.model('User', UserSchema);
+    // var UserModel = mongoose.model('User', UserSchema);
 
     // define api
     var api = {

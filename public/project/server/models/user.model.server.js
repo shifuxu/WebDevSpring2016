@@ -1,13 +1,13 @@
 // load q promise library
 var q = require("q");
 
-module.exports = function(db, mongoose) {
+module.exports = function(db, mongoose, UserModel) {
 
     // load user schema
-    var UserSchema = require("./user.schema.server.js")(mongoose);
+    // var UserSchema = require("./user.schema.server.js")(mongoose);
 
     // create user model from schema, the name should be different
-    var UserModel = mongoose.model('Users', UserSchema);
+    // var UserModel = mongoose.model('Users', UserSchema);
 
     var api = {
         findUserByCredentials: findUserByCredentials,

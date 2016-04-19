@@ -1,8 +1,7 @@
-var passport = require('passport');
 var LocalStrategy = require('passport-local').Strategy;
 var bcrypt = require('bcrypt-nodejs');
 
-module.exports = function(app, userModel) {
+module.exports = function(app, userModel, passport) {
     var auth = authorized;
     var authAdmin = isAdmin;
 
@@ -21,8 +20,6 @@ module.exports = function(app, userModel) {
 
     // call passport js
     passport.use(new LocalStrategy(localStrategy));
-    passport.serializeUser(serializeUser);
-    passport.deserializeUser(deserializeUser);
 
     // implement local strategy
     function localStrategy(username, password, done) {
@@ -41,25 +38,6 @@ module.exports = function(app, userModel) {
                     if (err) {
                         return done(err);
                     }
-                }
-            );
-    }
-
-    // serialize the user object into the session
-    function serializeUser(user, done) {
-        done(null, user);
-    }
-
-    // retrieve the user object from the session
-    function deserializeUser(user, done) {
-        userModel
-            .findUserById(user._id)
-            .then(
-                function(user) {
-                    done(null, user);
-                },
-                function(err) {
-                    done(err, null);
                 }
             );
     }
