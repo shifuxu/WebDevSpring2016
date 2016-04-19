@@ -25,7 +25,6 @@ module.exports = function(app, movieModel, userModel, passport) {
             .findUserByCredentials({username: username, password: password})
             .then(
                 function(user) {
-                    // if user exists, compare passwords with bcrypt.compareSync
                     if (user) {
                         return done(null, user);
                     } else {
@@ -77,8 +76,13 @@ module.exports = function(app, movieModel, userModel, passport) {
             .createUser(user)
             .then(
                 function(user) {
-                    req.session.currentUser = user;
-                    res.json(user);
+                    return req.login(user, function(err) {
+                        if (err) {
+                            res.status(400).send(err);
+                        } else {
+                            res.json(user);
+                        }
+                    });
                 },
                 function(err) {
                     res.status(400).send(err);
@@ -86,40 +90,14 @@ module.exports = function(app, movieModel, userModel, passport) {
             );
     }
 
-    //function login(req, res) {
-    //    var credentials = req.body;
-    //    userModel
-    //        .findUserByCredentials(credentials)
-    //        .then(
-    //            function(user) {
-    //                req.session.currentUser = user;
-    //                res.json(user);
-    //            },
-    //            function(err) {
-    //                res.status(400).send(err);
-    //            }
-    //        );
-    //}
-
     function login(req, res) {
         var user = req.user;
         res.json(user);
     }
 
-    //function loggedin(req, res) {
-    //    res.json(req.session.currentUser);
-    //}
-
     function loggedin(req, res) {
-        var user = req.user;
-        var flag = req.isAuthenticated();
         res.send(req.isAuthenticated() ? req.user : '0');
     }
-
-    //function logout(req, res) {
-    //    req.session.destroy();
-    //    res.send(200);
-    //}
 
     function logout(req, res) {
         req.logOut();
@@ -187,7 +165,6 @@ module.exports = function(app, movieModel, userModel, passport) {
             .findUserById(userId)
             .then(
                 function(user) {
-                    req.session.currentUser = user;
                     res.json(user);
                 },
                 function(err) {
