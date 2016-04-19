@@ -49,10 +49,7 @@
             .when("/details/:imdbID", {
                 templateUrl: "views/details/details.view.html",
                 controller: "DetailsController",
-                controllerAs: "model",
-                resolve: {
-                    getLoggedIn: getLoggedIn
-                }
+                controllerAs: "model"
             })
             .when("/others/:username", {
                 templateUrl: "views/users/others.view.html",
@@ -63,24 +60,6 @@
                 }
             })
             .otherwise("/home")
-    }
-
-    function getLoggedIn(UserService, $q) {
-        var deferred = $q.defer();
-
-        UserService
-            .getCurrentUser()
-            .then(function(response){
-                var currentUser = response.data;
-                if (currentUser != '0') {
-                    UserService.setCurrentUser(currentUser);
-                    deferred.resolve();
-                } else {
-                    deferred.reject();
-                }
-            });
-
-        return deferred.promise;
     }
 
     function checkLoggedIn(UserService, $q, $location) {
