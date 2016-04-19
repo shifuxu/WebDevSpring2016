@@ -58,6 +58,7 @@
                     var users = response.data;
                     if (users) {
                         vm.users = users;
+                        vm.user = {};
                     }
                 });
         }
@@ -75,6 +76,7 @@
                     var users = response.data;
                     if (users) {
                         vm.users = users;
+                        vm.user = {};
                     }
                 });
         }
