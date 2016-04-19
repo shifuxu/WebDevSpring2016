@@ -39,18 +39,12 @@
             .when("/search", {
                 templateUrl: "views/search/search.view.html",
                 controller: "SearchController",
-                controllerAs: "model",
-                resolve: {
-                    getLoggedIn: getLoggedIn
-                }
+                controllerAs: "model"
             })
             .when("/search/:title", {
                 templateUrl: "views/search/search.view.html",
                 controller: "SearchController",
-                controllerAs: "model",
-                resolve: {
-                    getLoggedIn: getLoggedIn
-                }
+                controllerAs: "model"
             })
             .when("/details/:imdbID", {
                 templateUrl: "views/details/details.view.html",
