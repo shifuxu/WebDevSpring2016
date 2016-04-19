@@ -1,3 +1,4 @@
+// add local strategy for user login
 var LocalStrategy = require('passport-local').Strategy;
 var bcrypt = require('bcrypt-nodejs');
 
@@ -17,7 +18,7 @@ module.exports = function(app, movieModel, userModel, passport) {
     app.delete("/api/project/omdb/:userId", deleteUserById);
     app.delete("/api/project/omdb/user/:userId/unfollow/:username", unfollowUser);
 
-    // call passport js
+    // init passport js named project
     passport.use("project", new LocalStrategy(projectLocalStrategy));
 
     // implement local strategy
@@ -93,6 +94,7 @@ module.exports = function(app, movieModel, userModel, passport) {
             );
     }
 
+    // security parts
     function login(req, res) {
         var user = req.user;
         res.json(user);

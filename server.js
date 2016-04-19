@@ -41,18 +41,21 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 // deal with the share passport js problem
+// define the project user model
 var ProjectUserSchema = require("./public/project/server/models/user.schema.server.js")(mongoose);
 var ProjectUser = mongoose.model("ProjectUser", ProjectUserSchema);
 var ProjectUserModel = require('./public/project/server/models/user.model.server.js')(db, mongoose, ProjectUser);
 
+// define the assignment user model
 var AssignmentUserSchema = require("./public/assignment/server/models/user.schema.server.js")(mongoose);
 var AssignmentUser = mongoose.model("AssignmentUser", AssignmentUserSchema);
 var AssignmentUserModel = require('./public/assignment/server/models/user.model.js')(db, mongoose, AssignmentUser);
 
+// define my self implemented shared serialized solution for passport js
 var UserSerializer =
     require("./public/security/security.js")(app, ProjectUserModel, AssignmentUserModel, passport);
 
-// pass app, db, mongoose for different project
+// pass app, db, mongoose and user model
 require("./public/assignment/server/app.js")(app, db, mongoose, passport, AssignmentUserModel);
 require("./public/project/server/app.js")(app, db, mongoose, passport, ProjectUserModel);
 

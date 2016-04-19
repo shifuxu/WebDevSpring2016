@@ -5,6 +5,7 @@ module.exports = function(mongoose) {
         {
             username: String,
             imdbID: String,
+            // movie title
             title: String,
             content: String
         }, {collection: 'project.omdb.review'});
